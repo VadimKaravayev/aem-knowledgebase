@@ -9,6 +9,8 @@ Site goes live over HTTPS with SSL terminated at the load balancer (not at AEM).
 1. **AEM's Felix HTTP Service SSL Filter isn't configured to trust `X-Forwarded-Proto`.** Since the LB→AEM connection is plain HTTP, AEM's own `request.getScheme()` / `request.isSecure()` defaults to `http` — it never inspects the forwarded header unless told to.
 2. **Sling Mapping only has an `http` entry, not `https`.** Even if AEM did know the request was HTTPS, mapping resolution looks under `/etc/map/https/www.domain.com.443` for a 443 HTTPS request — that node doesn't exist, only `/etc/map/http/...80` does.
 
+   That lookup path isn't arbitrary: Sling matches against a **constructed virtual path** `{scheme}/{host}.{port}/{uri_path}`, so the scheme AEM believes it is serving picks the `/etc/map` subtree before any entry inside it is considered. See [sling-resource-resolution-mapping.md](sling-resource-resolution-mapping.md) for the construction rule, entry matching order, and the separate trap where wildcard entries resolve inbound but can't be reversed for link rewriting.
+
 Both must be fixed together. Fixing only the Sling Mapping (creating `/etc/map/https/www.domain.com.443`) does **nothing** on its own if AEM never learns the request was HTTPS in the first place — it keeps resolving against the `http` map root regardless of what's under `https`.
 
 Fix:

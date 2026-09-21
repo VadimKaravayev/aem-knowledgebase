@@ -52,7 +52,9 @@ Curl gotcha: use `-F` (multipart) fields exactly as above with a **single** URL.
 
 ## Don't try to fix it by removing the runmode
 
-`nosamplecontent`/`samplecontent` (like `author`/`publish`) are **installation-time runmodes**, frozen at first startup. Removing `nosamplecontent` from the start command of an already-installed instance changes nothing; the only way out is deleting `crx-quickstart/` and reinstalling (which would then also install We.Retail). The right approach on a dev instance is to keep the runmode and toggle the individual hardened defaults you actually need (CRXDE above; WebDAV etc. are similar one-off OSGi/config fixes).
+`nosamplecontent`/`samplecontent` (like `author`/`publish`) are **installation-time runmodes**, frozen at first startup. (For the five mechanisms that set a runmode in the first place, their precedence, and which runmodes stay mutable afterwards, see [runmode-sources-and-precedence.md](runmode-sources-and-precedence.md).) Removing `nosamplecontent` from the start command of an already-installed instance changes nothing; the only way out is deleting `crx-quickstart/` and reinstalling (which would then also install We.Retail).
+
+  One documented qualification, and it does not help on a dev box: a **TarMK `crx2oak` repository migration** accepts `--promote-runmode nosamplecontent`, so an instance upgraded from a pre-6.3 source can acquire the runmode it never started with. That path exists only where a migration runs at all (pre-6.3 TarMK sources — not 6.3+, not MongoMK), and it is rebuilding the repository rather than flipping a frozen mode in place. See [in-place-upgrade-6x-to-65.md](in-place-upgrade-6x-to-65.md). Documented, not reproduced. The right approach on a dev instance is to keep the runmode and toggle the individual hardened defaults you actually need (CRXDE above; WebDAV etc. are similar one-off OSGi/config fixes).
 
 Confirmed on AEM 6.5 LTS local author (quickstart jar, Java 21), July 2026.
 

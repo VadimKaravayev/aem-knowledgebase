@@ -68,7 +68,11 @@ not "tidy" it away.
 
 ### `install.author` / `install.publish` are the only run-mode suffixes
 
-Level 4 accepts no other run modes. This is narrower than the AEMaaCS run-mode
+Level 4 accepts no other run modes. This is a rule of the **cloud embed
+grammar**, not of AEM generally — on 6.5, `install.<anyCustomRunmode>` is a
+valid folder for shipping bundles and packages
+([runmode-sources-and-precedence.md](runmode-sources-and-precedence.md)), and
+code carried across that relied on it has nowhere to land here. This is narrower than the AEMaaCS run-mode
 set generally (`author`/`publish` × `rde`/`dev`/`stage`/`prod`) — you can scope
 an *OSGi config* per environment with `config.publish.prod`, but you cannot
 scope a *package embed* to an environment, only to a tier. See
@@ -182,6 +186,13 @@ This is where repoinit lives, as `RepositoryInitializer` factory configs — see
 [repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md) for the
 ordering rules that govern what those scripts can assume exists.
 
+**`config.publish` and `config.publish.prod` are competitors, not layers.**
+When both match, the folder with more matching run modes wins the **entire
+PID**, and properties absent from it revert to bundle defaults rather than
+falling back to the less specific folder. Every variant must therefore carry
+the complete config. See
+[osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md).
+
 Adobe's distinction for what belongs in repoinit versus runtime: groups that
 are **integral to the application's function** (a group a workflow assigns to)
 ship as repoinit; organizational groupings are managed at runtime by admins.
@@ -249,6 +260,8 @@ their side.
 ## References
 
 - [AEM Project Content Package Structure (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/aem-project-content-package-structure)
+- [osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md)
+- [runmode-sources-and-precedence.md](runmode-sources-and-precedence.md)
 - [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md)
 - [repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md)
 - [oak-indexing-aemaacs.md](oak-indexing-aemaacs.md)

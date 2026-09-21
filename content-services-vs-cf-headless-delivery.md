@@ -4,6 +4,11 @@ AEM has **two distinct headless/JSON delivery mechanisms**, and they consume
 **different sources**. Conflating them is a classic architecture-exam trap and a
 real design mistake.
 
+Browser-based consumers of either path need a CORS policy covering the exact
+endpoint they call (`/graphql/execute.json.*`, the `.model.json` path, or the
+Assets HTTP API) — see
+[cors-policy-and-dispatcher.md](cors-policy-and-dispatcher.md).
+
 ## The two paths
 
 | Path | What it serializes | Source it consumes | Typical consumer |
