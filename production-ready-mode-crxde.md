@@ -55,3 +55,30 @@ Curl gotcha: use `-F` (multipart) fields exactly as above with a **single** URL.
 `nosamplecontent`/`samplecontent` (like `author`/`publish`) are **installation-time runmodes**, frozen at first startup. Removing `nosamplecontent` from the start command of an already-installed instance changes nothing; the only way out is deleting `crx-quickstart/` and reinstalling (which would then also install We.Retail). The right approach on a dev instance is to keep the runmode and toggle the individual hardened defaults you actually need (CRXDE above; WebDAV etc. are similar one-off OSGi/config fixes).
 
 Confirmed on AEM 6.5 LTS local author (quickstart jar, Java 21), July 2026.
+
+## The same rule on the AEMaaCS SDK quickstart
+
+The cloud SDK quickstart freezes the same class of decision at first start, and encodes it in the
+**jar filename** rather than a start argument: `aem-<tier>_<environment>-p<port>.jar`, e.g.
+`aem-author-p4502.jar`, `aem-publish_stage-p4503.jar`. Omitting the environment means `dev`. You copy
+the one downloaded quickstart jar into a directory per instance and rename it.
+
+- **Tier is baked into `crx-quickstart` at first start.** Renaming the jar from author to publish
+  afterwards does nothing; delete `crx-quickstart/` and start over, exactly as with `nosamplecontent`
+  above.
+- **`-r prerelease` applies on the first start only**
+  (`java -jar aem-author-p4502.jar -r prerelease`). Adding it to a later start of an existing
+  instance has no effect.
+- **Replication agents exist only in the local quickstart.** Real AEMaaCS moves content with Sling
+  Content Distribution and the Adobe Pipeline and has no replication agents at all, so local
+  author→publish has to be wired by hand on the default publish agent (transport URI
+  `http://localhost:4503/bin/receive?sling:authRequestLogin=1`, admin/admin, agent user id blank).
+  Anything built against that agent is local-only scaffolding that will not exist in the cloud.
+
+Worth knowing before investing in a local repository: updating the SDK jar (monthly, after the last
+Thursday) means replacing the whole local environment and losing its content. Keep sample content in
+a package in Git, or move it across with oak-upgrade `includepaths`.
+
+From the Adobe "Local Development Environment Set-up / AEM Runtime" tutorial (Sept 2026), not
+reproduced locally. Current SDKs need **JDK 21**, and the abort message names a "Java Specification
+11 VM" whatever the wrong JVM actually is.

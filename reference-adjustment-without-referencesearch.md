@@ -69,6 +69,14 @@ Reimplementing it is ~40–60 lines; the traps are what matter:
   pool) — almost certainly irrelevant to a translation connector, but it explains behavior
   differences if you diff against the original.
 
+Two `Import-Package` edits come with this, and neither is optional — the bundle resolves on only one
+of the two platforms without them. Reproducing the escaping needs
+`org.apache.jackrabbit.util.Text`, whose auto-computed range is unsatisfiable on 6.5; and the
+deprecated package stays on the shopping list until its pom line is deleted, however clean `src/`
+looks. Both are documented with the verified version numbers in
+[osgi-import-package-version-range.md](osgi-import-package-version-range.md) — read it before
+deploying, not after.
+
 ### Two semantics to choose between
 
 The naive reimplementation copies what `adjustReferences` does: **blanket prefix replace**

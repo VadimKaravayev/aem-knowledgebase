@@ -126,6 +126,18 @@ Your own clientlib should also declare `dependencies="[coralui3]"` so its JS upg
 
 ---
 
+## The page's own component needs its Sling model package EXPORTED
+
+**Symptom.** The shell, title bar, rail and any stock Granite actions render, but the one region backed by your own component is empty. The HTML carries the reason in an `<!--cq{…"exception":…}-->` comment: `SightlyException: Compilation errors … <Model> cannot be resolved to a type`. Build is green, bundle is `Active`, the class is in the jar.
+
+**Root cause.** HTL resolves a model named in `data-sly-use` by FQCN through the dynamic class loader, which only sees **exported** packages. bnd exports a package only when it has an `@Version` `package-info.java`, so a `models` package without one is private and invisible to the HTL compiler — even though every OSGi component inside the same bundle uses it happily.
+
+**Fix.** Add `package-info.java` with `@Version("1.0")` to the models package. Confirm with `/system/console/bundles/<bsn>.json` → `Exported Packages`.
+
+**How to spot it next time.** A connector that strips the archetype's sample classes tends to delete their `package-info.java` too, and the first real Sling model lands in that now-private package months later. If a custom console region renders blank, `curl` the page and grep for `cannot be resolved to a type` before touching the markup. Confirmed on the Phrase connector's Configuration console, Sept 2026.
+
+---
+
 ## Reference
 
 - `/libs/granite/ui/components/shell/page/page.jsp` (read it on the instance — the doc comment at the top is the authoritative content-structure spec).

@@ -34,6 +34,8 @@ On AEM **6.5**, one fix for accuracy-sensitive lookups was to switch to a **sync
 ### `/oak:index` is immutable → config-as-code
 You **cannot** edit indexes on a running instance (no Felix/JMX/CRXDE editing of `/oak:index` like 6.5). All index definitions ship via **code deployment** (package under `/apps`).
 
+**Why a *code* package, when `/oak:index` is technically mutable?** Deployment ordering. Cloud Manager installs index definitions **pre-startup** and must finish reindexing against them *before* it switches the code image over — mutable content installs only *after* switchover. Shipping an index as content would land it on the wrong side of that boundary, after the code that needs it is already serving. This is also why index size, not code size, sets the length of a deploy. See [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md) and [all-package-embed-structure.md](all-package-embed-structure.md).
+
 ### Naming conventions
 - **Extend an OOTB index:** `<indexName>-<productVersion>-custom-<customVersion>` — e.g. `damAssetLucene-6-custom-1`
 - **Brand-new custom index:** `<prefix>.<indexName>-<productVersion>-custom-<customVersion>`, where `prefix` is a **2–5 char** project id.
@@ -198,6 +200,8 @@ Two things are required to facet on a property, and they live at different level
 ```
 
 **Diagnosis tell:** slow facet computation, no traversal warnings in the logs (so the index itself is being used fine), and permission structure that's complex (many groups) but not actually restrictive (all groups can read everything) — that combination points at ACL-check overhead, not index design, and the fix is `secure="insecure"` on `facets`, not a leaner index or more indexed properties.
+
+**Plain-English version:** picture a school library where 15 different classes all share one rule — every class can read every book, none are off-limits. When the librarian wants to post a "books per category" count, a careful librarian checks each book against each class's permission slip before counting it — even though the answer is always "yes." With that many classes and books, all that slip-checking is what makes posting the count slow. Since every class can read everything anyway, the check is pointless — so the fix is telling the librarian to skip it and just count. That's `secure="insecure"`: skip a permission check whose answer is always "allowed," not a reduction in actual security.
 
 ## Maven build / FileVault validation gotchas (the painful ones)
 

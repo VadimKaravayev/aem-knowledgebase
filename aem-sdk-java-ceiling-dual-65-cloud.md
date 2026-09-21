@@ -6,6 +6,8 @@ A connector/plugin codebase that supports **AEM 6.5 on-prem and AEMaaCS from a s
 
 Concrete case (verified on the translated.com connector, Aug 2026): bumping `aem-sdk-api` to **2026.7.27083** pulls in a Jackrabbit Oak compiled for Java 17 (class file version 61). On a Java 11 toolchain the build fails on the SDK's own classes.
 
+> **Two refinements (Sept 2026).** (1) The baseline can be *lower* than 11: classic 6.5 supports Java 8 as well, so a customer running 6.5 on a **JVM 8** pushes the floor to Java SE 8 — ask which JVM they actually run rather than assuming 11. (2) This page frames the ceiling as forcing an old *toolchain*, but that is only true if you compile **on** the old JDK. Keep building on a new JDK (21) and target the old platform with `--release N`, and the SDK ceiling disappears — the build reads the Java 17+ SDK classes fine while still emitting old bytecode. See [java-target-platform-vs-build-jdk.md](java-target-platform-vs-build-jdk.md) for the build-JDK / target-platform / class-file-version / runtime-JVM distinction, why `-source`/`-target` is not enough, and the verification recipe.
+
 ## Why this bites: deprecation migrations become doubly blocked
 
 Adobe's Cloud Manager code scan (rule `java:S1874`, tag `obsolete`) flags deprecated-package usage with a removal deadline. The prescribed replacement often exists **only in newer Cloud releases** — exactly the SDK versions the Java ceiling forbids.
