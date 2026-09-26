@@ -158,6 +158,13 @@ AEM-native mechanism, and `scheduler_period()` in an `@ObjectClassDefinition` ma
 from `/system/console/configMgr`. No `ScheduledExecutorService`, which would drag in the banned
 `shutdownNow()`.
 
+## Multi-pod author: an in-memory publisher reaches one pod
+
+- **Symptom:** on AEMaaCS, some authors' dashboards never update while others do; fine on a local Quickstart. (Derived from the platform, not yet reproduced.)
+- **Root cause:** author runs at least two pods. A publisher held in memory only reaches streams parked on the pod where the job runs.
+- **Fix:** the job writes state to the JCR; on every pod a `ResourceChangeListener` + `ExternalResourceChangeListener` on that subtree re-reads the path and publishes locally. Send a JCR snapshot on connect.
+- **How to spot it:** any SSE design where the producer calls the publisher directly. Ask which pod holds the stream.
+
 ## Checklist
 
 1. `text/event-stream`, UTF-8, `Cache-Control: no-cache`.
@@ -168,6 +175,9 @@ from `/system/console/configMgr`. No `ScheduledExecutorService`, which would dra
 6. Client-side retry with backoff for the 404-during-deploy case.
 7. Cap concurrent streams, or move to `startAsync()`.
 8. Never touch the repository from the stream thread.
+9. Publish from a JCR listener with the external marker, never directly from the producer.
+
+Related to 9: [translation-connector-cached-services.md](translation-connector-cached-services.md).
 
 Related: [multi-author-scaling.md](multi-author-scaling.md),
 [osgi-import-package-version-range.md](osgi-import-package-version-range.md),

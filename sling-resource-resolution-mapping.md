@@ -15,6 +15,9 @@ Related: [ssl-termination-sling-mapping-404.md](ssl-termination-sling-mapping-40
 (the canonical scheme/port failure),
 [osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md) (where
 the resolver's OSGi config lives).
+[url-resolution-layers-aemaacs.md](url-resolution-layers-aemaacs.md) (which
+layer — Apache, Dispatcher, Sling — owns which URL rule on AEMaaCS; cache
+invalidation and debugging without the console).
 
 ---
 

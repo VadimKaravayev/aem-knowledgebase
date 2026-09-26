@@ -12,6 +12,25 @@ interpreted for a vendor package. Not reproduced against a live pipeline.
 
 ---
 
+## /apps and /libs are rebuilt from scratch, not diffed against the old image
+
+The immutable half of the repository is not "updated" in the sense of applying a
+delta to what was there before. Each pipeline run builds a **fresh container image**
+from the repo at that commit, and the new pods start from that image. There is no
+step that merges the new build's `/apps` content with the previous image's `/apps`
+content — whatever isn't part of the current build's `ui.apps`/`ui.apps.structure`
+packages simply isn't in the new image.
+
+Consequence: anything ever placed under `/apps` outside of what the pipeline builds
+(a manual hotfix, leftover code from a package installed by hand pre-migration) does
+not survive the next deploy — not because it was explicitly deleted, but because the
+new pods never had it to begin with. This is also why a rollback restores code but
+not content (rule 2 below): the rollback just points traffic back at a previously
+built image, and images are also swapped wholesale, never patched.
+
+**Sourcing:** reasoned from AEMaaCS's documented immutable/mutable split and rolling
+deploy model; not confirmed against Adobe's build-pipeline internals directly.
+
 ## What lands, and when
 
 Mutable content does not install in one step. Three phases, in this order:

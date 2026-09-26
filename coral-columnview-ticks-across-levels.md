@@ -1,0 +1,7 @@
+# Coral column view: ticks do not survive opening an item
+
+- **Symptom:** in a `coral-columnview` with `selectionmode="multiple"`, clicking a name to open its children clears every tick, so a pick can never span two levels. Stock `coral-columnview:navigate` never fires either.
+- **Root cause:** Coral treats "active" and "selected" as exclusive: `_onColumnActiveItemChanged` calls `items._deselectAllExcept()`. Opening an item fires `coral-columnview:activeitemchange` (`detail.activeItem`); `navigate` belongs to the lazy-load path.
+- **Fix:** run the view with `selectionmode="none"` and add your own `coral-checkbox` per item, with the `coral-interactive` attribute so Coral's item click/focus handlers ignore it. Put it in `item.thumbnail`: Coral moves any other child into the content zone on render, after the title. Keep ticks in a `Map` and restore them when a column re-renders.
+- **Also:** Coral renders the drilldown chevron (`._coral-AssetList-itemChildIndicator`) as a block inside the label, so it wraps under the title. Pin it with `position: absolute; right: 16px; top: 0; bottom: 0; margin: auto 0`.
+- **Spot it:** tick a page, open a sibling with children, look back. Verified on AEM SDK (Coral Spectrum), Sep 2026, Phrase connector wizard (`clientlibs/new-project/js/picker.js`).
