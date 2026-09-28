@@ -7,7 +7,8 @@ does not issue certificates or private keys for you** unless you take the
 Adobe-managed DV route; anything OV/EV comes from your own Certificate
 Authority (DigiCert, GlobalSign, Entrust, etc.) and you upload it.
 
-Companion notes: [[cloud-manager-environments]] (custom domains are a
+Companion notes: [[cloud-manager-custom-domain-names]] (Domain Settings,
+verification, DNS records), [[cloud-manager-environments]] (custom domains are a
 publish/preview, Sites-program feature), [[aemaacs-architecture-overview]]
 (Adobe CDN as the single front door), [[ssl-termination-sling-mapping-404]]
 (what happens *behind* TLS termination on 6.5/AMS; not relevant on AEMaaCS
@@ -30,10 +31,11 @@ browser ──TLS──▶ Platform TLS service ──▶ Adobe CDN (Fastly) ─
 - Several certificates can be installed per environment; the TLS layer selects
   **the most specific and most recently deployed** match for a hostname.
 - **Order of operations** (self-service flow): add the custom domain in
-  Domain Settings → add the SSL certificate → add the CDN configuration →
-  domain goes live. A domain can be *added* before any cert exists, but it
-  cannot be *associated with an environment* (CDN config) until a valid cert
-  covers it.
+  Domain Settings → verify → add the SSL certificate → add the domain
+  mapping / CDN configuration → DNS cutover. DV needs the domain verified
+  *before* the cert is requested; OV/EV marks the domain verified *after*
+  the cert is uploaded. Full per-path table in
+  [[cloud-manager-custom-domain-names]].
 
 ## 2. The two management models
 

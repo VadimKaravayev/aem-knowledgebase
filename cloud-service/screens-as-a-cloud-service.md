@@ -105,6 +105,26 @@ Manager IP Allow Lists are all-or-nothing per service; CDN traffic filters can
 carve out a path plus header exception. See [[url-resolution-layers-aemaacs]]
 for where the CDN rule layer sits.
 
+## Onboarding step 1: adding the Screens add-on in Cloud Manager
+
+Screens is enabled per **program**, as an add-on, in the same wizard that
+picks solutions:
+
+- **New program**: Cloud Manager → **Add Program** → **Set up for
+  Production** (Screens is a production-program feature; keep or rename the
+  default program name → Continue) → on the *Set up for production* step tick
+  **Screens** under add-ons → **Create**. The program card then lists Screens
+  next to the solutions.
+- **Existing program**: same checkbox via **Edit program** (Business Owner;
+  takes effect after the next deployment, see
+  [[cloud-manager-program-types]]).
+
+Adobe's onboarding order after that: create a **branch** for the project in
+Cloud Manager → build the Screens project → configure the Services Provider
+→ wire the Content Provider (previous sections). Selecting the add-on only
+licenses and provisions the Content Provider side inside AEM; the Services
+Provider tenant is provisioned separately.
+
 ## Exam and review checklist
 
 - "Which component manages players and displays" is the **Services Provider**
@@ -118,6 +138,7 @@ for where the CDN rule layer sits.
 - Screens on AMS with the cloud Services Provider is a valid hybrid.
 
 ## References
+- [Adding Screens as an add-on to a new program in Cloud Manager (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/screens-as-cloud-service/onboarding-screens-cloud/adding-screens-addon/add-on-new-program-screens-cloud)
 - [Introduction to AEM Screens as a Cloud Service (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/screens-as-cloud-service/overview/introduction)
 - [Using Screens Content Provider (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/screens-as-cloud-service/configure-screens-cloud/using-screens-content-provider)
 - [Setting up Screens Services Provider (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/screens-as-cloud-service/configure-screens-cloud/navigating-to-screens-services-provider)
