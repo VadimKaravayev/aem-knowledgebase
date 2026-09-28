@@ -13,7 +13,7 @@ additions are flagged where they appear.
 
 Related: [ssl-termination-sling-mapping-404.md](ssl-termination-sling-mapping-404.md)
 (the canonical scheme/port failure),
-[osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md) (where
+[osgi-config-runmode-resolution.md](../infrastructure-ops/osgi-config-runmode-resolution.md) (where
 the resolver's OSGi config lives).
 [url-resolution-layers-aemaacs.md](url-resolution-layers-aemaacs.md) (which
 layer — Apache, Dispatcher, Sling — owns which URL rule on AEMaaCS; cache
@@ -96,7 +96,7 @@ can't hold arbitrary characters.
 
 Worth knowing against the deployment rules elsewhere in this KB: a content
 package cannot be scoped to one environment
-([rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md)),
+([rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md)),
 so an `/etc/map` entry that reads an env var is one of the few seams where a
 single shipped artifact can differ per environment.
 
@@ -104,7 +104,7 @@ single shipped artifact can differ per environment.
 projects commonly keep a separate publish-side tree and point the resolver at
 it with `resource.resolver.map.location`, conventionally `/etc/map.publish`.
 `/etc/map` is mutable content, so it ships in `ui.content` — see
-[all-package-embed-structure.md](all-package-embed-structure.md).*)*
+[all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md).*)*
 
 ---
 
@@ -230,4 +230,4 @@ half-verified.
 - [Mappings for Resource Resolution (Apache Sling)](https://sling.apache.org/documentation/the-sling-engine/mappings-for-resource-resolution.html)
 - [ssl-termination-sling-mapping-404.md](ssl-termination-sling-mapping-404.md)
 - [cors-policy-and-dispatcher.md](cors-policy-and-dispatcher.md)
-- [all-package-embed-structure.md](all-package-embed-structure.md)
+- [all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md)

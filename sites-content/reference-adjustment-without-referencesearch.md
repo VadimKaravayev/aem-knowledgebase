@@ -1,7 +1,7 @@
 # Reference discovery + adjustment without `com.day.cq.wcm.commons.ReferenceSearch`
 
 The migration recipe for the deprecation described in
-[aem-sdk-java-ceiling-dual-65-cloud.md](aem-sdk-java-ceiling-dual-65-cloud.md)
+[aem-sdk-java-ceiling-dual-65-cloud.md](../java-osgi-build/aem-sdk-java-ceiling-dual-65-cloud.md)
 (`com.day.cq.wcm.commons` deprecated 2026-07-01, removal 2027-03-31, Cloud only).
 Applies to any connector that must keep one branch working on **6.5 on-prem and Cloud**.
 
@@ -74,7 +74,7 @@ of the two platforms without them. Reproducing the escaping needs
 `org.apache.jackrabbit.util.Text`, whose auto-computed range is unsatisfiable on 6.5; and the
 deprecated package stays on the shopping list until its pom line is deleted, however clean `src/`
 looks. Both are documented with the verified version numbers in
-[osgi-import-package-version-range.md](osgi-import-package-version-range.md) — read it before
+[osgi-import-package-version-range.md](../java-osgi-build/osgi-import-package-version-range.md) — read it before
 deploying, not after.
 
 ### Two semantics to choose between

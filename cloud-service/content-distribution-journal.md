@@ -43,7 +43,7 @@ partition by a hash of the subscriber agent name.
 1. **Asset binaries** never travel in the package. FileVault serializes **in binary-less
    mode**, so the package holds *references* into the **shared Oak blob store** that author
    and publish both see. This is the same trick as
-   [shared-datastore-binaryless-replication.md](shared-datastore-binaryless-replication.md),
+   [shared-datastore-binaryless-replication.md](../infrastructure-ops/shared-datastore-binaryless-replication.md),
    except there it is a 6.5 migration pattern you configure, and here it is the built-in
    architecture — the capacity mismatch between a Kafka-ish message bus and a 4 GB video is
    resolved by never putting the video on the bus.

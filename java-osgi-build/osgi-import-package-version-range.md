@@ -148,7 +148,7 @@ In the OSGi Web Console (`/system/console/bundles`), a bundle stuck in **Install
 ### `org.apache.jackrabbit.util` — 2.6 on Cloud vs 2.5 on 6.5 (translated.com connector, Sept 2026)
 
 Reimplementing `ReferenceSearch.adjustReferences` in-house (see
-[reference-adjustment-without-referencesearch.md](reference-adjustment-without-referencesearch.md))
+[reference-adjustment-without-referencesearch.md](../sites-content/reference-adjustment-without-referencesearch.md))
 introduced the first use of `org.apache.jackrabbit.util.Text` in the bundle. bnd auto-imported it
 through the trailing `*` and emitted:
 

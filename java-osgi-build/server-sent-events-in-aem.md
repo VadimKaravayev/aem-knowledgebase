@@ -177,8 +177,8 @@ from `/system/console/configMgr`. No `ScheduledExecutorService`, which would dra
 8. Never touch the repository from the stream thread.
 9. Publish from a JCR listener with the external marker, never directly from the producer.
 
-Related to 9: [translation-connector-cached-services.md](translation-connector-cached-services.md).
+Related to 9: [translation-connector-cached-services.md](../translation-i18n/translation-connector-cached-services.md).
 
-Related: [multi-author-scaling.md](multi-author-scaling.md),
+Related: [multi-author-scaling.md](../infrastructure-ops/multi-author-scaling.md),
 [osgi-import-package-version-range.md](osgi-import-package-version-range.md),
-[granite-i18n-client-snippets.md](granite-i18n-client-snippets.md).
+[granite-i18n-client-snippets.md](../touch-ui-granite/granite-i18n-client-snippets.md).

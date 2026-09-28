@@ -160,7 +160,7 @@ CDN/Apache response (status, Location) → Dispatcher rewrite logs → AEM resol
 
 Keep resolver OSGi configuration in code and deploy it through Cloud Manager.
 Never change it in a console, which you can't reach on AEMaaCS anyway. See
-[aemaacs-repository-inspection-by-tier.md](aemaacs-repository-inspection-by-tier.md)
+[aemaacs-repository-inspection-by-tier.md](../cloud-service/aemaacs-repository-inspection-by-tier.md)
 for which tool is available on which tier.
 
 ## Picking a mechanism
@@ -192,5 +192,5 @@ for which tool is available on which tier.
   Service: Sling Mappings, Aliases, Vanity URLs and Dispatcher*:
   https://experienceleaguecommunities.adobe.com/adobe-experience-manager-sites-8/understanding-url-resolution-in-aem-as-a-cloud-service-sling-mappings-aliases-vanity-urls-and-dispatcher-252910
 - [sling-resource-resolution-mapping.md](sling-resource-resolution-mapping.md)
-- [aemaacs-repository-inspection-by-tier.md](aemaacs-repository-inspection-by-tier.md)
+- [aemaacs-repository-inspection-by-tier.md](../cloud-service/aemaacs-repository-inspection-by-tier.md)
 - [dispatcher-ignoreurlparams.md](dispatcher-ignoreurlparams.md) (the other place where cache keys and public URLs drift apart)

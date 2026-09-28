@@ -16,4 +16,4 @@ Five testing types come up together on exam scenarios about launch readiness. Tw
 
 A scenario combining "identify system weaknesses" + "ways to exploit the applications" → answer is **Load Testing + Penetration Testing**, not Unit/Regression/Functional (those confirm known behavior rather than discover unknown weaknesses).
 
-Source: [question-22.md](../my-own-repos/aem-architect-lab/questions/question-22.md)
+Source: [question-22.md](../../my-own-repos/aem-architect-lab/questions/question-22.md)

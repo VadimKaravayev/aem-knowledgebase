@@ -37,7 +37,7 @@ runbook that says "open CRXDE" is wrong for half your environments.
 
 On AEM 6.5, `/crx/de` loading but reporting itself disabled is a *fixable*
 configuration problem — the DavEx backend has no OSGi config; see
-[production-ready-mode-crxde.md](production-ready-mode-crxde.md). That fix has
+[production-ready-mode-crxde.md](../infrastructure-ops/production-ready-mode-crxde.md). That fix has
 no analogue on AEMaaCS: there is no Felix console on any Cloud tier, so there
 is nothing to configure even if the cause were the same. On Cloud it is a
 product decision, not a broken component — stop debugging and switch tools.

@@ -12,7 +12,7 @@ Inference is flagged where it appears.
 
 Related: [exposing-apis-to-external-systems.md](exposing-apis-to-external-systems.md)
 (which tier should answer at all),
-[content-services-vs-cf-headless-delivery.md](content-services-vs-cf-headless-delivery.md)
+[content-services-vs-cf-headless-delivery.md](../sites-content/content-services-vs-cf-headless-delivery.md)
 (the endpoints these policies are usually written for).
 
 ---
@@ -40,8 +40,8 @@ folder rules apply, including the one where the most specific matching folder
 replaces the others **for the whole PID** rather than merging. A policy split
 across `config.publish` and `config.publish.prod` will lose half its properties
 on prod. See
-[osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md) and
-[all-package-embed-structure.md](all-package-embed-structure.md).
+[osgi-config-runmode-resolution.md](../infrastructure-ops/osgi-config-runmode-resolution.md) and
+[all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md).
 
 ---
 
@@ -214,5 +214,5 @@ discards the response. Stop inspecting routes and read the logs.
 
 - [Understand CORS (AEM Learn, Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-learn/foundation/security/understand-cross-origin-resource-sharing)
 - [exposing-apis-to-external-systems.md](exposing-apis-to-external-systems.md)
-- [content-services-vs-cf-headless-delivery.md](content-services-vs-cf-headless-delivery.md)
-- [osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md)
+- [content-services-vs-cf-headless-delivery.md](../sites-content/content-services-vs-cf-headless-delivery.md)
+- [osgi-config-runmode-resolution.md](../infrastructure-ops/osgi-config-runmode-resolution.md)

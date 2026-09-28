@@ -13,8 +13,8 @@ documents; none of that is covered here.
 > **The page's Java guidance is stale — ignore it.** It states a Java 7 minimum
 > and "Oracle JRE 8 or IBM JRE 7 & 8 only" for 6.3+. For what 6.5 and 6.5 LTS
 > actually run on, see
-> [aem-sdk-java-ceiling-dual-65-cloud.md](aem-sdk-java-ceiling-dual-65-cloud.md)
-> and [java11-bootdelegation-drift.md](java11-bootdelegation-drift.md) (Java 11
+> [aem-sdk-java-ceiling-dual-65-cloud.md](../java-osgi-build/aem-sdk-java-ceiling-dual-65-cloud.md)
+> and [java11-bootdelegation-drift.md](../java-osgi-build/java11-bootdelegation-drift.md) (Java 11
 > on 6.5, JDK 21 on LTS, and the `sling.properties` bootdelegation drift that
 > bites when you move an existing instance onto a newer JVM).
 

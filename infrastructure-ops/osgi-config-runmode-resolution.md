@@ -14,11 +14,11 @@ written, and only on instances carrying the extra run mode.
 does not. Version differences are called out per section. Not reproduced
 against a running instance.
 
-Related: [all-package-embed-structure.md](all-package-embed-structure.md)
+Related: [all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md)
 (where `ui.config` puts these folders),
-[repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md) (the
+[repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md) (the
 repoinit factory config that lives in one),
-[rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md)
+[rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md)
 (the closed AEMaaCS run-mode set).
 
 ---
@@ -94,7 +94,7 @@ Same algorithm, smaller input space: run modes are the closed set `author` /
 `publish` crossed with `dev` / `stage` / `prod` / `rde`, combined as
 `<service>.<environment>` — so the realistic collision is `config.publish`
 versus `config.publish.prod`, and it behaves exactly as above. See
-[all-package-embed-structure.md](all-package-embed-structure.md) for where
+[all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md) for where
 these folders sit inside `ui.config` (`/apps/<app>/osgiconfig/config.*`), and
 note the separate, stricter rule that **package embed** targets accept only
 `install.author` / `install.publish` — config folders are the one place
@@ -198,7 +198,7 @@ Both separators are in live use and belong to different eras: `-` is the
 convention documented for `sling:OsgiConfig` nodes and `.config` files in 6.5;
 `~` is the OSGi R7 / Sling form you see with `.cfg.json`, and is what the
 repoinit examples in
-[repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md) use.
+[repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md) use.
 Pick the one matching the file format you are writing rather than assuming they
 are interchangeable — that interchangeability is not something this doc has
 verified on 6.5.
@@ -234,7 +234,7 @@ content search instead.
 
 CRXDE Lite is unavailable on a production-ready 6.5 instance
 ([production-ready-mode-crxde.md](production-ready-mode-crxde.md)) and on
-AEMaaCS ([aemaacs-repository-inspection-by-tier.md](aemaacs-repository-inspection-by-tier.md));
+AEMaaCS ([aemaacs-repository-inspection-by-tier.md](../cloud-service/aemaacs-repository-inspection-by-tier.md));
 on the latter the Developer Console's read-only Repository Browser is the
 equivalent.
 
@@ -243,6 +243,6 @@ equivalent.
 ## References
 
 - [Configuring OSGi (AEM 6.5, Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configuring-osgi)
-- [all-package-embed-structure.md](all-package-embed-structure.md)
-- [repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md)
-- [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md)
+- [all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md)
+- [repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md)
+- [rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md)

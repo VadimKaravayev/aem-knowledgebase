@@ -7,7 +7,7 @@ real design mistake.
 Browser-based consumers of either path need a CORS policy covering the exact
 endpoint they call (`/graphql/execute.json.*`, the `.model.json` path, or the
 Assets HTTP API) — see
-[cors-policy-and-dispatcher.md](cors-policy-and-dispatcher.md).
+[cors-policy-and-dispatcher.md](../dispatcher-url-delivery/cors-policy-and-dispatcher.md).
 
 ## The two paths
 

@@ -34,7 +34,7 @@ On AEM **6.5**, one fix for accuracy-sensitive lookups was to switch to a **sync
 ### `/oak:index` is immutable → config-as-code
 You **cannot** edit indexes on a running instance (no Felix/JMX/CRXDE editing of `/oak:index` like 6.5). All index definitions ship via **code deployment** (package under `/apps`).
 
-**Why a *code* package, when `/oak:index` is technically mutable?** Deployment ordering. Cloud Manager installs index definitions **pre-startup** and must finish reindexing against them *before* it switches the code image over — mutable content installs only *after* switchover. Shipping an index as content would land it on the wrong side of that boundary, after the code that needs it is already serving. This is also why index size, not code size, sets the length of a deploy. See [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md) and [all-package-embed-structure.md](all-package-embed-structure.md).
+**Why a *code* package, when `/oak:index` is technically mutable?** Deployment ordering. Cloud Manager installs index definitions **pre-startup** and must finish reindexing against them *before* it switches the code image over — mutable content installs only *after* switchover. Shipping an index as content would land it on the wrong side of that boundary, after the code that needs it is already serving. This is also why index size, not code size, sets the length of a deploy. See [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md) and [all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md).
 
 ### Naming conventions
 - **Extend an OOTB index:** `<indexName>-<productVersion>-custom-<customVersion>` — e.g. `damAssetLucene-6-custom-1`

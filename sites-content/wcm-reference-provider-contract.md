@@ -57,7 +57,7 @@ returned resource, not by trusting `getType()`.
    `javap -v` shows the constant pool — string-concat recipes (`/jcr:content`) reveal
    path suffixes that `-c` output hides behind `invokedynamic makeConcatWithConstants`.
 
-Same recipe family as [dialog-el-bindings.md](dialog-el-bindings.md).
+Same recipe family as [dialog-el-bindings.md](../touch-ui-granite/dialog-el-bindings.md).
 
 Confirmed on AEM SDK 2026.6 local author (cq-wcm-core 5.16.4, cq-experience-fragments
 1.3.116, cq-dam-cfm-impl 0.12.524), July 2026, for the Crowdin connector's reference

@@ -125,4 +125,4 @@ To re-verify on a different SDK build, repeat steps 1–4 (bundle versions diffe
 ## Related
 
 - [dialog-showhide-fields.md](dialog-showhide-fields.md) — the client-side, live-reacting alternative for field visibility.
-- [xml-escaping-in-vault-content.md](xml-escaping-in-vault-content.md) — escaping `${`/special chars inside `.content.xml` attribute values.
+- [xml-escaping-in-vault-content.md](../sites-content/xml-escaping-in-vault-content.md) — escaping `${`/special chars inside `.content.xml` attribute values.

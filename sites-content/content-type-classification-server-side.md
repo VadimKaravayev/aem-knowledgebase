@@ -79,7 +79,7 @@ If each content type opens its own picker — AEM's stock CF picker at
 `dam/cfm/components/cfpicker/datasources/children` and its search via hidden form fields
 `type=dam:Asset` + `contentfragment=true` — then the author never sees a list where the
 question could arise. That is the right UI answer (see
-[granite-foundation-picker-control.md](granite-foundation-picker-control.md) for cloning it).
+[granite-foundation-picker-control.md](../touch-ui-granite/granite-foundation-picker-control.md) for cloning it).
 
 It does **not** remove the need for the ladder. The connector still resolves a type per item
 after the pick, for serialization and write-back, and any path can also arrive from a saved job,

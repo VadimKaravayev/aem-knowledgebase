@@ -93,7 +93,7 @@ is not.
 On AEMaaCS the run-mode set is closed — `author`/`publish` crossed with
 `dev`/`stage`/`prod`/`rde`, as `<service>.<environment>` — and custom run modes
 do not exist. The 6.5 habit of inventing a run mode per concern does not port.
-See [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md).
+See [rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md).
 
 ---
 
@@ -116,7 +116,7 @@ that appear in an `all` container's embed targets accept **only** `install`,
 `install.author` and `install.publish` — no custom suffix, because there are no
 custom run modes. That restriction belongs to the cloud embed grammar, not to
 AEM generally; see
-[all-package-embed-structure.md](all-package-embed-structure.md). Code carried
+[all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md). Code carried
 across from a 6.5 project that relied on `install.dev` has nowhere to land.
 
 For how competing `config.` folders resolve against each other — including the
@@ -131,4 +131,4 @@ than merging with them — see
 - [Run Modes (AEM 6.5, Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/implementing/deploying/configuring/configure-runmodes)
 - [production-ready-mode-crxde.md](production-ready-mode-crxde.md)
 - [osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md)
-- [all-package-embed-structure.md](all-package-embed-structure.md)
+- [all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md)

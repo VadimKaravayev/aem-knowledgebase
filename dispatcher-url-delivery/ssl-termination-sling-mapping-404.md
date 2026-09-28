@@ -23,4 +23,4 @@ A building has one internal hallway. A **guard** at the front door checks each v
 
 A **translator** stands just past the door specifically to read the note on each visitor's back and call ahead: "treat this one as VIP." But the translator can only decode the note if they have the matching **codebook** — that codebook is the SSL Filter's config, which has to explicitly name which symbol/header (`X-Forwarded-Proto`) means "VIP." Without that codebook configured, the translator sees a note but can't read it, stays silent, and the receptionist never hears "VIP" — she just defaults to her regular list, even if her VIP list (`/etc/map/https/...443`) is sitting right there, ready and correct. She never opens it because nobody flagged the visitor as VIP in the first place.
 
-Source: [question-45.md](../my-own-repos/aem-architect-lab/questions/question-45.md)
+Source: [question-45.md](../../my-own-repos/aem-architect-lab/questions/question-45.md)

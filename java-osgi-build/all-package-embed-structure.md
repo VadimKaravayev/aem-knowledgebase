@@ -10,9 +10,9 @@ most of them are naming conventions with no validator behind them.
 September 2026. Rules restated here are the ones that are non-obvious or whose
 failure mode is silent; not reproduced against a live pipeline unless noted.
 
-Related: [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md)
-(what lands when), [repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md)
-(the `ui.config` payload), [oak-indexing-aemaacs.md](oak-indexing-aemaacs.md)
+Related: [rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md)
+(what lands when), [repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md)
+(the `ui.config` payload), [oak-indexing-aemaacs.md](../cloud-service/oak-indexing-aemaacs.md)
 (the one package that breaks the `/apps`-only rule).
 
 ---
@@ -71,12 +71,12 @@ not "tidy" it away.
 Level 4 accepts no other run modes. This is a rule of the **cloud embed
 grammar**, not of AEM generally — on 6.5, `install.<anyCustomRunmode>` is a
 valid folder for shipping bundles and packages
-([runmode-sources-and-precedence.md](runmode-sources-and-precedence.md)), and
+([runmode-sources-and-precedence.md](../infrastructure-ops/runmode-sources-and-precedence.md)), and
 code carried across that relied on it has nowhere to land here. This is narrower than the AEMaaCS run-mode
 set generally (`author`/`publish` × `rde`/`dev`/`stage`/`prod`) — you can scope
 an *OSGi config* per environment with `config.publish.prod`, but you cannot
 scope a *package embed* to an environment, only to a tier. See
-[rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md)
+[rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md)
 for the environment-scoping gap and the manual Package Manager fallback.
 
 ---
@@ -121,7 +121,7 @@ people who copy the block into `ui.content` and then wonder why the structure
 package has to know about `/content`.
 
 It is also why the `validRoots` override in
-[oak-indexing-aemaacs.md](oak-indexing-aemaacs.md) (gotcha #4) doesn't break
+[oak-indexing-aemaacs.md](../cloud-service/oak-indexing-aemaacs.md) (gotcha #4) doesn't break
 `/apps`: replacing the validator's valid-roots list still leaves `/apps` valid,
 because the structure package dependency covers it. And per gotcha #6 there,
 `/oak:index` must **not** be added to the structure package — a filter root
@@ -183,7 +183,7 @@ an organizational folder under `/apps`:
 ```
 
 This is where repoinit lives, as `RepositoryInitializer` factory configs — see
-[repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md) for the
+[repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md) for the
 ordering rules that govern what those scripts can assume exists.
 
 **`config.publish` and `config.publish.prod` are competitors, not layers.**
@@ -191,7 +191,7 @@ When both match, the folder with more matching run modes wins the **entire
 PID**, and properties absent from it revert to bundle defaults rather than
 falling back to the less specific folder. Every variant must therefore carry
 the complete config. See
-[osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md).
+[osgi-config-runmode-resolution.md](../infrastructure-ops/osgi-config-runmode-resolution.md).
 
 Adobe's distinction for what belongs in repoinit versus runtime: groups that
 are **integral to the application's function** (a group a workflow assigns to)
@@ -238,7 +238,7 @@ their side.
 - **A single content package cannot deploy to both `/apps` and a runtime-writable
   area.** The split is per package, not per project. A mixed package installs
   only its mutable half, silently — see
-  [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md).
+  [rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md).
 - **Container packages cannot use FileVault install hooks.** Neither can
   immutable packages. If you need one, you need a different mechanism.
 - **Nothing deploys to `/libs`.** Product code only; overlay under `/apps/cq`,
@@ -252,7 +252,7 @@ their side.
   stage validates something production never runs.
 - `<accessControlHandling>merge</accessControlHandling>` for packages that carry
   `rep:policy` nodes; see
-  [repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md) for
+  [repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md) for
   when package-carried ACEs are the right call at all.
 
 ---
@@ -260,8 +260,8 @@ their side.
 ## References
 
 - [AEM Project Content Package Structure (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/aem-project-content-package-structure)
-- [osgi-config-runmode-resolution.md](osgi-config-runmode-resolution.md)
-- [runmode-sources-and-precedence.md](runmode-sources-and-precedence.md)
-- [rolling-deployment-two-version-overlap.md](rolling-deployment-two-version-overlap.md)
-- [repoinit-acls-on-apps-and-libs.md](repoinit-acls-on-apps-and-libs.md)
-- [oak-indexing-aemaacs.md](oak-indexing-aemaacs.md)
+- [osgi-config-runmode-resolution.md](../infrastructure-ops/osgi-config-runmode-resolution.md)
+- [runmode-sources-and-precedence.md](../infrastructure-ops/runmode-sources-and-precedence.md)
+- [rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md)
+- [repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md)
+- [oak-indexing-aemaacs.md](../cloud-service/oak-indexing-aemaacs.md)
