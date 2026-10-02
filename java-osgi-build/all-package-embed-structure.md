@@ -170,11 +170,17 @@ the `core` that carries only the jar.
 
 ---
 
-## `ui.config` is a code package
+## `ui.config` is a code package — of type `container`
 
-`ui.config` carries `packageType: application` even though it contains no
-components or scripts, because OSGi configuration **is** code. It is rooted at
-an organizational folder under `/apps`:
+`ui.config` carries `packageType: container` — **not** `application`, even
+though OSGi configuration is code-like and immutable. The FileVault
+package-type validator forbids an `application` package from containing OSGi
+bundles or configurations; installer payload (install/config folders) is what
+`container` packages carry, which is also the `all` package's type. (Corrected
+Oct 2026 — this doc previously claimed `application`; verified
+`<packageType>container</packageType>` in the archetype's `ui.config/pom.xml`.
+Taxonomy: [filevault-package-types.md](filevault-package-types.md).) It is
+rooted at an organizational folder under `/apps`:
 
 ```
 /apps/my-app/osgiconfig/config                        <- defaults
