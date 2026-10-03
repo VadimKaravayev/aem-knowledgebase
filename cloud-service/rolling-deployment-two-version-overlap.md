@@ -84,18 +84,33 @@ this work, and note that ACS Commons Ensure Oak Index is **not** usable on AEMaa
 - **Run modes are a closed set.** `author` and `publish` crossed with `rde`, `dev`, `stage`, `prod`,
   combined as `<service>.<environment>` (`author.dev`, `publish.prod`). No custom run modes, and **no
   way to scope a package to one environment**; environment-specific content means a manual Package
-  Manager install.
+  Manager install. Bundles only get the service dimension (`install.author`/`install.publish`).
+- **`getRunModes()` no longer reports the environment type at runtime.** Code branching on
+  `dev`/`stage`/`prod` from the SlingSettings API silently misbehaves on AEMaaCS — the environment
+  dimension exists only for OSGi config resolution. Branch via an OSGi config property set per
+  run-mode folder instead.
 - **`cp2fm` packages are frozen.** Anything Cloud Manager deployed appears in Package Manager with a
   `cp2fm` suffix and cannot be rebuilt, reinstalled or downloaded.
-- **Manual one-off installs are mutable-only and time out after 10 minutes.** Retrying a timed-out
-  install can introduce conflicts.
-- **No FileVault install hooks in immutable packages.**
-- **A mixed immutable/mutable package installs only its mutable half**, silently. Keep the split
-  clean in the `all` container.
+- **Manual one-off installs are mutable-only and time out after 10 minutes** — but the timeout's
+  **"undefined" error is the Cloud Service request limit, not a failure**: the installation keeps
+  running in the background. **Do not retry**; a second concurrent import of the same package is
+  what actually creates conflicts.
+- **No FileVault install hooks in immutable packages.** Mutable packages installed post-switchover
+  *do* support FileVault install hooks.
+- **A mixed immutable/mutable package installs only its mutable half**, silently at runtime — but
+  the build does warn: `Generated content-package <PACKAGE_ID> … is of MIXED type` in the Cloud
+  Manager build log. Keep the split clean in the `all` container.
 - **OSGi config belongs in source control**, not the web console, and **maintenance task
   configuration must too**, because Tools → Operations is unavailable on AEMaaCS.
 - Cloud Manager converts content packages into **Sling Feature Model** artifacts; every embedded
-  third-party package must itself satisfy the cloud coding guidelines or the deploy fails.
+  third-party package must itself satisfy the cloud coding guidelines or the deploy fails. Two
+  sanctioned ways to pull a third-party package in: reference it from a **remote Maven repository**
+  (public or password-protected, creds per the pipeline-variable mechanism) or commit a
+  **filesystem-based Maven repository** into the project and embed via
+  `filevault-package-maven-plugin`.
+- The quickstart's replication config stays reachable at **`/etc/replication`** on the local SDK
+  even where the UI entry point is gone — publication APIs remain backward compatible with the
+  AEM Replication Java APIs.
 
 ## References
 

@@ -51,6 +51,29 @@ go on every call (`x-api-key`, `x-gw-ims-org-id`); **Client Secret** and
 earlier JWT cut-off ("stop working after Jan 1, 2025") than the IMS guide's
 30 June 2025 end-of-life; either way it is gone.
 
+### Which product profile for which API operation
+
+From Adobe's API permissions guide. The service account is org-owned, and
+**cannot log into Cloud Manager or any Experience Cloud UI** — profile
+assignment is purely an API-rights decision. Baseline rule: **read-only
+(`GET`) access needs only the Developer profile**, with a few exceptions;
+mutations follow this matrix:
+
+| Operation | Profile(s) |
+|---|---|
+| Create / delete program | **Business Owner** (delete: BO only) |
+| Start / advance pipeline execution | Business Owner, Deployment Manager, Program Manager |
+| Certificates (create/update/delete) | Deployment Manager, Business Owner |
+| Domain names | Deployment Manager, Business Owner |
+| Content Copy | Deployment Manager |
+| Environment logs | Deployment Manager, Developer |
+| RDE reset | **Developer** |
+| Environment/pipeline variables | Deployment Manager (a `403` from `aio … set-variables` = the caller lacks this role) |
+
+Custom profiles with custom permission sets are also supported as an
+alternative to the four stock roles. Per-command check from the CLI:
+`--permissions` ([[aio-cloudmanager-cli]]).
+
 ### HTTP API resource structure: HAL
 
 Resources follow the **Hypertext Application Language** convention. Each has
@@ -161,6 +184,7 @@ still builds from the repository Cloud Manager knows about.
 ## References
 - [Understanding the API (developer.adobe.com)](https://developer.adobe.com/experience-cloud/cloud-manager/guides/getting-started/understanding-the-api)
 - [Creating an API integration project (developer.adobe.com)](https://developer.adobe.com/experience-cloud/cloud-manager/guides/getting-started/create-api-integration)
+- [API permissions (developer.adobe.com)](https://developer.adobe.com/experience-cloud/cloud-manager/guides/getting-started/permissions)
 - [CLI and SDKs (developer.adobe.com)](https://developer.adobe.com/experience-cloud/cloud-manager/cli-and-sdks/)
 - [Cloud Manager API reference (developer.adobe.com)](https://developer.adobe.com/experience-cloud/cloud-manager/reference/api/)
 - [aio-cli-plugin-cloudmanager (GitHub)](https://github.com/adobe/aio-cli-plugin-cloudmanager)
