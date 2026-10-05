@@ -15,6 +15,11 @@ only when there's durable insight to record.
 - [adobe/aem-test-samples (aem-cloud branch)](https://github.com/adobe/aem-test-samples/blob/aem-cloud/README.md) — Adobe's sample functional-test suite (smoke/ReplicationIT) and the template for `it.tests`; run against cloud envs with `-Peaas-local -Dcloud.author.url=…`. Covered in [cloud-manager-functional-ui-testing.md](cloud-service/cloud-manager-functional-ui-testing.md).
 - [adobe/aemanalyser-maven-plugin](https://github.com/adobe/aemanalyser-maven-plugin/) — runs Cloud Manager's build analyzers locally (`aem-analyse` goal). Note: [aem-analyser-maven-plugin.md](cloud-service/aem-analyser-maven-plugin.md).
 - [adobe/aem-guides-wknd](https://github.com/adobe/aem-guides-wknd) — WKND reference site; releases ship cloud and `-classic` (6.5) zips. Install gotchas in [wknd-onprem-install.md](infrastructure-ops/wknd-onprem-install.md).
+- [Tough Day 2 on Maven Central](https://repo1.maven.org/maven2/com/adobe/qe/toughday2/) — download location for Adobe's AEM stress/load-testing jar (needs Java 8). Note: [tough-day-load-testing.md](infrastructure-ops/tough-day-load-testing.md).
+
+## Articles
+
+- [CTT extraction deep dive (implementationdetails.dev, Aug 2021)](https://implementationdetails.dev/blog/2021/08/05/ctt-extraction-deep-dive/) — how Content Transfer Tool extraction works inside (Azure blob container layout, AzCopy pre-copy, SHA-256 blob dedup, field gotchas); summarized in [content-transfer-tool.md](cloud-service/content-transfer-tool.md). The blog (implementationdetails.dev) covers AEM internals generally — worth checking for other topics.
 
 ## Doc hubs
 

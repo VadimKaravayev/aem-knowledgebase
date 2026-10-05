@@ -38,6 +38,24 @@ source AEM ──extraction──▶ migration set (Adobe cloud storage) ──i
 | **Extraction** | content copied from source into the migration set, a temporary Adobe-provided cloud storage area | **overwrite must be disabled** to add a delta to an existing set |
 | **Ingestion** | migration set applied to the target environment | **wipe must be disabled** to layer the delta on existing content |
 
+## Setup mechanics (getting-started page)
+
+- CTT is a package from **Software Distribution, installed on the SOURCE instance** (v2.0.0+, use latest); UI appears under **Operations → Content Migration**.
+- Migration set is created **in CAM** (Content Transfer card): pick the **storage region — immutable after creation**; name obeys AEM node naming (no `. / : [ ] | * < > ^ ? { } % #`).
+- CAM issues an **extraction key** that the source pastes in to connect to the set — "treat with the same care as a password, never share over email". A set deleted in CAM leaves the source failing with connection errors.
+- Path selection: **≥ 1 Include Path, and `/apps`, `/libs`, `/home`, `/etc` are not selectable** (code and users ride other mechanisms; groups auto-migrate); Exclude Paths supported; bulk via CSV (one path per line, no commas). **Include Versions auto-includes `/var/audit`.**
+- **Check Size** pre-flight before extracting: verifies free disk under `crx-quickstart` *and* that the set fits product limits (WARNING status otherwise).
+- Network prerequisite: source must reach **`casstorageprod.blob.core.windows.net`** (Azure blob) — corporate egress rules are the first thing to clear; cert-path errors mean importing the CA cert; the SSL-logging debug flag in "Content Transfer Tool Extraction Service Configuration" must be **off** for real runs (disk hog).
+- **Versions + top-ups (`wipe=false`) → disable version purging** on the source for the duration — a documented CTT limitation, and it directly conflicts with the standing "purge regularly" maintenance advice, so time-box it.
+
+## Under the hood (extraction deep dive, implementationdetails.dev)
+
+- The migrator is a **jar AEM launches** to coordinate extraction; the migration set is an **Azure blob container**: loose blobs + an `aem` directory holding a **temporary segment node store** (the node/metadata half) + `locks`.
+- Binaries **> 16 KB travel as separate blobs, and blob transfer is where almost all extraction time goes**; node store copy is the small half.
+- **Pre-copy = AzCopy**, for cloud-backed source datastores (Azure blob / S3): `azcopy.config` with `azCopyPath` + `azureSas` (or S3 creds) lets blobs go **datastore → migration container directly** — the blog's number: **~10 TB datastore from ~10 days down to < 10 hours**. Blobs are named by **SHA-256, so already-present blobs are never re-uploaded** — which is also why top-ups and re-extractions are cheap.
+- "**Overwrite staging container**" removes the `aem` dir but **keeps the blobs** — a "full" re-extraction still dedups binaries.
+- Field gotchas: expired/malformed **SAS URI** halts extraction ("Signature fields not well formed"); `DataStoreException: Cannot retrieve blob` on **cloned sources** whose datastore is missing blobs (clone + datastore GC mismatch); changing include paths or the versions flag **without** overwrite → "passed list of paths … doesn't match the current migration set".
+
 ## Migration set attributes
 
 - **Max ten migration sets per CAM project.** Unique names.
@@ -104,4 +122,6 @@ extraction and ingestion.
 ## References
 - [Content Transfer Tool overview (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/migration-journey/cloud-migration/content-transfer-tool/overview-content-transfer-tool)
 - [Prerequisites for Content Transfer Tool (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/migration-journey/cloud-migration/content-transfer-tool/prerequisites-content-transfer-tool)
+- [Getting started with Content Transfer Tool (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/migration-journey/cloud-migration/content-transfer-tool/getting-started-content-transfer-tool)
+- [CTT extraction deep dive (implementationdetails.dev, Aug 2021)](https://implementationdetails.dev/blog/2021/08/05/ctt-extraction-deep-dive/) — the Azure-container/AzCopy internals summarized above
 - Question 17 in this repo (`devops/questions/question-17.md`), the AEM 6.2 large-repo migration scenario this note was first written from.
