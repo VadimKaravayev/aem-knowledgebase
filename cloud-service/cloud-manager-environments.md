@@ -24,6 +24,31 @@ Capabilities of any environment follow the solutions enabled on its program
 shown in parentheses next to each type in the Add dialog. If **Add Environment**
 is greyed out, it is either missing permissions or exhausted entitlement.
 
+## Creating an environment
+
+In the onboarding journey this is the **System Administrator's** step, right
+after creating the program and before assigning team members to AEM product
+profiles in the Admin Console ([[admin-console-product-profiles]]) — the
+sysadmin can do it because they self-assigned Business Owner earlier in the
+journey.
+
+1. Log in to Cloud Manager at `my.cloudmanager.adobe.com` and pick the right
+   IMS org.
+2. Select the program, then **Program Overview → Environments** card (or the
+   Environments tab).
+3. **Add Environment** → dialog: environment **type** (remaining entitlement
+   shown in parentheses), **name**, **description**, **cloud region** → Save.
+
+Gotchas:
+
+- **The creator is recorded on the environment.** Adobe's own caution: because
+  deleted users can sometimes be restored, *choose the environment creator
+  carefully* — don't create long-lived environments from a contractor or
+  soon-to-leave account.
+- Once the environment is up, members of the **Developer** product profile can
+  log in to Cloud Manager and manage its Git repositories — environment
+  creation is the gate for that, not repo setup.
+
 ## Who can do what
 
 | Action | Role required |
@@ -131,6 +156,7 @@ either production or stage updates the other, so the pair stays on one release.
   region's IP means advanced networking was provisioned after the region.
 
 ## References
+- [Onboarding journey: Create environments (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/onboarding/journey/create-environments) — read Oct 2026
 - [Manage environments (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/manage-environments)
 - [Additional publish regions (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/additional-publish-regions)
 - [Rapid Development Environments (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/rde/overview)

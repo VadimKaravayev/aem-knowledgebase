@@ -45,11 +45,15 @@ are handled" — depending on Git config that **does not stage deletions**, so
 a file removed from a team repo lives on in the CM subdirectory and keeps
 deploying. Use **`git add --all`** in the sync job.
 
-### Onboarding a new team repo — three steps
+### Onboarding a new team repo — four steps
 
 1. add the sync action/job to the new repo,
 2. **run it once** so the code exists in the CM repo,
-3. add the new directory to the root `pom.xml` modules.
+3. add the new directory to the root `pom.xml` modules,
+4. add a **new dispatcher configuration file for the project and include it
+   from the main dispatcher configuration** (the enterprise-setup page lists
+   this as the second half of onboarding alongside the reactor entry — the
+   shared web tier has to learn about the new project's paths/vhosts).
 
 (Do 2 before 3 — a module entry pointing at a not-yet-synced directory
 fails the next pipeline of *everyone*.)
@@ -86,7 +90,8 @@ model/standards, and two structural consequences:
 
 - Many customer repos → subdirectories of one CM repo via CI sync; root
   reactor `pom.xml` lists them as modules.
-- Onboard: sync job → run once → then add the module.
+- Onboard: sync job → run once → then add the module + a per-project
+  dispatcher config file included from the main dispatcher config.
 - `git add` in sync scripts misses deletions → `git add --all`.
 - Stable branch auto-triggers production; development branch syncs but
   needs an **API call** for the non-prod pipeline.

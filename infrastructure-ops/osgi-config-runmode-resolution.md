@@ -14,7 +14,9 @@ written, and only on instances carrying the extra run mode.
 does not. Version differences are called out per section. Not reproduced
 against a running instance.
 
-Related: [all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md)
+Related: [jcr-installer.md](jcr-installer.md) (the service that applies these
+folders, and the write-back mechanism behind the drift below),
+[all-package-embed-structure.md](../java-osgi-build/all-package-embed-structure.md)
 (where `ui.config` puts these folders),
 [repoinit-acls-on-apps-and-libs.md](../cloud-service/repoinit-acls-on-apps-and-libs.md) (the
 repoinit factory config that lives in one),

@@ -71,6 +71,9 @@ GMT.
 - **Incompatible code/config** — violations that only surface in the real
   container; grep `aemerror` for your packages' ERRORs.
 
+Similar symptom, different mechanism: a **malformed XML file** in a content package (author OK, publish
+import `Failed attempt (N/infinite)`, fails at **Install mutable content**, no stuck queue item): see [[publish-distribution-poison-package]].
+
 ### The `/var`-in-a-content-package signature (worth memorizing whole)
 
 Symptoms line up as: first deployment *succeeds* but mutable content is
