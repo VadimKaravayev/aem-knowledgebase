@@ -18,6 +18,7 @@ only when there's durable insight to record.
 - [adobe/aem-guides-wknd](https://github.com/adobe/aem-guides-wknd) — WKND reference site; releases ship cloud and `-classic` (6.5) zips. Install gotchas in [wknd-onprem-install.md](infrastructure-ops/wknd-onprem-install.md).
 - [Tough Day 2 on Maven Central](https://repo1.maven.org/maven2/com/adobe/qe/toughday2/) — download location for Adobe's AEM stress/load-testing jar (needs Java 8). Note: [tough-day-load-testing.md](infrastructure-ops/tough-day-load-testing.md).
 - [ollama/ollama](https://github.com/ollama/ollama) — local LLM server + CLI (`ollama pull/run/serve`), native `/api/*` and OpenAI-compatible `/v1/*` incl. Responses; API reference in [docs/api.md](https://github.com/ollama/ollama/blob/main/docs/api.md), Modelfile syntax in [docs/modelfile.md](https://github.com/ollama/ollama/blob/main/docs/modelfile.md), model library at [ollama.com/library](https://ollama.com/library). Note: [ollama-local-llm-basics.md](ai-integration/ollama-local-llm-basics.md).
+- [astral-sh/uv](https://github.com/astral-sh/uv) — Python package/project/interpreter manager; docs at [docs.astral.sh/uv](https://docs.astral.sh/uv/) (projects, scripts/PEP 723, tools, `uv python`). Note: [uv-python-project-basics.md](ai-integration/uv-python-project-basics.md).
 
 ## Articles
 
