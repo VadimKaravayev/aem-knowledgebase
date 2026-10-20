@@ -53,3 +53,9 @@ No external dependencies needed — Core Components are embedded in the classic
 package.
 
 Confirmed by package inspection Aug 2026 (WKND 3.2.0-classic).
+## Second WKND project brings a second Core Components bundle
+
+- **Symptom:** a WKND page that rendered before (e.g. FAQs with an accordion) now 500s: `IllegalAccessError` in `AccordionImpl`, then `RecursionTooDeepException` chains on the same accordion path, then `OutOfMemoryError`.
+- **Root cause:** installing `wknd-spa-react` (1.0.x) embedded Core Components **2.7.0** next to the instance's 2.31.2. Two active `com.adobe.cq.core.wcm.components.core` bundles split one Java package across classloaders; with no panels, the accordion includes itself.
+- **Fix:** stop the old bundle, then **restart the remaining one** — stopping alone leaves "Could not yet find an adapter factory for the model interface …LayoutContainer"; Sling Models re-registers only on restart.
+- **Spot it:** `/system/console/bundles` filtered by `core.wcm.components.core` shows two versions; the request progress trace repeats one include path at growing depth. Seen on 6.5, Oct 2026.
