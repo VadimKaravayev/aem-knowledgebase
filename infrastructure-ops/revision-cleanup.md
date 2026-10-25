@@ -7,8 +7,8 @@ is what runs unless somebody turned it off.
 This note deliberately skips what Adobe already documents well (how to set the maintenance window,
 the oak-run command lines) and keeps the behaviour that reads as a malfunction when it is not.
 
-**Sourcing:** written from the AEM **6.4** deploying/revision-cleanup page, cross-checked against the
-6.5 cold standby page. Nothing here was reproduced on a local instance, so treat the thresholds as
+**Sourcing:** written from the AEM **6.4** deploying/revision-cleanup page (re-read 2026-10-25; 6.4 is
+out of extended support, the page is frozen), cross-checked against the 6.5 cold standby page. Nothing here was reproduced on a local instance, so treat the thresholds as
 documented values rather than observed ones.
 
 ---
@@ -64,6 +64,39 @@ after one cancellation, and **red after three consecutive cancellations**, meani
 intervention. **Gotcha: the status resets on restart**, so a routine restart erases the only
 accumulated signal that cleanup has been failing.
 
+## Log lines → what to do
+
+Phase and mode markers (all prefixed `TarMK GC #n:` unless noted):
+
+| Line | Meaning |
+|---|---|
+| `estimation started` / `compaction started, strategy=…` / `cleanup started. Current repository size is …` | phase boundaries; the only progress signal besides JMX |
+| `TarMK GC: running tail compaction` | weekday mode |
+| `TarMK GC: no base state available, running full compaction instead` | tail was scheduled but there is no previous compaction to build on, so full ran — normal on first run or after offline cleanup |
+| `compaction completed in … after N cycles` / `cleanup completed in …` | success markers |
+| `compaction gave up compacting concurrent commits after N cycles` | write contention; see forceCompact above |
+
+Error matrix from Adobe:
+
+| Phase | Message | Next step |
+|---|---|---|
+| Estimation | `estimation skipped because compaction is paused` | ORC is disabled — enable it |
+| Estimation | `estimation interrupted: ${REASON}. Skipping compaction.` | depends on reason |
+| Compaction | `compaction paused` | enable ORC |
+| Compaction | `compaction cancelled: ${REASON}.` | depends on reason (disk/heap threshold, window end) |
+| Compaction | `compaction failed in … after 5 cycles` | not unrecoverable; five missed forceCompact cycles = too much write traffic in the window |
+| Cleanup | `cleanup interrupted` | the repository shut down mid-cleanup — find out why; avoid restarts inside the window |
+
+When the health check is **red**, the decision list is: five missed compact cycles with forceCompact
+timeout → move the window to lower write activity; cancelled at window end → enlarge the window
+(leftovers are removed and the run restarts in the next window on its own); insufficient heap → add
+memory; no success for a week → plan downtime and run offline cleanup. More than **three checkpoints**
+present when compaction runs is a signal to clean them up first.
+
+ORC can be stopped safely from the Maintenance window or JMX; a repository shutdown interrupts it
+cleanly too. No integrity check is required after a run; optional ones are the repository traversal
+check or `oak-run check`, which does not need AEM down.
+
 ## Scheduling gotcha
 
 Maintenance tasks run **sequentially with no configurable order**. Putting ORC in a window shared
@@ -88,7 +121,28 @@ makes it unreadable by older Oak, so it is one-way. Clean up unreferenced checkp
 (`oak-run.jar checkpoints <segmentstore> rm-unreferenced`); more than three checkpoints present
 during compaction is a signal to do so.
 
-Note that migrating to the 6.4 persistence format is **not reversible** back to 6.3.
+Useful oak-run knobs from the page: `-mmap` (memory-mapped on 64-bit by default, ignored on
+Windows, replaces `-Dtar.memoryMapped`), `-Dupdate.limit` (flush threshold, default **10000**),
+`-Dcompaction-progress-log` (default **150000** nodes per log line); `-Dcompress-interval` is gone
+since Oak 1.6. If an offline run passes **8 hours** and thread dumps sit in
+`InMemoryCompactionMap.findEntry`, that was the `PersistCompactionMap` case on oak-run 1.4–1.5 —
+on current Oak the fix is more heap, not a flag. Adobe's example: `java -Dupdate.limit=10000
+-Dcompaction-progress-log=150000 -Dlogback.configurationFile=logback.xml -Xmx8g -jar oak-run-*.jar
+checkpoints <repository>`.
+
+Note that migrating to the 6.4 persistence format is **not reversible** back to 6.3: it happens as a
+rolling, transparent migration on first access and cannot be undone.
+
+## Oak Segment Tar migration (6.3+), the one place offline cleanup is mandatory first
+
+- Moving a pre-6.3 TarMK store to **Oak Segment Tar** is required (unless starting fresh) and needs
+  downtime; **no search reindex** afterwards.
+- A format mismatch fails fast with `IllegalStateException: Invalid segment format` — no data is
+  corrupted, the wrong Oak just refuses to open it.
+- Disk for the migration ≈ recreating the segment store; delete the old store afterwards.
+- Migration time ≈ an offline cleanup, so **run offline cleanup first** to shrink what gets migrated.
+- 6.4 adds a more efficient dedup during compaction, which is why 6.4 footprints come out smaller
+  than 6.3 for the same content.
 
 ## Windows
 

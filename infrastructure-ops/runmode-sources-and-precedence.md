@@ -4,7 +4,8 @@ Two separate questions people run together: *how* does an instance acquire its
 run modes, and *which* of them can still be changed. The answers differ per run
 mode, and the mutable half is the one the KB has so far left implicit.
 
-**Sourcing:** Adobe, *Run Modes* (AEM **6.5**), read September 2026. The
+**Sourcing:** Adobe, *Run Modes* (AEM **6.5**), read September 2026, re-read 2026-10-25 against the
+2026-10-09 revision (unchanged; this doc is the knowledgebase's home for that page). The
 precedence list is as documented; not reproduced against a running instance.
 Interpretation is flagged where it appears.
 
@@ -49,6 +50,16 @@ grammar (`aem-author-p4502.jar`, `aem-publish_stage-p4503.jar`); see
 [production-ready-mode-crxde.md](production-ready-mode-crxde.md).
 
 ---
+
+Two qualifiers the page attaches to the sources above:
+
+- **Filename detection sets only the installation modes `author` / `publish`.** A custom mode cannot
+  be smuggled in through the jar name; use `-r`, `-D` or `sling.properties` for those.
+- **`samplecontent` is the default** when neither sample-content mode is given; `nosamplecontent` is
+  what Adobe intends for production installs (details and cost in
+  [production-ready-mode-crxde.md](production-ready-mode-crxde.md)). Sample content is baked in before
+  the quickstart is built and can carry packages *and* configurations, so a `samplecontent` instance
+  is not just "plus a demo site".
 
 ## Frozen versus re-selected
 

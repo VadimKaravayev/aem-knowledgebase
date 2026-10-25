@@ -10,7 +10,8 @@ Nothing warns you. The config simply behaves as if half of it were never
 written, and only on instances carrying the extra run mode.
 
 **Scope:** sourced from Adobe, *Configuring OSGi* (AEM **6.5**), read September
-2026. The resolution algorithm carries to AEMaaCS; the Web Console editing path
+2026, re-read 2026-10-25 against the 2026-10-09 revision (no substantive change; this doc is the
+knowledgebase's home for that page). The resolution algorithm carries to AEMaaCS; the Web Console editing path
 does not. Version differences are called out per section. Not reproduced
 against a running instance.
 
@@ -241,6 +242,23 @@ on the latter the Developer Console's read-only Repository Browser is the
 equivalent.
 
 ---
+
+## Page leftovers worth one line each
+
+- Adobe's own framing of the three methods: Web Console = easiest, applies immediately **regardless of
+  run mode**; `.config` files = what the console wrote, packageable for other instances; `sling:OsgiConfig`
+  nodes = hand-made in CRXDE, run-mode-aware, several run modes' configs can coexist in one repository.
+- Console field descriptions quote **Sling defaults, which are not necessarily AEM's defaults** — read the
+  running value, not the description.
+- When creating a node, **only add properties you are changing**; the rest keep the bundle default. The
+  node's **full path must be correct or it is not read at startup** (`config` folder must be a
+  `sling:Folder` directly under `/apps/<project>`).
+- ConfigAdmin's private files under `/crx-quickstart/launchpad/config` include e.g.
+  `…/org/apache/felix/webconsole/internal/servlet/OsgiManager.config` and
+  `…/com/day/crx/sling/client/impl/CRXSlingClientRepository/<pid-nr>.config` — useful only as a backup
+  reference, never as an edit target.
+- The page's run-mode example contains a typo (`/config/author.dev.emea.noldap`); the intended path is
+  `/apps/*/config.author.dev.emea.noldap`, not applied because `noldap` is not a started mode.
 
 ## References
 

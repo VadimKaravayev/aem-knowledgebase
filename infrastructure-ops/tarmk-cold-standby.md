@@ -74,8 +74,30 @@ FileDataStore with `path="./crx-quickstart/repository/datastore"` and `minRecord
    Configs copied from older notes are silently ignored.
 
 Standard setup is: install and configure the primary, shut it down, copy the whole installation
-folder to the standby host, then edit the standby's configs. Delete the standby's `sling.id` before
-first start so the two instances do not share a repository id.
+folder to the standby host (descriptive names such as `aem-primary` / `aem-standby` help), then edit
+the standby's configs. **Clear anything left in `crx-quickstart/install` first**, then create
+`install.primary` / `install.standby` (and the `crx3` folder for the data store config) so no stale
+config survives the clone. Delete the standby's `sling.id` before first start so the two instances
+do not share a repository id.
+
+The same service can be edited in the Web Console (`/system/console/configMgr` → *Apache Jackrabbit
+Oak Segment Tar Cold Standby Service*) followed by a restart. Which role an instance is actually
+running is visible at `/system/console/status-slingsettings` under *Run Modes* — the first thing to
+check when a "standby" is answering requests.
+
+`standby.autoclean` triggers the standby's cleanup automatically when the segment store grew during a
+sync cycle, which is why a healthy standby stays close to the primary's size without manual work.
+
+## Logs: the only progress indicator for the initial sync
+
+On **both** instances set the `org.apache.jackrabbit.oak.segment` logger to **DEBUG** and route it
+to its own file, e.g. `tarmk-coldstandby.log` (Sling Commons Log logger config in the same install
+folder). The first sync moves the whole repository and prints nothing useful at INFO.
+
+- The initial sync is **complete when the polling-request entries stop appearing** in that log; there
+  is no "sync finished" message.
+- With a **non-shared FileDataStore**, binary transfers show up as separate log entries, so a
+  large DAM makes this phase visibly longer than the segment count suggests.
 
 ## Security
 
@@ -126,8 +148,12 @@ effective.
 afterwards on the standby. The standby has no `RepositoryManagement` MBean, so use
 `BlobGarbageCollection#startBlobGC()` there. Order only matters for non-shared data stores.
 
-**Hotfixes**: never patch a standby in place. Stop and delete it, install and test the hotfix on the
-primary, stop the primary, file-system copy it, and reconfigure the copy as the standby.
+**Hotfixes**: never patch a standby in place. Install and test the hotfix on the primary first, then
+**stop sync on the standby via JMX (`stop()`)**, stop the standby, delete its folder, stop the
+primary, file-system copy it, and reconfigure the copy as the standby.
+
+Adobe page re-read 2026-10-25; the sections above match it, with the capacity-vs-availability framing
+and the ORC phase split added from the revision cleanup doc.
 
 ## References
 

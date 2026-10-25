@@ -8,7 +8,8 @@ really "I configured one direction and assumed the other came free."
   renders every link AEM emits.
 
 **Sourcing:** Apache Sling, *Mappings for Resource Resolution*, read September
-2026. Not reproduced against a running instance. Inference and AEM-specific
+2026, re-read 2026-10-25 (this doc is the knowledgebase's home for that page). Not reproduced
+against a running instance. Inference and AEM-specific
 additions are flagged where they appear.
 
 Related: [ssl-termination-sling-mapping-404.md](ssl-termination-sling-mapping-404.md)
@@ -211,6 +212,58 @@ but hand-built URLs containing a *raw colon* are not what Sling emits either.
 Let `map()` produce these rather than concatenating them yourself.
 
 ---
+
+## The trap's mirror image: regex in `sling:internalRedirect` = reverse-only (SLING-2560)
+
+The rule above says a wildcard in the *match* side kills reverse mapping. The inverse is also
+true and is the sanctioned way to get a regex-based **outbound** rule: **if `sling:internalRedirect`
+contains a regex, the entry is used only for `map()` and never for `resolve()`.** The node then
+carries a `sling:match` whose `$1`/`$2` refer to the groups captured in `sling:internalRedirect`:
+
+```
+/etc/map/http/example.com.80
+    sling:internalRedirect = "/content/([^/]+)/home/(.*)"
+    sling:match            = "$1/index/$2"
+```
+
+Reverse table entry: pattern `/content/([^/]+)/home/(.*)` → replacement `https://example.com/$1/index/$2`.
+So the two regex placements are complementary, not interchangeable: **regex in `sling:match` → inbound
+only; regex in `sling:internalRedirect` → outbound only.** A site that needs both directions
+pattern-driven needs two entries.
+
+## Page leftovers worth one line each
+
+- **What `map()` returns**: an absolute URL (scheme + host + port) only when a resource-based entry
+  exists with no `sling:match`, or with a `sling:match` that contains no wildcard; otherwise an
+  absolute path. The `map(request, path)` variants additionally return a URL only when the request's
+  `Host` header differs from the mapped host:port — same-host links stay path-relative. Multiple
+  outgoing matches resolve unpredictably, so **never define conflicting `sling:match` values under
+  different schemes/hosts/ports**.
+- **Only nodes carrying `sling:redirect` or `sling:internalRedirect` become table entries**; every
+  other node under `/etc/map` is pure structure for the regex built from the hierarchy.
+- **A replacement that is a URL is fed back through the table** until the result is a path or nothing
+  matches — chained entries work, and a loop between two entries is possible.
+- **After the table**: a relative result is combined with the resolver search path
+  (`ResourceResolver.getSearchPath()`), first hit wins; an absolute one is used as-is. Then four cases:
+  *star resource* (`/*` — `SlingPostServlet` creation target), *direct existence check*, *drill-down*
+  (child by name, else child by `sling:alias`, else stop), *missing resource*.
+- **`resource.resolver.mapping`** (OSGi) defines host-agnostic mappings with separate inbound and
+  outbound rules; **only `/etc/map` entries can be per host**. Both sources compile into the same two
+  internal tables.
+- **Alias cache contradiction on the page**: `optimize_alias_resolution` is marked *deprecated,
+  disable it* in the property table, yet the performance section says disabling it is *not
+  recommended* (SLING-12025: speed and `jcr:content` behaviour differ). Read it as "the switch is
+  going away because the cache becomes mandatory", and leave it on; expect slow startup/alias updates
+  past ~10 000 aliases. `allowed_alias_locations` only limits **cache initialisation**, not
+  resolution. Invalid aliases are logged at **WARN**.
+- Vanity extras: `vanitypath_maxEntries_startup=true` applies the cap only while the cache is built;
+  `vanitypath_bloomfilter_maxBytes=1024000` is documented as *do not touch*.
+- **Node types** `sling:Mapping` (primary, extends `nt:hierarchyNode` so it sits under `nt:folder`),
+  `sling:MappingSpec` and `sling:ResourceAlias` (mixins) exist for convenience — **the implementation
+  reads only the properties, never the types**, so `sling:Folder` nodes with the right properties work.
+- String interpolation (SLING-7768) placeholder grammar is `$['type':'name';default='value']`, values
+  come from the **Apache Sling String Interpolation Provider** config for `config`, env vars for `env`,
+  framework-then-system properties for `prop`; works anywhere in the `/etc/map` tree.
 
 ## Testing both directions
 

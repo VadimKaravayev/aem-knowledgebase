@@ -15,12 +15,20 @@ Cloud Manager discovers the artifacts in [[cloud-manager-ams-project-setup]].
 |---|---|---|---|
 | **ui.apps** | `application` | `/apps` only (immutable) | components, HTL, clientlibs, `/libs` overlays, `/apps/settings` CA-configs, ACLs, precompiled scripts |
 | **ui.content** | `content` | mutable: `/conf`, `/content`, `/etc`, tags | CA configs, baseline content structures, taxonomies |
-| **ui.config** | `application` | `/apps/<app>/osgiconfig` | `config` + `config.<service>.<env>` folders, repoinit factory configs |
+| **ui.config** | `container` (code, but no regular content nodes) | `/apps/<app>/osgiconfig` | `config` + `config.<service>.<env>` folders, repoinit factory configs |
 | **all** | *(container — none)* | nothing of its own | embeds everything; the **only** package Cloud Manager deploys |
 
-Every non-container package sets
+Every package except `all` sets
 `<cloudManagerTarget>none</cloudManagerTarget>` so Cloud Manager deploys
-only the `all` artifact.
+only the `all` artifact (Cloud Manager harvests *every* package from the
+build by default).
+
+Package-type rules the page states: **`container`** = OSGi bundles,
+configurations and subpackages only, **no regular nodes, no install hooks**
+(that is why `ui.config` is a container even though it is code — see
+[[filevault-package-types]]); **`application`** = immutable code;
+**`content`** = mutable content. Configurations come from **AEM Project
+Archetype 24+**. `/libs` is never modified by customer packages.
 
 Mutable vs immutable: `/apps` + `/libs` immutable; `/content /conf /var
 /etc /oak:index /system /tmp` mutable — **but `/oak:index` ships in the
@@ -78,6 +86,34 @@ Embed the vendor's **`all` container** (not its pieces) into your `all`,
 target under `/apps/vendor-packages/container/install`; the artifact must
 come from a reachable Maven repository declared in the reactor pom
 (auth via [[cloud-manager-ams-project-setup]]'s settings.xml mechanism).
+
+## Smaller facts from the page (re-read 2026-10-25, page dated 2026-10-09)
+
+- **Single deployable principle**: one package cannot deploy to both `/apps`
+  and runtime-writable areas; an application ships as one `all` with
+  subpackages for code, configuration and baseline content.
+- **Repoinit scope and limits**: baseline content structures, service
+  users, users, groups, ACLs — runs **early, with implicit permissions**,
+  scoped by the `config.<runmode>` folder it sits in. **Only groups the
+  application needs to function belong in repoinit**; organisational users
+  and groups are managed at runtime. `.config` format is used here only
+  because it supports multi-line values.
+- **Third-party Maven sources**: Adobe's public repo
+  (`https://repo1.maven.org/maven2/com/adobe/`) needs no configuration;
+  any other repository must be registered in the reactor POM (releases on,
+  snapshots off) and **lengthens Cloud Manager builds**.
+- **Bundles-only packages can't be dependencies** because they are not
+  registered with Package Manager, so the dependency can never resolve and
+  the dependent install fails ([[all-package-embed-structure]]).
+- **Typical `install.author` / `install.publish` use cases** Adobe names:
+  tier-specific ACLs, author-only configurations, author-only back-office
+  integrations.
+- **Multi-site / vendor layout**: `common.ui.apps` + `site-a.*` /
+  `site-b.*` sets, each site's `ui.content` → its `ui.apps` → `common.ui.apps`;
+  vendor apps embedded as `vendor-x.all` under `/apps/vendor-packages/container/install`.
+- **Page markup errors to not copy**: the sample closes with
+  `</cloudManageTarget>` (typo) and the `<embeddeds>` block "closes" with an
+  opening tag; the real tags are `</cloudManagerTarget>` and `</embeddeds>`.
 
 ## Misc
 

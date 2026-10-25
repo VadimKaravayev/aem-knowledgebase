@@ -4,7 +4,8 @@ The Adobe procedure is mostly mechanical. This keeps only the steps where the
 obvious action is the wrong one, plus the decision table for whether you need a
 repository migration at all.
 
-**Sourcing:** Adobe, *In-Place Upgrade* (AEM 6.5), read September 2026. Not
+**Sourcing:** Adobe, *In-Place Upgrade* (AEM 6.5), read September 2026, re-read 2026-10-25 against
+the 2026-10-09 revision (this doc is the knowledgebase's home for that page). Not
 performed against a real instance — treat the commands as the documented shape,
 not as reproduced output. The page defers pre-upgrade maintenance, code review,
 post-upgrade checks, backup targets, downtime and rollback to separate
@@ -102,11 +103,17 @@ java -Xmx4096m -jar aem-quickstart.jar -v -x crx2oak -xargs -- \
 | crx2 | MongoMK | `mongo-from-crx2` (+ `-T mongo-uri=… -T mongo-db=…`) |
 
 **The bundled crx2oak is not the current one.** The instance ships
-`crx-quickstart/opt/extensions/crx2oak.jar`, and Adobe points you at Maven
-Central for the latest build instead. Using the shipped jar is the default
-action and the wrong one.
+`crx-quickstart/opt/extensions/crx2oak.jar`, and Adobe points you at the **Adobe
+Maven repository** (`com/adobe/granite/crx2oak/`) for the latest build instead —
+replace the jar after `-unpack`, before migrating. Using the shipped jar is the
+default action and the wrong one.
 
-If migration cannot reach the binaries, it needs to be told where they are —
+The failure signature when migration cannot reach the binaries is the message
+**"Checkpoints are not copied, because no external datastore has been specified."**
+The same message advertises `--skip-checkpoints` as a way to force the run —
+read the Oak migration docs before using it, since skipping checkpoints is
+what makes every async index rebuild from scratch afterwards. The right fix is
+to tell crx2oak where the binaries are —
 `--src-datastore=/path/to/datastore` for a file datastore, or
 `--src-s3config=/path/to/SharedS3DataStore.config` plus
 `--src-s3datastore=/path/to/datastore` for S3. On Windows, `--disable-mmap`
@@ -125,6 +132,22 @@ moves every binary has two independent ways to fail and one rollback story
 covering both.
 
 ---
+
+## Two steps the page adds that are easy to miss
+
+- **S3 before the upgrade start.** If the instance uses the S3 connector: delete the previous
+  connector's jars from `crx-quickstart/install`, download the latest **1.10.x**
+  `com.adobe.granite.oak.s3connector` from the Adobe Maven repository
+  (`com/adobe/granite/com.adobe.granite.oak.s3connector/`), unzip it and copy the contents of
+  `jcr_root/libs/system/install` into `crx-quickstart/install`. An old connector left in place is a
+  classic reason the upgraded instance cannot open its datastore.
+- **Java 11+ needs the extra switches** from Adobe's *Java 11 Considerations* on the upgrade command
+  line (the `--add-opens` / bootdelegation set — see
+  [java11-bootdelegation-drift.md](../java-osgi-build/java11-bootdelegation-drift.md)). The
+  `ps -ef` capture above will not contain them if the old instance ran on Java 8.
+- Pre-upgrade, Adobe's listed inputs are: *Upgrading Code and Customizations*, *Pre-Upgrade
+  Maintenance Tasks*, the target version's system requirements, and a **Pattern Detector** run to
+  size the effort. Post-upgrade: redeploy the upgraded codebase, then *Post Upgrade Checks*.
 
 ## Verifying
 

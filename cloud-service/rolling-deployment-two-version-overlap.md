@@ -7,8 +7,10 @@ is wrong. Mutable content is applied only after the application version has swit
 
 This is the constraint that shapes how a connector ships service users, ACLs and indexes.
 
-**Sourcing:** the Adobe *Deploying to AEM as a Cloud Service / Overview* page (Sept 2026),
-interpreted for a vendor package. Not reproduced against a live pipeline.
+**Sourcing:** the Adobe *Deploying to AEM as a Cloud Service / Overview* page (Sept 2026, re-read
+2026-10-25 against the 2026-10-09 revision), interpreted for a vendor package. Not reproduced against a
+live pipeline. This doc is the knowledgebase's home for that page; the sections below the three rules
+carry its remaining reference facts.
 
 ---
 
@@ -111,6 +113,69 @@ this work, and note that ACS Commons Ensure Oak Index is **not** usable on AEMaa
 - The quickstart's replication config stays reachable at **`/etc/replication`** on the local SDK
   even where the UI entry point is gone — publication APIs remain backward compatible with the
   AEM Replication Java APIs.
+
+## The rest of the overview page, condensed
+
+- **Two kinds of release, decoupled.** Custom code releases and **AEM version updates are separate
+  deployment events**; Adobe's automatic updates are meant to be backward compatible with deployed
+  custom code. Build against the **latest SDK** for internal releases and test against the AEM
+  version currently on production ([[aemaacs-sdk]], [[local-development-environment]]); local and
+  cloud behave differently, so dev and stage testing is not optional ([[environment-tiers-dev-stage-prod]]).
+- **The only mutable state application code may depend on at startup**: service users, their ACLs,
+  node types and index definitions — i.e. exactly what installs before or during startup. Anything
+  else (folders, templates, `/conf`) arrives post-switchover and code must tolerate its absence.
+- **Legacy `/etc` content must be relocated** (AEM 6.5 repository restructuring) before a codebase is
+  cloud-deployable; the tooling is [[repository-modernizer]].
+- **Two sanctioned OSGi config workflows**: edit in the local Configuration Manager and export into the
+  project, or write the config by hand and use the console only to look up property names
+  ([[aemaacs-osgi-configuration]]). Never manage config at runtime on cloud.
+- **Mutable content's two vehicles**: Vault content packages (folder hierarchies, editable templates,
+  `/conf`, scripts) and **repoinit**. Repoinit is for service users (create/delete/disable), groups,
+  users, ACLs (**the path must already exist — precede with `create path`**), root folder structures
+  and CNDs. Adobe's reasons to prefer it: created **at startup so code can rely on it**, explicit and
+  additive (removals only for users/service users/groups), **fast and atomic** (a package install
+  snapshots the whole tree even for one node), validated at runtime locally, **skipped when the state
+  already matches**, and executed by Cloud Manager **independently of package installation**. Config
+  = factory PID `org.apache.sling.jcr.repoinit.RepositoryInitializer~<descriptive-name>` with a
+  `script` property; create parents before children; keep ACLs high and scope with `rep:glob`
+  ([[repoinit-acls-on-apps-and-libs]]).
+- **Author/publish-only packages**: embed under `install.author` / `install.publish` in `/apps`
+  ([[all-package-embed-structure]]).
+- **Package Manager on cloud** is a runtime tool for mutable one-offs (e.g. copying prod content to
+  stage for a repro); it can never write the immutable repository ([[package-manager]]).
+- **Third-party packages**: prefer a remote Maven repo; the committed file-system alternative is
+  declared in the POM as
+
+  ```xml
+  <repository>
+      <id>project.local</id>
+      <name>project</name>
+      <url>file:${maven.multiModuleProjectDirectory}/repository</url>
+  </repository>
+  ```
+
+  and embedded via `filevault-package-maven-plugin` `embeddeds` to e.g.
+  `/apps/vendor-packages/container/install`.
+- **Rolling deploy, step by step**: old nodes active → release candidate built → indexes
+  (re)processed, old nodes on old indexes → new nodes start → health checks while old nodes serve →
+  ready new nodes take traffic, old nodes shut down → only new nodes remain → **mutable content
+  deployed last**. Cloud Manager notifies when the new version is ready for traffic; index status is
+  visible per build. **Canary deployments** are the alternative: validate the build on production
+  infrastructure before routing live traffic (Adobe page *Use Canary Deployments to Validate Code*).
+- **Replication**: the publication mechanism is backward compatible with the Replication Java APIs
+  ([[content-distribution-journal]]); locally, classic author→publish replication is configured at
+  `http://localhost:4502/etc/replication` if the UI entry point is gone.
+- **Supported OSGi config folders — the full closed list**: `config`, `config.author`,
+  `config.author.dev|rde|stage|prod`, `config.publish`, `config.publish.dev|rde|stage|prod`,
+  `config.dev`, `config.rde`, `config.stage`, `config.prod`. Most matching run modes wins. Locally:
+  `java -jar aem-sdk-quickstart-….jar -r publish,dev`.
+- **RDE** receives code by CLI sync and skips the pipeline's quality gates; the regular dev
+  environment is where the gates run before stage ([[cloud-manager-environments]]).
+- **Adobe's own summary of restrictions**: no direct deploy to a running instance; no install hooks in
+  immutable packages; mutable packages cannot target one environment; mutable changes cannot be
+  auto-rolled back; non-cloud-compatible third-party packages fail the deploy; ACS Commons Ensure Oak
+  Index unsupported; Package Manager "undefined" after ten minutes is a timeout, do not retry;
+  `cp2fm` packages cannot be reinstalled, rebuilt or downloaded; run modes cannot target content.
 
 ## References
 

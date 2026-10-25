@@ -7,7 +7,10 @@ clean HTTP 200 with no CORS headers, which reads like a routing bug and is not
 one.
 
 **Sourcing:** Adobe, *Understand Cross-Origin Resource Sharing (CORS)* (AEM
-Learn), read September 2026. Not reproduced against a live instance.
+Learn, applies to **6.4 / 6.5**), read September 2026, re-read 2026-10-25 against the 2026-10-09
+revision (unchanged; this doc is the knowledgebase's home for that page). Not reproduced against a
+live instance. On AEMaaCS the same Granite policy exists, but the dispatcher halves below move
+into the Cloud dispatcher module and the CDN also sits in the path.
 Inference is flagged where it appears.
 
 Related: [exposing-apis-to-external-systems.md](exposing-apis-to-external-systems.md)
@@ -128,7 +131,11 @@ failure that points at CSRF, at auth, at anything but the CORS path list.
 
 **`alloworigin: ["*"]` is not a production configuration.** Adobe's wording:
 absolutely not recommended, since it lets every foreign (attacker) site make
-requests.
+requests. It is also technically limited: **`*` is only honoured for requests without
+credentials** — pair it with `supportscredentials: true` and the browser rejects the response
+anyway, so the "it works for GET but not for my logged-in POST" symptom is the spec, not AEM.
+
+Adobe's JSON samples on the page have missing and trailing commas; validate before pasting.
 
 ---
 
@@ -164,7 +171,9 @@ Without these the CORS handler never sees an `Origin` and cannot match a policy.
 }
 ```
 
-Then **restart the web server** and **flush the cache entirely**. Cached
+Then **restart the web server** and **flush the cache entirely**. Adobe generalises this: **any
+CORS configuration change on Publish must be followed by invalidating the affected cached
+content**, and recommends purging the dispatcher cache as part of every deployment. Cached
 responses were stored with whatever headers were correct at the time; a policy
 change does not retroactively fix them, and a half-flushed cache serves a mix.
 

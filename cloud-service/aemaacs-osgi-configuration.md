@@ -96,6 +96,31 @@ anything environment-variable-shaped can't be provisioned via repoinit.
   Status Dump **Configurations** → find the `pid`, inspect `properties`,
   diff against the run-mode folder you expect to have won.
 
+## Page leftovers (re-read 2026-10-25, page dated 2026-10-09)
+
+- **Factory file naming as Adobe writes it is `<factoryPID>-<name>.cfg.json`** (hyphen). The Sling
+  installer accepts both `-` and the OSGi R7 `~` for `.cfg.json`; the archetype and
+  [[osgi-config-runmode-resolution]] use `~`. Either resolves — just don't mix separators for one
+  factory, or two files become two instances.
+- **Unresolved placeholder stays literal**: with no variable set and no `;default=`, the property
+  value is the string `$[env:NAME]` itself, not empty — a useful tell in the Status Dump.
+- **Placeholders are for your own code's properties only.** Adobe says not to use `$[env:]`/`$[secret:]`
+  to override Adobe-defined configuration.
+- **`config.dev` does not inherit from `config`.** The page's Example 3: a dev environment that should
+  carry the same value as stage/prod still needs the variable set via the API — or the placeholder
+  needs `;default=<the config value>`. The most-specific folder wins the whole PID, so `config` never
+  contributes.
+- **Defaults are declared in the property, never through the API** (`$[env:NAME;default=val]`).
+- Adobe's variable advice ends with **keep old variable names around for disaster-recovery
+  redeployments** of a previous release — the additive strategy is also a DR strategy.
+- CLI forms on the page: `aio cloudmanager:list-environment-variables ENVIRONMENT_ID` (secrets print
+  as `****`), `aio cloudmanager:set-environment-variables ENVIRONMENT_ID --variable NAME "v" --secret
+  NAME2 "s"`, `--delete NAME`. The `environment:set-variables` topic form in [[aio-cloudmanager-cli]]
+  is the same command under the newer topic layout.
+- **Local dev needs `-r publish,dev` (or `author,dev`)** on the SDK jar for the right folders to
+  resolve; the page documents no `-D` route for secrets — `secretsdir` goes in `sling.properties` only,
+  not in the Felix console.
+
 ## Exam checklist
 
 - `.cfg.json` only; factory `~name`; configs in `ui.config`, not visible
@@ -114,4 +139,4 @@ anything environment-variable-shaped can't be provisioned via repoinit.
 ## References
 - [Configuring OSGi for AEM as a Cloud Service (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/deploying/configuring-osgi)
 
-Docs-based (page read Oct 2026), not reproduced on a live environment.
+Docs-based (page read Oct 2026, re-read 2026-10-25 against the 2026-10-09 revision; this doc is the knowledgebase's home for that page), not reproduced on a live environment.
