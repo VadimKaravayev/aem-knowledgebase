@@ -4,7 +4,7 @@ The Adobe procedure is mostly mechanical. This keeps only the steps where the
 obvious action is the wrong one, plus the decision table for whether you need a
 repository migration at all.
 
-**Sourcing:** Adobe, *In-Place Upgrade* (AEM 6.5), read September 2026, re-read 2026-10-25 against
+**Sourcing:** Adobe, *In-Place Upgrade* (AEM 6.5), read September 2026, re-read Oct 2026 against
 the 2026-10-09 revision (this doc is the knowledgebase's home for that page). Not
 performed against a real instance — treat the commands as the documented shape,
 not as reproduced output. The page defers pre-upgrade maintenance, code review,

@@ -87,7 +87,7 @@ target under `/apps/vendor-packages/container/install`; the artifact must
 come from a reachable Maven repository declared in the reactor pom
 (auth via [[cloud-manager-ams-project-setup]]'s settings.xml mechanism).
 
-## Smaller facts from the page (re-read 2026-10-25, page dated 2026-10-09)
+## Smaller facts from the page (re-read Oct 2026, page dated 2026-10-09)
 
 - **Single deployable principle**: one package cannot deploy to both `/apps`
   and runtime-writable areas; an application ships as one `all` with

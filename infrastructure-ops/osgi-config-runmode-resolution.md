@@ -10,7 +10,7 @@ Nothing warns you. The config simply behaves as if half of it were never
 written, and only on instances carrying the extra run mode.
 
 **Scope:** sourced from Adobe, *Configuring OSGi* (AEM **6.5**), read September
-2026, re-read 2026-10-25 against the 2026-10-09 revision (no substantive change; this doc is the
+2026, re-read Oct 2026 against the 2026-10-09 revision (no substantive change; this doc is the
 knowledgebase's home for that page). The resolution algorithm carries to AEMaaCS; the Web Console editing path
 does not. Version differences are called out per section. Not reproduced
 against a running instance.

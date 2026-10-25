@@ -1,6 +1,6 @@
 # Dispatcher log entries you will actually meet — what each means and the fix
 
-Adobe's AMS tutorial page *Dispatcher Common Logs* (AEM 6.5 / AMS; read 2026-10-25) as a lookup table, plus the triage context it leaves out. Log mechanics (`DispatcherLogLevel`, bring-up checklist, debug headers) are in [[dispatcher-fundamentals]]; cache semantics in [[dispatcher-caching-and-invalidation]]. On **AEMaaCS** the same module writes the same lines, but you read them via Cloud Manager `download-logs` / `tail-log` for the `aemdispatcher` log, not `/var/log/httpd` ([[aio-cloudmanager-cli]]).
+Adobe's AMS tutorial page *Dispatcher Common Logs* (AEM 6.5 / AMS; read Oct 2026) as a lookup table, plus the triage context it leaves out. Log mechanics (`DispatcherLogLevel`, bring-up checklist, debug headers) are in [[dispatcher-fundamentals]]; cache semantics in [[dispatcher-caching-and-invalidation]]. On **AEMaaCS** the same module writes the same lines, but you read them via Cloud Manager `download-logs` / `tail-log` for the `aemdispatcher` log, not `/var/log/httpd` ([[aio-cloudmanager-cli]]).
 
 ## Paths on AMS
 

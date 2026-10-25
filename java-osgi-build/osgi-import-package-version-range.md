@@ -184,7 +184,7 @@ The same task also hit the removal half of the trap above: after deleting every 
 
 ### commons-lang3 3.20 via an embedded SDK (Crowdin connector, June 2026)
 
-Crowdin AEM connector (`core` bundle), June 2026. The bundle embedded `crowdin-api-client-java` via `-includeresource: @crowdin-api-client-java-*.jar`; that SDK pulled commons-lang3 **3.20** transitively, so bnd emitted `org.apache.commons.lang3;version=[3.20,4)`, which the AEM 2026.6 SDK (exporting an older 3.x) could not resolve. Fixed by adding `org.apache.commons.lang3.*;version=0.0.0` to the bnd `Import-Package` directive — matching the convention already used in the sibling `devhandler-aem-plugin` connector.
+Crowdin AEM connector (`core` bundle), June 2026. The bundle embedded `crowdin-api-client-java` via `-includeresource: @crowdin-api-client-java-*.jar`; that SDK pulled commons-lang3 **3.20** transitively, so bnd emitted `org.apache.commons.lang3;version=[3.20,4)`, which the AEM 2026.6 SDK (exporting an older 3.x) could not resolve. Fixed by adding `org.apache.commons.lang3.*;version=0.0.0` to the bnd `Import-Package` directive — matching the convention already used in a sibling in-house connector.
 
 ---
 

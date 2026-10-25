@@ -1,6 +1,6 @@
 # ICMP: the internet's status and error channel, and what it means for AEM diagnostics
 
-ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Every example below was run on macOS on 2026-10-24 from a home connection in Lviv against `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute-explained.md](traceroute-explained.md) (built entirely on one ICMP message type) and [ip-addresses-explained.md](../fundamentals/ip-addresses-explained.md).
+ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Every example below was run on macOS (Oct 2026) from a consumer ISP connection against `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute-explained.md](traceroute-explained.md) (built entirely on one ICMP message type) and [ip-addresses-explained.md](ip-addresses-explained.md).
 
 ## The post-office picture
 
@@ -23,7 +23,7 @@ Every ICMP *error* message quotes the IP header plus the first 8 bytes of the pa
 
 ```
 $ ping -c 1 -m 2 cdn.adobeaemcloud.com          # -m 2: TTL 2, expires at the ISP router
-36 bytes from mz-gw.network.lviv.ua (91.200.113.25): Time to live exceeded
+36 bytes from gw.isp.example.net (203.0.113.1): Time to live exceeded
 Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src          Dst
  4  5  00 5400 98e1   0 0000  01  01 84d6 192.168.0.218  151.101.67.10
 ```
@@ -49,7 +49,7 @@ The ICMP header is a fixed 4-byte prefix, 4 bytes whose meaning depends on the t
 
 - **Type (1 byte).** What kind of message: 8 Echo Request, 0 Echo Reply, 3 Destination Unreachable, 11 Time Exceeded, 5 Redirect, 12 Parameter Problem.
 - **Code (1 byte).** Sub-reason within the type. Type 3: 0 net, 1 host, 3 port, 4 fragmentation needed, 13 administratively prohibited. Type 11: 0 TTL expired in transit, 1 reassembly timeout. Echo is always code 0.
-- **Checksum (2 bytes).** Ones-complement sum over the whole ICMP message, header and data. **No pseudo-header in IPv4**, so the IP addresses are not covered. A NAT that rewrites the quoted inner header must also fix this checksum. How the sum works: [internet-checksum.md](../fundamentals/internet-checksum.md).
+- **Checksum (2 bytes).** Ones-complement sum over the whole ICMP message, header and data. **No pseudo-header in IPv4**, so the IP addresses are not covered. A NAT that rewrites the quoted inner header must also fix this checksum. How the sum works: [internet-checksum.md](internet-checksum.md).
 
 **The second 4 bytes, by type**
 
@@ -74,7 +74,7 @@ The ICMP header is a fixed 4-byte prefix, 4 bytes whose meaning depends on the t
 | Minimal error (8 header + 20 quoted IP header + 8 quoted payload) | 36 | 56 |
 | Default macOS echo request (8 header + 56 data) | 64 | 84 |
 
-The `36 bytes from` on the Time Exceeded line above is that minimal error size; the `92 bytes from` the home router printed is a router that quoted the whole 84-byte original packet (8 + 84).
+The `36 bytes from` on the Time Exceeded line above is that minimal error size; the `92 bytes from` the LAN router printed is a router that quoted the whole 84-byte original packet (8 + 84).
 
 **ICMPv6 differences.** Same 4-byte prefix layout, but the checksum **does** include an IPv6 pseudo-header with both addresses. Types are renumbered: Destination Unreachable 1, Packet Too Big 2 (MTU in the second 4 bytes), Time Exceeded 3, Parameter Problem 4, Echo 128/129. **Types below 128 are errors, 128 and above are informational**, so a firewall can express "allow all errors" with one range rule. Errors quote as much of the original packet as fits in the IPv6 minimum MTU of 1280 bytes.
 
@@ -122,7 +122,7 @@ Because ICMP is optional and filtered, the absence of a reply has at least four 
 
 ## The gotcha that bites production: Path MTU Discovery
 
-Modern hosts send all TCP segments with the Don't-Fragment bit set (MTU values, MSS arithmetic and the probing recipe: [mtu-explained.md](../fundamentals/mtu-explained.md)). When a link on the path has a smaller MTU (VPNs, PPPoE, GRE/IPsec tunnels, some cloud interconnects), the router drops the big packet and returns **Fragmentation Needed (type 3 code 4)** with the MTU it can carry. The sender shrinks its segment size and retries. Nobody notices.
+Modern hosts send all TCP segments with the Don't-Fragment bit set (MTU values, MSS arithmetic and the probing recipe: [mtu-explained.md](mtu-explained.md)). When a link on the path has a smaller MTU (VPNs, PPPoE, GRE/IPsec tunnels, some cloud interconnects), the router drops the big packet and returns **Fragmentation Needed (type 3 code 4)** with the MTU it can carry. The sender shrinks its segment size and retries. Nobody notices.
 
 If a firewall anywhere on the path drops type 3 code 4, that feedback never arrives:
 

@@ -11,7 +11,7 @@ The local environment is the **SDK Quickstart jar on your machine**, plus option
 | **Dispatcher Tools** | validator for the dispatcher module + Docker image running Apache + Dispatcher in front of local publish, hot-reloads config | same SDK zip; what Cloud Manager's Build step validates against ([[dispatcher-fundamentals]], [[dispatcher-converter]]) |
 | **Build** | `mvn clean install -PautoInstallSinglePackage` deploys the `all` package via Package Manager | runs the **same AEM Analyser** as Cloud Manager, so a clean local build catches most Build Images failures ([[aem-analyser-maven-plugin]], [[cloud-manager-pipeline-steps]]) |
 
-## Runtime setup specifics (Adobe tutorial *Set up local AEM SDK*, read 2026-10-25)
+## Runtime setup specifics (Adobe tutorial *Set up local AEM SDK*, read Oct 2026)
 
 - **Download**: Software Distribution → *AEM as a Cloud Service* tab → sort by published date → latest *AEM SDK* → unzip `aem-sdk-XXX.zip` → `aem-sdk-quickstart-XXX.jar`. Needs an Adobe ID in an org provisioned for AEMaaCS.
 - **Layout**: `~/aem-sdk/author/aem-author-p4502.jar` and `~/aem-sdk/publish/aem-publish-p4503.jar`, started with `java -jar …` from inside each folder; admin password `admin` for local. First start takes minutes.

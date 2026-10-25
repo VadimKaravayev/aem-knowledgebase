@@ -8,7 +8,7 @@ really "I configured one direction and assumed the other came free."
   renders every link AEM emits.
 
 **Sourcing:** Apache Sling, *Mappings for Resource Resolution*, read September
-2026, re-read 2026-10-25 (this doc is the knowledgebase's home for that page). Not reproduced
+2026, re-read Oct 2026 (this doc is the knowledgebase's home for that page). Not reproduced
 against a running instance. Inference and AEM-specific
 additions are flagged where they appear.
 

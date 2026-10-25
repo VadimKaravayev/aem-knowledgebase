@@ -10,7 +10,7 @@ the queue for minutes, **you will not find a stuck item** in Tools → Deploymen
 Related: queue mechanics in [[content-distribution-journal]], the `/var` variant of the same symptom
 in [[aemaacs-build-deploy-debugging]], what installs when in [[rolling-deployment-two-version-overlap]].
 
-**Sourcing:** observed on a real AEMaaCS dev environment (program p153802, 2026-10-09, AEM
+**Sourcing:** observed on a real AEMaaCS dev environment (Oct 2026, AEM
 2026.8). Diagnosed from the author `aemerror` log and confirmed by unpacking the package. The empty
 queue was checked in the Distribution UI the next day. Inferred, not shown in the log: that the
 re-sends come from the Install mutable content step retrying, and that the loop is why that step fails.

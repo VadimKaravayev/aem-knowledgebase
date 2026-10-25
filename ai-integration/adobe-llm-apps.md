@@ -1,6 +1,6 @@
 # Adobe LLM Apps — brand actions + widgets inside ChatGPT/Claude, served as an MCP server
 
-**Adobe LLM Apps** (Adobe CX Enterprise, **Beta**, `experience.adobe.com/llm-apps`, Beta access via llm-apps-beta@adobe.com) lets a brand expose **actions** ("Schedule a test drive", "Browse products") and **visual widgets** (product cards, booking forms, store locators) inside supported AI assistants — Adobe names **ChatGPT and Claude**. Deployment produces an **MCP server URL**; the assistant connects to it, discovers the actions by description and invokes them. Written from the Adobe doc set (overview, architecture, create-app, handler, widgets, deploy pages) read 2026-10-25, overview last updated 2026-10-23. Beta: UI and workflow may change; nothing here is production-verified.
+**Adobe LLM Apps** (Adobe CX Enterprise, **Beta**, `experience.adobe.com/llm-apps`, Beta access via llm-apps-beta@adobe.com) lets a brand expose **actions** ("Schedule a test drive", "Browse products") and **visual widgets** (product cards, booking forms, store locators) inside supported AI assistants — Adobe names **ChatGPT and Claude**. Deployment produces an **MCP server URL**; the assistant connects to it, discovers the actions by description and invokes them. Written from the Adobe doc set (overview, architecture, create-app, handler, widgets, deploy pages) read Oct 2026, overview last updated 2026-10-23. Beta: UI and workflow may change; nothing here is production-verified.
 
 ## The five concepts
 

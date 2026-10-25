@@ -1,6 +1,6 @@
 # MAC addresses: the mailbox name on the local link, and the other MAC (message authentication code)
 
-"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Verified on macOS on 2026-10-25 on a home Wi-Fi LAN. Companion docs: [ip-addresses-explained.md](ip-addresses-explained.md), [icmp-explained.md](../network/icmp-explained.md), [internet-checksum.md](internet-checksum.md).
+"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Verified on macOS in Oct 2026 on a home Wi-Fi LAN. Companion docs: [ip-addresses-explained.md](ip-addresses-explained.md), [icmp-explained.md](icmp-explained.md), [internet-checksum.md](internet-checksum.md).
 
 ## The apartment-building picture
 
@@ -8,13 +8,13 @@ An IP address is the building's street address, which the postal system routes b
 
 ## What it looks like
 
-48 bits, written as six hex pairs: `6c:4c:bc:12:34:56`.
+48 bits, written as six hex pairs: `00:00:5e:00:53:01`.
 
 - **First three pairs = OUI** (Organizationally Unique Identifier), assigned to the manufacturer by the IEEE. A lookup on the prefix usually names the vendor.
 - **Last three pairs** = the device's number within that vendor.
 - **Two flag bits in the first byte:** lowest bit set = multicast/group address; second-lowest bit set = **locally administered** (software-assigned, not factory). So a first byte of `x2`, `x6`, `xA` or `xE` means "this MAC was made up by an OS or hypervisor".
 - `ff:ff:ff:ff:ff:ff` = broadcast to everyone on the segment.
-- macOS `arp -a` prints pairs without leading zeros (`ce:92:e:ac:…`), which trips up copy-paste into tools that expect two digits.
+- macOS `arp -a` prints pairs without leading zeros (`ce:0:53:a:…`), which trips up copy-paste into tools that expect two digits.
 
 ## Where it lives and where it stops
 
@@ -24,6 +24,8 @@ Layering in one line: Ethernet frame (MAC → MAC) carries an IP packet (IP → 
 
 ## How IP finds a MAC: ARP and Neighbor Discovery
 
+Full treatment of the protocol, its cache timers, and ARP poisoning: [arp-explained.md](arp-explained.md).
+
 To send to an IP on its own subnet, a host broadcasts an **ARP** (Address Resolution Protocol) request: "who has 192.168.0.1?" The owner replies with its MAC and the asker caches it for a few minutes. For an off-subnet destination the host ARPs for the **default gateway** instead and hands the packet to the router. IPv6 does the same job with **ICMPv6 Neighbor Discovery** (Neighbor Solicitation/Advertisement, multicast instead of broadcast), which is why a firewall that blocks ICMPv6 kills IPv6 entirely.
 
 ```bash
@@ -32,16 +34,16 @@ arp -a                           # ARP cache: which MAC answers for each local I
 arp -d 192.168.0.1               # drop one entry (sudo) when a stale one is suspected
 ```
 
-Verified ARP cache on a home LAN:
+Verified ARP cache on a small consumer Wi-Fi LAN:
 
 ```
-? (192.168.0.1)   at 6c:4c:bc:…  on en0   ← router: factory OUI
-? (192.168.0.123) at ce:92:e:…   on en0   ← phone: ce = locally administered
-? (192.168.0.146) at 12:1b:f5:…  on en0   ← laptop: 12 = locally administered
-? (192.168.0.172) at 66:b3:fc:…  on en0   ← 66 = locally administered
+? (192.168.0.1)   at 0:0:5e:…    on en0   ← router: factory OUI
+? (192.168.0.123) at ce:0:53:…   on en0   ← phone: ce = locally administered
+? (192.168.0.146) at 12:0:53:…   on en0   ← laptop: 12 = locally administered
+? (192.168.0.172) at 66:0:53:…   on en0   ← 66 = locally administered
 ```
 
-This machine's own Wi-Fi MAC began with `0a`, also locally administered. **Every client on the LAN except the router was using a randomised MAC.** That is the state of a normal 2026 network and the reason for the first gotcha below.
+The test laptop's own Wi-Fi MAC began with `0a`, also locally administered. **Every client on the LAN except the router was using a randomised MAC.** That is the state of a normal 2026 network and the reason for the first gotcha below.
 
 ## Gotchas
 
