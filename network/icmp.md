@@ -1,6 +1,6 @@
 # ICMP: the internet's status and error channel, and what it means for AEM diagnostics
 
-ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Every example below was run on macOS (Oct 2026) from a consumer ISP connection against `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute-explained.md](traceroute-explained.md) (built entirely on one ICMP message type) and [ip-addresses-explained.md](ip-addresses-explained.md).
+ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Every example below was run on macOS (Oct 2026) from a consumer ISP connection against `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute.md](traceroute.md) (built entirely on one ICMP message type) and [ip-addresses.md](ip-addresses.md).
 
 ## The post-office picture
 
@@ -116,13 +116,13 @@ Because ICMP is optional and filtered, the absence of a reply has at least four 
 | Observation | Natural reading | What it actually meant here |
 |---|---|---|
 | `ping host` gets no reply | host is down | **Not conclusive.** Many hosts and most cloud load balancers drop Echo Requests. Adobe's Fastly edge *does* answer (4/4 replies, ~23 ms), so for AEMaaCS silence is a real signal; for an on-prem Dispatcher behind a hardened firewall it usually is not. |
-| UDP `traceroute` ends in `* * *` | path broken | Destination doesn't send Port Unreachable for UDP. `-I` (ICMP) reached the same host in 5 hops. See [traceroute-explained.md](traceroute-explained.md). |
+| UDP `traceroute` ends in `* * *` | path broken | Destination doesn't send Port Unreachable for UDP. `-I` (ICMP) reached the same host in 5 hops. See [traceroute.md](traceroute.md). |
 | `nc -u -z host 33434` prints `succeeded!` | UDP port open | **UDP "open" only means no Port Unreachable came back within the timeout.** The router here silently dropped it; `nc` cannot tell the difference. Never trust UDP port scans. |
 | `ping -D -s 1473 host` prints `sendto: Message too long` | the network rejected it | The **local kernel** refused before sending: 1473 + 8 ICMP + 20 IP = 1501 bytes > the interface MTU of 1500. No ICMP was involved. A *remote* MTU limit would instead show a Fragmentation Needed message, or (when it is filtered) nothing at all, which is the PMTUD black hole below. |
 
 ## The gotcha that bites production: Path MTU Discovery
 
-Modern hosts send all TCP segments with the Don't-Fragment bit set (MTU values, MSS arithmetic and the probing recipe: [mtu-explained.md](mtu-explained.md)). When a link on the path has a smaller MTU (VPNs, PPPoE, GRE/IPsec tunnels, some cloud interconnects), the router drops the big packet and returns **Fragmentation Needed (type 3 code 4)** with the MTU it can carry. The sender shrinks its segment size and retries. Nobody notices.
+Modern hosts send all TCP segments with the Don't-Fragment bit set (MTU values, MSS arithmetic and the probing recipe: [mtu.md](mtu.md)). When a link on the path has a smaller MTU (VPNs, PPPoE, GRE/IPsec tunnels, some cloud interconnects), the router drops the big packet and returns **Fragmentation Needed (type 3 code 4)** with the MTU it can carry. The sender shrinks its segment size and retries. Nobody notices.
 
 If a firewall anywhere on the path drops type 3 code 4, that feedback never arrives:
 

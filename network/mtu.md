@@ -1,6 +1,6 @@
 # MTU: the largest packet a link carries, why 1500, and how to find the path MTU
 
-MTU (Maximum Transmission Unit) is the largest IP packet, in bytes, that a network link will carry in one piece. It is a property of each link and interface, not of a connection. The **path MTU** is the smallest MTU on the whole route. Examples below were run on macOS in Oct 2026 against `cdn.adobeaemcloud.com` (Fastly). Companion docs: [icmp-explained.md](icmp-explained.md) (Path MTU Discovery and the black hole), [internet-checksum.md](internet-checksum.md), [ip-addresses-explained.md](ip-addresses-explained.md).
+MTU (Maximum Transmission Unit) is the largest IP packet, in bytes, that a network link will carry in one piece. It is a property of each link and interface, not of a connection. The **path MTU** is the smallest MTU on the whole route. Examples below were run on macOS in Oct 2026 against `cdn.adobeaemcloud.com` (Fastly). Companion docs: [icmp.md](icmp.md) (Path MTU Discovery and the black hole), [internet-checksum.md](internet-checksum.md), [ip-addresses.md](ip-addresses.md).
 
 ## The bridge picture
 
@@ -46,7 +46,7 @@ A frame must be buffered whole before it can be checksummed and forwarded, so ha
 | IPv4, DF set (**all modern TCP**) | Drops it, sends ICMP **Fragmentation Needed** (type 3 code 4) with the next-hop MTU | Sender shrinks segments and retries: **Path MTU Discovery**. Invisible when it works |
 | IPv6 | **Never fragments in transit.** Drops and sends ICMPv6 **Packet Too Big** (type 2) | Only the original sender may fragment, and only if it chooses to |
 
-If the ICMP message is filtered anywhere, the sender never learns the limit, retransmits full-size packets forever, and the connection stalls after a clean handshake. That is the **PMTUD / TCP / MTU black hole**, covered with symptoms and fixes in [icmp-explained.md](icmp-explained.md). macOS has `net.inet.tcp.path_mtu_discovery: 1` on by default; Linux `net.ipv4.ip_no_pmtu_disc=0` likewise.
+If the ICMP message is filtered anywhere, the sender never learns the limit, retransmits full-size packets forever, and the connection stalls after a clean handshake. That is the **PMTUD / TCP / MTU black hole**, covered with symptoms and fixes in [icmp.md](icmp.md). macOS has `net.inet.tcp.path_mtu_discovery: 1` on by default; Linux `net.ipv4.ip_no_pmtu_disc=0` likewise.
 
 ## Seeing and testing it
 

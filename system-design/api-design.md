@@ -35,7 +35,7 @@ General system-design reference (not AEM-specific). Key facts, trade-offs, and t
 
 - Algorithms: **fixed window** (simple, but 2× burst at window boundary), **sliding window log/counter** (accurate, more state), **token bucket** (rate + burst capacity, the usual right answer), **leaky bucket** (smooths output, queues internally).
 - Return **`429` + `Retry-After`**, and advertise state with `RateLimit-Limit/Remaining/Reset` headers — clients can't behave well blind.
-- Decide the **key**: per API key / per user / per IP / per tenant. Per-IP breaks behind corporate NAT (many users, one IP — see [ip-addresses-explained](../network/ip-addresses-explained.md)); per-tenant protects the platform from one noisy tenant (the actual goal in multi-tenant systems).
+- Decide the **key**: per API key / per user / per IP / per tenant. Per-IP breaks behind corporate NAT (many users, one IP — see [ip-addresses](../network/ip-addresses.md)); per-tenant protects the platform from one noisy tenant (the actual goal in multi-tenant systems).
 - Distributed limiters need shared state (Redis `INCR`+`EXPIRE`, or a Lua-scripted token bucket for atomicity); local-only counters multiply the real limit by the node count. Accept approximation — a perfectly consistent global limiter is slower than the thing it protects.
 - Rate limiting is **load shedding at the edge**: reject early and cheap rather than letting excess load reach the expensive tier — the same philosophy as backpressure in [[reliability-patterns]].
 - Trap: retries without jitter turn a rate-limited burst into a synchronized retry storm; the limiter and the retry policy must be designed together.

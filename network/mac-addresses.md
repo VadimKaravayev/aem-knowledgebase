@@ -1,6 +1,6 @@
 # MAC addresses: the mailbox name on the local link, and the other MAC (message authentication code)
 
-"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Verified on macOS in Oct 2026 on a home Wi-Fi LAN. Companion docs: [ip-addresses-explained.md](ip-addresses-explained.md), [icmp-explained.md](icmp-explained.md), [internet-checksum.md](internet-checksum.md).
+"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Verified on macOS in Oct 2026 on a home Wi-Fi LAN. Companion docs: [ip-addresses.md](ip-addresses.md), [icmp.md](icmp.md), [internet-checksum.md](internet-checksum.md).
 
 ## The apartment-building picture
 
@@ -20,11 +20,11 @@ An IP address is the building's street address, which the postal system routes b
 
 Every Ethernet or Wi-Fi frame carries a source and destination MAC. **Switches** learn which MAC sits on which port and forward by that table. **Routers strip the frame and build a new one** for the next link, so the MAC changes at every hop. The server at the far end never sees your MAC, only that of the last router before it. **A MAC address never leaves the local network**, which is why web analytics, licence servers and CDNs cannot see it, and why "block their MAC" is meaningless against anything beyond your own router.
 
-Layering in one line: Ethernet frame (MAC → MAC) carries an IP packet (IP → IP) which carries TCP/UDP/ICMP. The MTU limit in [mtu-explained.md](mtu-explained.md) is the IP packet; the 14-byte Ethernet header with the two MACs sits outside it.
+Layering in one line: Ethernet frame (MAC → MAC) carries an IP packet (IP → IP) which carries TCP/UDP/ICMP. The MTU limit in [mtu.md](mtu.md) is the IP packet; the 14-byte Ethernet header with the two MACs sits outside it.
 
 ## How IP finds a MAC: ARP and Neighbor Discovery
 
-Full treatment of the protocol, its cache timers, and ARP poisoning: [arp-explained.md](arp-explained.md).
+Full treatment of the protocol, its cache timers, and ARP poisoning: [arp.md](arp.md).
 
 To send to an IP on its own subnet, a host broadcasts an **ARP** (Address Resolution Protocol) request: "who has 192.168.0.1?" The owner replies with its MAC and the asker caches it for a few minutes. For an off-subnet destination the host ARPs for the **default gateway** instead and hands the packet to the router. IPv6 does the same job with **ICMPv6 Neighbor Discovery** (Neighbor Solicitation/Advertisement, multicast instead of broadcast), which is why a firewall that blocks ICMPv6 kills IPv6 entirely.
 

@@ -1,6 +1,6 @@
 # The Internet checksum: what it is, how IP/ICMP/TCP/UDP compute it, and why it is not security
 
-A checksum is a small number computed from a block of data and sent along with it, so the receiver can recompute it and detect that something changed in transit. IP, ICMP, TCP and UDP all use the same 16-bit recipe (RFC 1071), so one explanation covers all four. Companion docs: [icmp-explained.md](icmp-explained.md) and [ip-addresses-explained.md](ip-addresses-explained.md).
+A checksum is a small number computed from a block of data and sent along with it, so the receiver can recompute it and detect that something changed in transit. IP, ICMP, TCP and UDP all use the same 16-bit recipe (RFC 1071), so one explanation covers all four. Companion docs: [icmp.md](icmp.md) and [ip-addresses.md](ip-addresses.md).
 
 ## The idea
 
@@ -56,7 +56,7 @@ The pseudo-header is not transmitted. Both ends build it from the IP header they
 
 ## Consequences you will actually hit
 
-- **NAT and ICMP errors.** Because ICMPv4's checksum excludes the outer IP addresses, a NAT can rewrite them freely. But an ICMP *error* carries a copy of the offending packet's IP header inside its data, and that quoted header is covered. A NAT that rewrites the inner copy must patch the ICMP checksum too. Early boxes got this wrong, and hosts silently discarded every ICMP error as corrupt, which looked like a PMTUD black hole. See [icmp-explained.md](icmp-explained.md).
+- **NAT and ICMP errors.** Because ICMPv4's checksum excludes the outer IP addresses, a NAT can rewrite them freely. But an ICMP *error* carries a copy of the offending packet's IP header inside its data, and that quoted header is covered. A NAT that rewrites the inner copy must patch the ICMP checksum too. Early boxes got this wrong, and hosts silently discarded every ICMP error as corrupt, which looked like a PMTUD black hole. See [icmp.md](icmp.md).
 - **"Checksum incorrect" in packet captures on the sender.** Modern NICs do **checksum offload**: the kernel leaves the field blank (or partial) and the card fills it in after the point where `tcpdump`/Wireshark captures. Outgoing packets therefore look broken on the sending machine and fine everywhere else. It is a capture artifact, not an error. Wireshark: *Preferences → Protocols → TCP → Validate checksum* is off by default for this reason.
 - **Silent drops, not errors.** A receiver that computes a mismatch discards the packet and tells nobody. TCP retransmits after a timeout; UDP and ICMP simply lose the datagram. A link that corrupts occasionally shows up as unexplained retransmissions and latency, never as an error message.
 - **UDP checksum `0` on IPv4.** Allowed, and a few legacy appliances still send it. On IPv6 it is forbidden, and a middlebox that strips checksums from tunneled traffic (some VXLAN setups) is a classic "works on v4, breaks on v6" cause.

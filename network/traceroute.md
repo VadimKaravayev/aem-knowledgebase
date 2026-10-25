@@ -1,6 +1,6 @@
 # traceroute: how it works, how to read it, and what it can't tell you about AEM
 
-Run every example below on macOS. The traces were captured in Oct 2026 from a consumer ISP connection to `cdn.adobeaemcloud.com`, which resolves to `adobe-aem.map.fastly.net`, Fastly `151.101.{3,67,131,195}.10`. Background on IP addresses and DNS: [ip-addresses-explained.md](ip-addresses-explained.md).
+Run every example below on macOS. The traces were captured in Oct 2026 from a consumer ISP connection to `cdn.adobeaemcloud.com`, which resolves to `adobe-aem.map.fastly.net`, Fastly `151.101.{3,67,131,195}.10`. Background on IP addresses and DNS: [ip-addresses.md](ip-addresses.md).
 
 ## How it works
 
