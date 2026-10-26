@@ -1,4 +1,4 @@
-# Network interface card (NIC): what the hardware does, and what it can and cannot tell you about AEM
+# Network interface card (NIC): what the hardware does, interface versus card, and reading its counters
 
 A NIC (network interface card, network adapter, "the network card") is the piece of hardware that turns frames into signals on a cable, fibre or radio and back again. The operating system does not talk to the card directly; it talks to an **interface** (`en0` on macOS, `eth0`/`enp0s3` on Linux) that a **driver** presents on the card's behalf. Most "network" problems that are not DNS or a firewall are decided in this layer: link speed and duplex, dropped frames under load, offload features that make captures lie, and virtual NICs whose bandwidth is a quota rather than a wire. Addresses in the examples use the documentation ranges. Companion docs: [ifconfig.md](ifconfig.md) (reading the interface the card presents), [mac-addresses.md](mac-addresses.md) (the address burned into it), [mtu.md](mtu.md) (the largest frame it will carry), [tcpdump.md](tcpdump.md) and [internet-checksum.md](internet-checksum.md) (why offloading makes captures look broken).
 

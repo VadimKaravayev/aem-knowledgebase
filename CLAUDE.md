@@ -29,6 +29,7 @@ A plain-markdown knowledgebase of AEM (Adobe Experience Manager) patterns, gotch
 **Adding a doc**:
 1. Create a kebab-case markdown file in the folder that fits the topic best (create a new folder only when several docs would share it).
 2. Add a one-line entry under that folder's section in `INDEX.md` summarizing the finding (see existing entries for the expected density — key facts, gotchas, and the exam/design trap if there is one, not a generic teaser).
+3. Title the doc by what it covers, drawn from its section headings. Do not append an AEM tie-in such as "and what it can and cannot tell you about AEM"; hardware, protocols and commands do not "tell you about AEM". The AEM relationship is stated once, in a closing "What this means for AEM" section, honestly, including "irrelevant on AEMaaCS" where that is true. `INDEX.md` folder blurbs follow the same rule.
 
 Docs accumulate verified, often counter-intuitive findings (decompiled source, reproduced bugs, confirmed-on-version behavior) rather than restating official docs — entries typically cite how/where something was verified and note version specifics, since AEM behavior varies significantly across 6.5/AMS vs AEMaaCS and across versions.
 
