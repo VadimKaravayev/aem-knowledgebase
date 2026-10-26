@@ -52,4 +52,4 @@ Logs land in a `logs/` dir next to the jar: `toughday.log` (global) + `toughday_
 
 Discovery: `--help_full` (everything), `--help_tests` (all test classes), `--help_publish`, `--help --suite=<name>`, `--help --tag=<tag>`, `--help <TestClass>`.
 
-Source: Adobe 6.5 Tough Day page, Oct 2026. Docs-based, not run locally.
+Source: Adobe 6.5 Tough Day page. Docs-based, not run locally.

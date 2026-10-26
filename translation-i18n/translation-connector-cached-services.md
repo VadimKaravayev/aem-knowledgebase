@@ -183,7 +183,7 @@ marker. Treat "invalidated by a `ResourceChangeListener`" as an incomplete cache
 
 Confirmed against the AEM SDK sources (`aem-sdk-api` 2026.6, `ResourceChangeListener` /
 `ExternalResourceChangeListener` javadoc) and Adobe's AEMaaCS architecture documentation; implemented and
-unit-tested on the Crowdin connector, September 2026. Related:
+unit-tested on the Crowdin connector. Related:
 [translation-rules-xml.md](translation-rules-xml.md),
 [immutable-json-dtos-lombok-jacksonized.md](../java-osgi-build/immutable-json-dtos-lombok-jacksonized.md),
 [aem-mock-delegation-picker-trap.md](../java-osgi-build/aem-mock-delegation-picker-trap.md).

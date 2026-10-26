@@ -6,7 +6,7 @@ consume as a DTO, and how to actually run the thing. Companion to
 the model fills the schema; this file covers the boundary in front of it.
 
 Verified on fastapi 0.141.1 / starlette 1.6.0 / uvicorn 0.53.0 / pydantic 2.13.5 /
-anyio 4.15.0 / Python 3.13.2, Sep 2026.
+anyio 4.15.0 / Python 3.13.2.
 
 ## The three-file split
 

@@ -1,6 +1,6 @@
 # MTU: the largest packet a link carries, why 1500, and how to find the path MTU
 
-MTU (Maximum Transmission Unit) is the largest IP packet, in bytes, that a network link will carry in one piece. It is a property of each link and interface, not of a connection. The **path MTU** is the smallest MTU on the whole route. Examples below were run on macOS in Oct 2026 against `cdn.adobeaemcloud.com` (Fastly). Companion docs: [icmp.md](icmp.md) (Path MTU Discovery and the black hole), [internet-checksum.md](internet-checksum.md), [ip-addresses.md](ip-addresses.md).
+MTU (Maximum Transmission Unit) is the largest IP packet, in bytes, that a network link will carry in one piece. It is a property of each link and interface, not of a connection. The **path MTU** is the smallest MTU on the whole route. Examples below were run on macOS against `cdn.adobeaemcloud.com` (Fastly). Companion docs: [icmp.md](icmp.md) (Path MTU Discovery and the black hole), [internet-checksum.md](internet-checksum.md), [ip-addresses.md](ip-addresses.md).
 
 ## The bridge picture
 

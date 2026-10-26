@@ -20,7 +20,7 @@ own language-copy tooling get the full property set.
 
 ## What AEM's own tooling stamps on a created language root
 
-Observed on a tooling-created `.../language-masters/fr` (verified July 2026, local SDK):
+Observed on a tooling-created `../language-masters/fr` (verified on a local SDK):
 
 ```
 jcr:language          fr                      ← locale of the tree
@@ -56,4 +56,4 @@ RE-stamp after any refresh that replaces `jcr:content` wholesale — the replace
 wipes previously stamped (or hand-added) props.
 
 Implemented in the Crowdin connector's `LanguageCopyServiceImpl` (folder branch of
-`recreateAncestorStructure` + page stamping in the copy/refresh paths), July 2026.
+`recreateAncestorStructure` + page stamping in the copy/refresh paths).

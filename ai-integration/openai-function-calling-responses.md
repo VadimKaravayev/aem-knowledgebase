@@ -200,6 +200,6 @@ streams the same information as `delta.tool_calls` chunks indexed by `index`, wi
   "definition": ...}`. The right shape when the natural payload is code or DSL text
   and JSON-wrapping would just add escaping.
 
-Docs-based Oct 2026 (page used `gpt-6-astra` for Responses examples, `gpt-5.6-terra`
+Docs-based (page used `gpt-6-astra` for Responses examples, `gpt-5.6-terra`
 for Chat Completions; GPT-6-generation models are Responses-only for tool calling).
 Read from the live page, not reproduced against the API.

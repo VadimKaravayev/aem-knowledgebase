@@ -35,7 +35,7 @@ child of `/mnt/overlay/wcm/core/resources/languages`, which is `/libs/wcm/core/r
 same table Sites uses, so on a toggled instance the tag picker offers every locale AEM knows about.
 
 The toggle state is visible at `/etc.clientlibs/toggles.json` (`enabled` array). It was off on a
-local Cloud SDK in Sept 2026, so the legacy branch is still what most people see.
+local Cloud SDK, so the legacy branch is still what most people see.
 
 ## Labels come from the languages resource either way
 
@@ -76,7 +76,7 @@ curl -s -u admin:admin "http://localhost:4502/mnt/overlay/wcm/core/resources/lan
 curl -s -u admin:admin "http://localhost:4502/etc.clientlibs/toggles.json" | grep -o "FT_CQ-4363942"
 ```
 
-Verified Sept 2026 on a local AEM Cloud SDK author (`cq-tagging` 5.13.38) by disassembling the
+Verified on a local AEM Cloud SDK author (`cq-tagging` 5.13.38) by disassembling the
 bundle and reading the JSP out of the repository with
 `curl .../crx/server/crx.default/jcr:root/<path>/jcr:content/jcr:data`.
 

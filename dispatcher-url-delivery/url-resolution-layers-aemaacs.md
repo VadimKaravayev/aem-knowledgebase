@@ -10,7 +10,7 @@ authentication hole) is in
 
 **Sourcing:** Adobe Experience League Community article *Understanding URL
 Resolution in AEM as a Cloud Service: Sling Mappings, Aliases, Vanity URLs and
-Dispatcher* (community author, 22 Sept 2026), read September 2026. This is a
+Dispatcher* (community author, 22 Sept 2026). This is a
 community post, not Adobe product documentation. Where it quotes "Adobe
 guidance", that is the article's attribution; the underlying Adobe pages were
 not checked here. Nothing here was reproduced on a running instance. My own

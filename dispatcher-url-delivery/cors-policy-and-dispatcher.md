@@ -7,7 +7,7 @@ clean HTTP 200 with no CORS headers, which reads like a routing bug and is not
 one.
 
 **Sourcing:** Adobe, *Understand Cross-Origin Resource Sharing (CORS)* (AEM
-Learn, applies to **6.4 / 6.5**), read September 2026, re-read Oct 2026 against the 2026-10-09
+Learn, applies to **6.4 / 6.5**), re-read against the 2026-10-09
 revision (unchanged; this doc is the knowledgebase's home for that page). Not reproduced against a
 live instance. On AEMaaCS the same Granite policy exists, but the dispatcher halves below move
 into the Cloud dispatcher module and the CDN also sits in the path.

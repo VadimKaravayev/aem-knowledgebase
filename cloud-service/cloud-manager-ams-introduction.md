@@ -26,4 +26,4 @@ AEMaaCS contrast: rolling blue/green-style deployment is the built-in default th
 
 The old flat rule "AMS cannot scale" is one notch too strong — the accurate version: **AMS can autoscale its publish/dispatcher segments (optional, 1–10 segments, prod, CSE-approved) but can never scale Author, and nothing is elastic by default**. Distractor options like "AMS with auto scaling" are wrong when the scenario needs editor-load elasticity, usage-based economics, or scaling as a platform default — not because the feature is fictional.
 
-Source: Adobe AMS Cloud Manager introduction page, Oct 2026. Docs-based.
+Source: Adobe AMS Cloud Manager introduction page. Docs-based.

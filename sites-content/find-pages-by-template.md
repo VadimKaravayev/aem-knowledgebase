@@ -19,7 +19,7 @@
 3. **Sites search rail Template facet — only if the search form includes it, and see the bug below.**
    Sites/XF console → left rail → Filter (alt+4) → jumps into omnisearch with predicate facets. Which facets exist is **content config, not product**: Tools → General → **Search Forms** → "Sites Admin Search Rail" → drag **Templates Predicate** in, set required Property Name = `jcr:content/cq:template`. Saving writes `/conf/global/settings/cq/search/facets/sites` (overlays the `/libs/settings/cq/search/facets/sites` default; delete the `/conf/global` node to revert). Runtime-authorable — no deployment — but can be shipped in `ui.content` for config-as-code.
 
-## Gotchas verified on AEM 6.5 LTS local author (Aug 2026)
+## Gotchas verified on AEM 6.5 LTS local author
 
 - **Search Forms editor's Done button can be permanently disabled** before you change anything: the stock Sites rail form ships an invalid field (LiveCopy Status predicate with an empty required `name`), and the wizard gates Done on whole-form validity. Workaround: fix/fill that predicate's property name, or submit the builder form directly (`form#builder-form` POSTs to `<facet-path>/_jcr_content`; all sidecar inputs are already in the DOM).
 

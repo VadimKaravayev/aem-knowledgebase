@@ -56,4 +56,4 @@ for (const url of [base, base + "&exclude=%2fnonexistent"]) {
   page picker that should hide the system trees (the stock Pages picker in site admin
   does exactly that).
 
-Confirmed on the Crowdin connector New Job wizard (local AEM SDK), July 2026.
+Confirmed on the Crowdin connector New Job wizard (local AEM SDK).

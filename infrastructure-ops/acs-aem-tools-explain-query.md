@@ -14,4 +14,4 @@ Since v0.0.22 the ACS tool accepts **QueryBuilder predicate maps** (`type=cq:Pag
 
 Related: index-side view of the same problem in [oak-indexing-aemaacs.md](../cloud-service/oak-indexing-aemaacs.md) (query-explain as index validation step); the Slow Queries source MBean and traversal-limit health checks in [operations-dashboard.md](operations-dashboard.md).
 
-Source: ACS AEM Tools feature page, Oct 2026. Docs-based.
+Source: ACS AEM Tools feature page. Docs-based.

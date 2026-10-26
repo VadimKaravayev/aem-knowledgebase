@@ -7,7 +7,7 @@ Applies to any connector that must keep one branch working on **6.5 on-prem and 
 
 ## Verified availability matrix
 
-Checked by `unzip -l` on the actual artifacts (Sept 2026), not from docs:
+Checked by `unzip -l` on the actual artifacts, not from docs:
 
 | class | uber-jar 6.5.23 | aem-sdk-api 2026.8.27830 |
 |---|---|---|
@@ -94,4 +94,4 @@ a correctness change that should not ride along with it.
 
 Verified against the translated.com connector (single `adjustReferences` call site) and the Crowdin
 connector's `ReferenceDiscoveryServiceImpl` / `ReferenceUpdateServiceImpl` /
-`RichTextLinkUpdateServiceImpl`, Sept 2026.
+`RichTextLinkUpdateServiceImpl`.

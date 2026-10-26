@@ -4,7 +4,7 @@ Two separate questions people run together: *how* does an instance acquire its
 run modes, and *which* of them can still be changed. The answers differ per run
 mode, and the mutable half is the one the KB has so far left implicit.
 
-**Sourcing:** Adobe, *Run Modes* (AEM **6.5**), read September 2026, re-read Oct 2026 against the
+**Sourcing:** Adobe, *Run Modes* (AEM **6.5**), re-read against the
 2026-10-09 revision (unchanged; this doc is the knowledgebase's home for that page). The
 precedence list is as documented; not reproduced against a running instance.
 Interpretation is flagged where it appears.

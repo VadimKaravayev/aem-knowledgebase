@@ -84,5 +84,5 @@ Read-only and per-node, so for anything bulk or offline:
 4. Nodes visible but sparse — read ACLs, or the Publish/Preview default
    limitation above. The tool is filtering, not failing.
 
-Adobe docs read September 2026. The Cloud-dev contradiction is between Adobe's
+Adobe docs-based. The Cloud-dev contradiction is between Adobe's
 own pages as of that date, not a version difference.

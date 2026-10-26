@@ -49,4 +49,4 @@ Per-request validation instead of farm-level sessions: the Dispatcher sends a **
 - Responses carrying `Set-Cookie` are never cached regardless of these settings; `/filter` is request security, `/ignoreUrlParams` is cache-key hygiene ([dispatcher-ignoreurlparams.md](dispatcher-ignoreurlparams.md)); general cache/invalidation rules in [dispatcher-caching-and-invalidation.md](dispatcher-caching-and-invalidation.md).
 - CUG itself (what's being protected) is an AEM-side ACL/authentication-requirement mechanism; the Dispatcher only decides whether its *cache* may answer for AEM.
 
-Adobe dispatcher docs + exam material, Oct 2026; flag semantics documented, interaction behavior not lab-verified.
+Adobe dispatcher docs + exam material; flag semantics documented, interaction behavior not lab-verified.

@@ -133,7 +133,7 @@ From the AEMaaCS *Managing Repositories* page:
 
 ## Sources
 
-Read from Adobe documentation, September 2026 — steps not yet performed end to end on a live
+Read from Adobe documentation — steps not yet performed end to end on a live
 program, so treat the UI labels as current-as-documented rather than screen-verified.
 
 - [Managing Repositories in Cloud Manager (AEMaaCS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/managing-code/managing-repositories)

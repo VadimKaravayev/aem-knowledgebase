@@ -1,6 +1,6 @@
 # traceroute: how it works, how to read it, and what it can't tell you about AEM
 
-Run every example below on macOS. The traces were captured in Oct 2026 from a consumer ISP connection to `cdn.adobeaemcloud.com`, which resolves to `adobe-aem.map.fastly.net`, Fastly `151.101.{3,67,131,195}.10`. Background on IP addresses and DNS: [ip-addresses.md](ip-addresses.md).
+Run every example below on macOS. The traces were captured from an ordinary client network to `cdn.adobeaemcloud.com`, which resolves to `adobe-aem.map.fastly.net`, Fastly `151.101.{3,67,131,195}.10`. Background on IP addresses and DNS: [ip-addresses.md](ip-addresses.md).
 
 ## How it works
 
@@ -11,7 +11,7 @@ traceroute uses this deliberately. It sends probes with TTL 1, 2, 3, … and eac
 Each line of output is one TTL. By default it sends three probes per TTL, so you get three round-trip times.
 
 ```
- 1  192.168.0.1  46.419 ms  2.657 ms  2.680 ms      ← LAN router
+ 1  192.0.2.1    46.419 ms  2.657 ms  2.680 ms      ← LAN router
  2  203.0.113.1    3.946 ms  4.010 ms  3.938 ms     ← ISP
  3  198.51.100.8  23.512 ms  22.999 ms  23.310 ms     ← internet exchange (fastly.ix.example.net)
  4  * * *                                           ← router that doesn't answer

@@ -51,7 +51,7 @@ On author, `request.locale` reflects the signed-in user's UI language — the sa
 
 **Rejected alternative:** setting `jcr:language` on the console page. That hardcodes one language for all users; a console must follow the *user's* locale, not the page's.
 
-Confirmed on the Crowdin connector dashboard console (`/apps/crowdin/content/dashboard`, local AEMaaCS SDK quickstart), July 2026.
+Confirmed on the Crowdin connector dashboard console (`/apps/crowdin/content/dashboard`, local AEMaaCS SDK quickstart).
 
 ---
 

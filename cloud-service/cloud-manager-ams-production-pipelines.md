@@ -117,4 +117,4 @@ pipeline.
 ## References
 - [Production pipelines (Adobe docs, Cloud Manager for AMS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-manager/content/using/pipelines/production-pipelines)
 
-Docs-based (page read Oct 2026), not verified against a live AMS program.
+Docs-based, not verified against a live AMS program.

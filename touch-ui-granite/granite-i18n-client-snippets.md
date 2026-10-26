@@ -38,4 +38,4 @@ This also composes with the i18n best practice that motivates placeholders in th
 ## Verification
 
 Confirmed by reading the deployed clientlib on a local author:
-`curl -su admin:admin http://localhost:4502/etc.clientlibs/clientlibs/granite/utils.js` — both `Granite.Util.patchText` (~line 248) and the private `patchText` used by `Granite.I18n` (~line 868) carry the `if (snippets)` guard. Reproduced in the translated.com connector's New Order wizard References dialog (counter showed `References: {0}` after removing the last reference), Aug 2026.
+`curl -su admin:admin http://localhost:4502/etc.clientlibs/clientlibs/granite/utils.js` — both `Granite.Util.patchText` (~line 248) and the private `patchText` used by `Granite.I18n` (~line 868) carry the `if (snippets)` guard. Reproduced in the translated.com connector's New Order wizard References dialog (counter showed `References: {0}` after removing the last reference).

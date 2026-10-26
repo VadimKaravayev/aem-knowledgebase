@@ -44,4 +44,4 @@ This is the supported way to keep per-environment values and credentials out of 
 
 Related: [cloud-manager-api-cli-sdks.md](cloud-manager-api-cli-sdks.md) (the `aio cloudmanager` plugin used to set both kinds), [cloud-manager-pipeline-steps.md](cloud-manager-pipeline-steps.md) (where in the pipeline the build environment exists).
 
-From Adobe build-environment and environment-variables docs via exam prep, Oct 2026 — documented, not screen-verified.
+From Adobe build-environment and environment-variables docs via exam prep — documented, not screen-verified.

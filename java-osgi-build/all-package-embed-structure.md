@@ -6,8 +6,8 @@ single `all` container that Cloud Manager actually deploys. The four-package
 split itself is well known; the wiring rules are where projects break, because
 most of them are naming conventions with no validator behind them.
 
-**Sourcing:** Adobe, *AEM Project Content Package Structure* (AEMaaCS), read
-September 2026. Rules restated here are the ones that are non-obvious or whose
+**Sourcing:** Adobe, *AEM Project Content Package Structure* (AEMaaCS).
+Rules restated here are the ones that are non-obvious or whose
 failure mode is silent; not reproduced against a live pipeline unless noted.
 
 Related: [rolling-deployment-two-version-overlap.md](../cloud-service/rolling-deployment-two-version-overlap.md)
@@ -177,7 +177,7 @@ though OSGi configuration is code-like and immutable. The FileVault
 package-type validator forbids an `application` package from containing OSGi
 bundles or configurations; installer payload (install/config folders) is what
 `container` packages carry, which is also the `all` package's type. (Corrected
-Oct 2026 — this doc previously claimed `application`; verified
+— this doc previously claimed `application`; verified
 `<packageType>container</packageType>` in the archetype's `ui.config/pom.xml`.
 Taxonomy: [filevault-package-types.md](filevault-package-types.md).) It is
 rooted at an organizational folder under `/apps`:

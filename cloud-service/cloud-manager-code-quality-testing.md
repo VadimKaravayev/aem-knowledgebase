@@ -94,5 +94,5 @@ either platform.
 - [Code Quality Testing (Adobe docs, Cloud Manager AEMaaCS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/test-results/code-quality-testing)
 - [Code Quality Testing (Adobe docs, Cloud Manager for AMS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-manager/content/using/code-quality-testing)
 
-Docs-based (page read twice Oct 2026, metrics table cross-checked), not
+Docs-based (metrics table cross-checked), not
 reproduced against a live pipeline.

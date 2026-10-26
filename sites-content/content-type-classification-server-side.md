@@ -87,5 +87,4 @@ a REST call or a workflow rather than from the picker.
 
 Confirmed against the Crowdin AEM connector's `ContentTypeServiceImpl`
 (`resolveContentType`: CF → asset → XF variation → site page) and its CF picker clone at
-`/apps/crowdin/content/cfpicker/picker`, plus a local AEM 6.5 author with WKND sample content,
-September 2026.
+`/apps/crowdin/content/cfpicker/picker`, plus a local AEM 6.5 author with WKND sample content.

@@ -153,5 +153,5 @@ rule stated in the file itself: the `create path` statements exist *because*
 the ACL below them would otherwise run against nodes no package has created
 yet.
 
-Adobe docs read September 2026 (AEMaaCS deploying/overview); in-repo
+Adobe docs-based (AEMaaCS deploying/overview); in-repo
 confirmation from the Translated connector, same date.

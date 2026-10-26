@@ -7,7 +7,7 @@ is what runs unless somebody turned it off.
 This note deliberately skips what Adobe already documents well (how to set the maintenance window,
 the oak-run command lines) and keeps the behaviour that reads as a malfunction when it is not.
 
-**Sourcing:** written from the AEM **6.4** deploying/revision-cleanup page (re-read Oct 2026; 6.4 is
+**Sourcing:** written from the AEM **6.4** deploying/revision-cleanup page (6.4 is
 out of extended support, the page is frozen), cross-checked against the 6.5 cold standby page. Nothing here was reproduced on a local instance, so treat the thresholds as
 documented values rather than observed ones.
 

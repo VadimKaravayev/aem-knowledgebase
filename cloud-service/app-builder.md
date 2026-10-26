@@ -72,7 +72,7 @@ AEM as a Cloud Service│                                                       
 2. **Asset Compute** — the AEMaaCS replacement for custom rendition workflow steps. Worker on I/O Runtime, registered through a Processing Profile. Also does **metadata workers**.
 3. **UI extensions** — a JavaScript/React app embedded in the Experience Cloud unified shell, talking to the host UI over a **two-way communication protocol**. Deployed to Adobe Developer Console, then enabled per environment in the **Extension Manager** (enable/disable per instance, configure parameters, generate preview links, opt into Adobe's first-party experimental extensions).
 
-### Extensible AEM UIs (verified Sept 2026)
+### Extensible AEM UIs
 
 - AEM Experience Hub
 - AEM Content Fragments Console
@@ -85,7 +85,7 @@ Classic Sites authoring (the Granite/Coral page editor) is **not** in this list 
 
 ---
 
-## I/O Runtime limits (verified Sept 2026)
+## I/O Runtime limits
 
 These decide feasibility, so quote them from the doc, not memory — they move.
 
@@ -138,4 +138,4 @@ App Builder is **not automatically included** with an AEM licence. Adobe's own o
 | Static header/redirect/traffic rules | `cdn.yaml` |
 | Edge-rendered marketing pages | Edge Delivery Services (different product — don't conflate) |
 
-Adobe docs read **Sept 2026**; Runtime limits and the extensible-UI list verified against the live docs on that date. Licensing specifics not verified.
+Adobe docs-based; Runtime limits and the extensible-UI list verified against the live docs. Licensing specifics not verified.

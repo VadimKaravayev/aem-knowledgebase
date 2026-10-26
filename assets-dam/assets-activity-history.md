@@ -18,4 +18,4 @@ Useful two ways: programmatic reporting queries `cq:AuditEvent` nodes under the 
 
 **"Transient workflows are not displayed in the timeline, because no history information is saved for these workflows."** On AEMaaCS asset processing is largely transient-workflow/Assets-Compute based — so "why doesn't the timeline show processing steps" is by design, not a bug; and conversely, making a workflow transient (the performance best practice) trades away its timeline/audit trail. Pick per workflow: auditability vs repository churn.
 
-Docs-based Oct 2026. Gaps the page leaves open (retention numbers, event customization, read-ACL on audit nodes): unspecified — verify on an instance before promising an auditor.
+Docs-based. Gaps the page leaves open (retention numbers, event customization, read-ACL on audit nodes): unspecified — verify on an instance before promising an auditor.

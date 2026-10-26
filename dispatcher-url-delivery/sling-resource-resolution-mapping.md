@@ -7,8 +7,8 @@ really "I configured one direction and assumed the other came free."
 - **Outbound — `ResourceResolver.map(…)`**: resource path → URL. This is what
   renders every link AEM emits.
 
-**Sourcing:** Apache Sling, *Mappings for Resource Resolution*, read September
-2026, re-read Oct 2026 (this doc is the knowledgebase's home for that page). Not reproduced
+**Sourcing:** Apache Sling, *Mappings for Resource Resolution*
+(this doc is the knowledgebase's home for that page). Not reproduced
 against a running instance. Inference and AEM-specific
 additions are flagged where they appear.
 

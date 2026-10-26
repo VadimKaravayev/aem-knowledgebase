@@ -38,7 +38,7 @@ The subtlest instance of the above. From Java 9, javac compiles `"a" + x` to an 
 javap -c -p -cp target/classes com.example.Foo | grep -cE "makeConcat|StringConcatFactory"   # must be 0
 ```
 
-This matters for **generated** code you never wrote — Lombok's `@Value`/`@Data` `toString()` is string concatenation, so it is exactly the shape that would break. (Verified Sept 2026: Lombok 1.18.46 under `--release 8` emits `StringBuilder`, 0 `StringConcatFactory` refs; `@Value @Builder @Jacksonized @Slf4j @NonNull` all compile to class file 52. The `StringBuilder` fallback comes from `--release`, not from Lombok.)
+This matters for **generated** code you never wrote — Lombok's `@Value`/`@Data` `toString` is string concatenation, so it is exactly the shape that would break. (Verified: Lombok 1.18.46 under `--release 8` emits `StringBuilder`, 0 `StringConcatFactory` refs; `@Value @Builder @Jacksonized @Slf4j @NonNull` all compile to class file 52. The `StringBuilder` fallback comes from `--release`, not from Lombok.)
 
 ## Maven wiring, and the trap in the AEM archetype
 
@@ -87,4 +87,4 @@ The forward direction is not *unconditionally* safe, though — it is safe for t
 
 Classic **AEM 6.5 supports both Java 8 and Java 11**, so the lowest common baseline for a single-artifact connector is a *customer* question, not a product one — ask which JVM their 6.5 actually runs on before assuming 11. (6.5 LTS requires 17/21 and AEMaaCS is 11+, so only classic 6.5 can force an 8 baseline.) This is the floor; [aem-sdk-java-ceiling-dual-65-cloud.md](aem-sdk-java-ceiling-dual-65-cloud.md) is the corresponding ceiling on the build JDK.
 
-Verified on the Phrase AEM connector (aem-sdk-api 2026.8.27830 + uber-jar 6.5.22, build JDK 21, Lombok 1.18.46), Sept 2026.
+Verified on the Phrase AEM connector (aem-sdk-api 2026.8.27830 + uber-jar 6.5.22, build JDK 21, Lombok 1.18.46).

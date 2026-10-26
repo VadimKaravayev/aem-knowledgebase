@@ -5,7 +5,7 @@ Running `.ipynb` notebooks inside IntelliJ IDEA Ultimate (not PyCharm) with a uv
 Jupyter support launches a *managed* Jupyter server from the project interpreter; when it
 can't resolve that interpreter every cell fails with **"Jupyter server is not started"**, with
 no further hint in the UI. Verified IntelliJ IDEA 2026.3, jupyterlab 4.6 / jupyter_server 2.21,
-Python 3.13, macOS, Oct 2026.
+Python 3.13, macOS.
 
 ## Root cause
 

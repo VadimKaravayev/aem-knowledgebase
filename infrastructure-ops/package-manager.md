@@ -106,4 +106,4 @@ Share is dead.
 - [Package Manager (Adobe docs, AEM 6.5)](https://experienceleague.adobe.com/en/docs/experience-manager-65/content/sites/administering/contentmanagement/package-manager)
 - [Package Manager (Adobe docs, AEM 6.4 — same content, confirms defaults)](https://experienceleague.adobe.com/en/docs/experience-manager-64/administering/contentmanagement/package-manager)
 
-Docs-based (page read Oct 2026), behaviors not re-verified on an instance.
+Docs-based, behaviors not re-verified on an instance.

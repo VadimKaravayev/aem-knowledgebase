@@ -56,7 +56,7 @@ Curl gotcha: use `-F` (multipart) fields exactly as above with a **single** URL.
 
   One documented qualification, and it does not help on a dev box: a **TarMK `crx2oak` repository migration** accepts `--promote-runmode nosamplecontent`, so an instance upgraded from a pre-6.3 source can acquire the runmode it never started with. That path exists only where a migration runs at all (pre-6.3 TarMK sources — not 6.3+, not MongoMK), and it is rebuilding the repository rather than flipping a frozen mode in place. See [in-place-upgrade-6x-to-65.md](in-place-upgrade-6x-to-65.md). Documented, not reproduced. The right approach on a dev instance is to keep the runmode and toggle the individual hardened defaults you actually need (CRXDE above; WebDAV etc. are similar one-off OSGi/config fixes).
 
-Confirmed on AEM 6.5 LTS local author (quickstart jar, Java 21), July 2026.
+Confirmed on AEM 6.5 LTS local author (quickstart jar, Java 21).
 
 ## The same rule on the AEMaaCS SDK quickstart
 
@@ -81,6 +81,6 @@ Worth knowing before investing in a local repository: updating the SDK jar (mont
 Thursday) means replacing the whole local environment and losing its content. Keep sample content in
 a package in Git, or move it across with oak-upgrade `includepaths`.
 
-From the Adobe "Local Development Environment Set-up / AEM Runtime" tutorial (Sept 2026), not
+From the Adobe "Local Development Environment Set-up / AEM Runtime" tutorial, not
 reproduced locally. Current SDKs need **JDK 21**, and the abort message names a "Java Specification
 11 VM" whatever the wrong JVM actually is.

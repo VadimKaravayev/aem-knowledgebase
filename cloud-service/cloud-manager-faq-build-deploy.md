@@ -66,4 +66,4 @@ mechanics in [[content-distribution-journal]]; API permissions in
 - [Cloud Manager FAQs (Adobe docs, AEMaaCS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/faqs)
 - [cqsupport/cloud-manager (GitHub)](https://github.com/cqsupport/cloud-manager) — Adobe support's troubleshooting snippets (build-step failures, importer repoinit example)
 
-Docs-based (FAQ read Oct 2026), answers not reproduced.
+Docs-based, answers not reproduced.

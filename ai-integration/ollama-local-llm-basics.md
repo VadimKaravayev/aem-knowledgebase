@@ -7,7 +7,7 @@ when the `input` is customer AEM config, logs or content). The server speaks its
 native API **and** an OpenAI-compatible one, including the Responses API.
 
 Verified on Ollama 0.33.3 (macOS menu-bar app, Apple Silicon, 16 GB), `llama3.2:1b`,
-openai 3.8.0 / Python 3.13, Oct 2026. Items marked *(docs)* are from Ollama's docs and not
+openai 3.8.0 / Python 3.13. Items marked *(docs)* are from Ollama's docs and not
 re-verified here.
 
 ## Mental model
@@ -68,7 +68,7 @@ Gotchas verified here:
 ollama run llama3.2:1b                          # interactive REPL
 ollama run llama3.2:1b "one-shot prompt"        # prints answer, exits
 cat error.log | ollama run llama3.2:1b "Summarize this AEM error log"   # stdin is appended to the prompt
-ollama run llama3.2:1b --format json "Return {city,country} for Kyiv"  # forces valid JSON
+ollama run llama3.2:1b --format json "Return {city,country} for Lisbon"  # forces valid JSON
 ollama run llama3.2:1b --verbose "…"            # prints timings/token rates after the answer
 ollama run MODEL --keepalive 30m "…"            # keep loaded longer than the default 5m
 ollama run MODEL --think=false / --hidethinking # thinking models only
@@ -101,12 +101,12 @@ curl localhost:11434/api/chat -d '{"model":"llama3.2:1b","stream":false,
 
 - **Structured output:** `"format": "json"` (any JSON) or `"format": {<JSON schema>}` —
   the schema form is constrained decoding; verified it returned exactly
-  `{"city":"Kyiv","country":"Ukraine"}` with no prose. Same caveat as
+  `{"city":"Lisbon","country":"Portugal"}` with no prose. Same caveat as
   [llm-structured-output-contracts.md](llm-structured-output-contracts.md): structure is
   enforced, semantics are not.
 - **Tool calling** on `/api/chat` with `"tools":[{"type":"function","function":{…}}]` for
   models whose `show` lists `tools`: the reply is
-  `{"message":{"content":"","tool_calls":[{"id":"call_…","function":{"name":"get_weather","arguments":{"city":"Kyiv"}}}]}}`.
+  `{"message":{"content":"","tool_calls":[{"id":"call_…","function":{"name":"get_weather","arguments":{"city":"Lisbon"}}}]}}`.
   Note **`arguments` is already an object**, not the JSON-encoded string OpenAI returns
   (compare [openai-function-calling-responses.md](openai-function-calling-responses.md)) —
   code that `json.loads` it breaks. You execute the function and append a
@@ -122,13 +122,13 @@ curl localhost:11434/api/chat -d '{"model":"llama3.2:1b","stream":false,
 from openai import OpenAI
 client = OpenAI(base_url="http://localhost:11434/v1", api_key="ollama")  # key is required by the SDK, ignored by Ollama
 
-r = client.responses.create(model="llama3.2:1b", instructions="You are terse.", input="Capital of Ukraine?")
-r.output_text            # "Kyiv."  — same instructions/input/output_text shape as OpenAI
+r = client.responses.create(model="llama3.2:1b", instructions="You are terse.", input="Capital of Portugal?")
+r.output_text            # "Lisbon."  — same instructions/input/output_text shape as OpenAI
 r.usage                  # input/output/total tokens incl. cached_tokens
 
 class Place(BaseModel): city: str; country: str
-client.responses.parse(model="llama3.2:1b", input="Kyiv: city and country.", text_format=Place).output_parsed
-# Place(city='Kyiv', country='Ukraine')
+client.responses.parse(model="llama3.2:1b", input="Lisbon: city and country.", text_format=Place).output_parsed
+# Place(city='Lisbon', country='Portugal')
 
 client.responses.create(model="llama3.2:1b", input="hi", previous_response_id=r.id)   # chaining works
 ```
@@ -169,7 +169,7 @@ prompt in `instructions` in the request so it's versioned with the code.
 |---|---|---|
 | `OLLAMA_HOST` | `127.0.0.1:11434` | `0.0.0.0:11434` to reach the server from a VM/container/other machine; the CLI reads the same var to find the server |
 | `OLLAMA_MODELS` | `~/.ollama/models` | move multi-GB weights to another disk |
-| `OLLAMA_KEEP_ALIVE` | `5m` | `-1` keep loaded, `0` unload immediately; the first request after unload pays the load time (19 s for a 270M model cold on this laptop) |
+| `OLLAMA_KEEP_ALIVE` | `5m` | `-1` keep loaded, `0` unload immediately; the first request after unload pays the load time (19 s for a 270M model cold on a laptop) |
 | `OLLAMA_CONTEXT_LENGTH` | 4k/32k/256k by VRAM | see the `ps` CONTEXT trap above |
 | `OLLAMA_NUM_PARALLEL` / `OLLAMA_MAX_LOADED_MODELS` / `OLLAMA_MAX_QUEUE` | auto | concurrency; parallel slots multiply KV-cache memory |
 | `OLLAMA_ORIGINS` | localhost | CORS allow-list when a browser page calls the API directly |

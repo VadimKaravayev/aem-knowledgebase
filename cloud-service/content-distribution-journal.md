@@ -130,7 +130,7 @@ path out of the Distribution UI and look at the *node* first.
 
 ---
 
-Verified Sept 2026 from: Apache `sling-org-apache-sling-distribution-journal`
+Verified from: Apache `sling-org-apache-sling-distribution-journal`
 `docs/documentation.md` (topics, partition counts, binary-less mode, offset storage, error-queue
 semantics); Adobe KB **ka-21668** (AccessDeniedException / `jcr:lockIsDeep`) and **ka-23465**
 (NamespaceException, Distribution UI runbook); Netcentric accesscontroltool issue #566 and

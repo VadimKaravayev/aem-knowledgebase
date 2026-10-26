@@ -23,4 +23,4 @@ Production-only comparison against contracted uptime, **separately for Author an
 
 Gotchas/limits: thresholds invisible in-product (CSE-only), no customer alert configuration or custom dashboards on this page (alerting = New Relic side), doc states no retention/granularity figures.
 
-Source: Adobe Cloud Manager (AMS) monitoring-environments page, Oct 2026. Docs-based, not verified against a live AMS program.
+Source: Adobe Cloud Manager (AMS) monitoring-environments page. Docs-based, not verified against a live AMS program.

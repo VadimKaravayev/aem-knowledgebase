@@ -30,4 +30,4 @@ The page is silent on: exact session/logout behavior, login-token refresh, wheth
 
 Exam tells: "configure IMS login for site visitors on publish" = wrong by scope; "permissions stop working after team moved groups in AD" = login-triggered sync + one-way UST flow; "admin rights vanished for everyone" = someone renamed the AEM Administrators profile.
 
-Docs-based Oct 2026; tutorial page is video-backed (code 39150), its substance folded in above.
+Docs-based; tutorial page is video-backed (code 39150), its substance folded in above.

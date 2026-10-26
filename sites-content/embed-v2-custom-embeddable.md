@@ -79,4 +79,4 @@ Consequences for SPA/headless projects:
 
 Register processors/embeddables only for trusted sources, HTTPS only, and avoid the `unsafe` HTL display context unless the payload is verified trustworthy.
 
-Refs: component README `adobe/aem-core-wcm-components` → `content/.../embed/v2/embed`; model source `internal/models/v1/EmbedImpl.java`. Confirmed on AEM 6.5 LTS local author, July 2026.
+Refs: component README `adobe/aem-core-wcm-components` → `content/../embed/v2/embed`; model source `internal/models/v1/EmbedImpl.java`. Confirmed on AEM 6.5 LTS local author.

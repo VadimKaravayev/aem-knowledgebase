@@ -61,4 +61,4 @@ validators; `jackrabbit-docviewparser` on by default — malformed
 - [Build Analyzer Maven Plugin (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-core-components/using/developing/archetype/build-analyzer-maven-plugin)
 - [adobe/aemanalyser-maven-plugin (GitHub)](https://github.com/adobe/aemanalyser-maven-plugin/)
 
-Docs-based (page read Oct 2026), analyzer list as documented there.
+Docs-based, analyzer list as documented there.

@@ -45,7 +45,7 @@ It looks canonical — `&lt;p&gt;...` is exactly what most XML serializers produ
 
 Empirically: leaving `>` unescaped in the XML source produces a JCR value with a literal `>`, which the RTE renders correctly as the closing of `<p>`. Escaping it to `&gt;` produces a JCR value where `>` arrives in some pipeline as `&gt;`, and the RTE renders that as visible text.
 
-This was confirmed on a real KFORCE component (`profilecard` default `role`) in May 2026. The canonical form failed; the asymmetric form worked.
+This was confirmed on a real client component (`profilecard` default `role`). The canonical form failed; the asymmetric form worked.
 
 ---
 

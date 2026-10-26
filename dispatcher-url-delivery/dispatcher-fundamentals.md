@@ -179,4 +179,4 @@ and after installing a feature pack/hotfix/service pack, **delete cached
 - [Overview of the Dispatcher (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/dispatcher)
 - [Configuring Dispatcher (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-dispatcher/using/configuring/dispatcher-configuration)
 
-Docs-based (both pages read Oct 2026), not lab-verified.
+Docs-based, not lab-verified.

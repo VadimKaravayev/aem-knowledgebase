@@ -80,4 +80,4 @@ or `nt:folder` (≥ 3.4.4), and existing ancestors are left untouched.
 ## References
 - [Workspace Filter (Apache Jackrabbit FileVault docs)](https://jackrabbit.apache.org/filevault/filter.html)
 
-Docs-based (page read Oct 2026).
+Docs-based.

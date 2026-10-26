@@ -4,7 +4,7 @@
 dependencies, creates the virtualenv, installs (or downloads) the interpreter, and runs
 commands inside the environment. It's the tooling behind the Python side of this folder
 (the FastAPI boundary in [fastapi-llm-service-boundary.md](fastapi-llm-service-boundary.md),
-the OpenAI/Ollama clients). Verified on uv 0.12.10 and 0.13.0, macOS arm64, Oct 2026.
+the OpenAI/Ollama clients). Verified on uv 0.12.10 and 0.13.0, macOS arm64.
 
 ## Mental model
 
@@ -90,7 +90,7 @@ uv self version             # current version + commit + platform
   via `uv run`. Same reason a fresh clone (`uv sync`) can fail where your machine passes.
 - **Which Python backs `.venv` is whatever matched first on `PATH`**, not necessarily the
   newest or the uv-managed one. With `.python-version` = `3.13` and three 3.13 builds on
-  this Mac (Homebrew 3.13.3, python.org 3.13.2, miniconda 3.13.2), the venv was built on
+  the test machine (Homebrew 3.13.3, python.org 3.13.2, miniconda 3.13.2), the venv was built on
   **miniconda's** (`home = /opt/miniconda3/bin` in `.venv/pyvenv.cfg`). Pin a full version
   (`uv python pin 3.13.2`), or `uv python install 3.13` + `UV_MANAGED_PYTHON=1` /
   `--managed-python` to force uv's own builds. Check with `uv python find` / `uv python list`.

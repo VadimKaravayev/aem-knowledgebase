@@ -7,8 +7,8 @@ is wrong. Mutable content is applied only after the application version has swit
 
 This is the constraint that shapes how a connector ships service users, ACLs and indexes.
 
-**Sourcing:** the Adobe *Deploying to AEM as a Cloud Service / Overview* page (Sept 2026, re-read
-2026-10-25 against the 2026-10-09 revision), interpreted for a vendor package. Not reproduced against a
+**Sourcing:** the Adobe *Deploying to AEM as a Cloud Service / Overview* page (re-read
+against the 2026-10-09 revision), interpreted for a vendor package. Not reproduced against a
 live pipeline. This doc is the knowledgebase's home for that page; the sections below the three rules
 carry its remaining reference facts.
 

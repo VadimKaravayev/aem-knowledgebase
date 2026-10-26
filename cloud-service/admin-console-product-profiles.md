@@ -41,4 +41,4 @@ Inside AEM, profiles surface as IMS-synced groups to hang ACLs on (fine-grained 
 
 Three permission planes, three tools: **Admin Console** (who may log in where: identity + profile), **Cloud Manager roles** (who may build/deploy/configure programs), **AEM groups/ACLs** (what they may touch in content). Distractors love moving a task one plane over — "give the developer deploy rights in AEM" or "fix author permissions in Admin Console" are both wrong by plane.
 
-Source: AEMaaCS onboarding journey pages, Oct 2026. Docs-based.
+Source: AEMaaCS onboarding journey pages. Docs-based.

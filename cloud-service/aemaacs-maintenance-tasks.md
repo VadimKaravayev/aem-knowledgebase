@@ -2,7 +2,7 @@
 
 On AEM as a Cloud Service the **Maintenance card (Tools → Operations → Maintenance) is gone**. Maintenance tasks are either fully Adobe-owned or configured **in source control and deployed via Cloud Manager** — a JCR node override under `/conf` for the Granite purge tasks, or a **config pipeline YAML** for Version Purge and Audit Log Purge. Adobe explicitly **reserves the right to override a customer's maintenance task configuration** to mitigate performance degradation or similar issues.
 
-Source: Adobe docs *Maintenance Tasks in AEM as a Cloud Service*, read Oct 2026 (documented, not reproduced on an environment). 6.5/AMS equivalents: [[operations-dashboard]], [[revision-cleanup]], [[monitoring-and-maintaining]].
+Source: Adobe docs *Maintenance Tasks in AEM as a Cloud Service* (documented, not reproduced on an environment). 6.5/AMS equivalents: [[operations-dashboard]], [[revision-cleanup]], [[monitoring-and-maintaining]].
 
 ## Ownership table
 

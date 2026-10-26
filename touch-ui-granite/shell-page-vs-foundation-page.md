@@ -134,11 +134,11 @@ Your own clientlib should also declare `dependencies="[coralui3]"` so its JS upg
 
 **Fix.** Add `package-info.java` with `@Version("1.0")` to the models package. Confirm with `/system/console/bundles/<bsn>.json` → `Exported Packages`.
 
-**How to spot it next time.** A connector that strips the archetype's sample classes tends to delete their `package-info.java` too, and the first real Sling model lands in that now-private package months later. If a custom console region renders blank, `curl` the page and grep for `cannot be resolved to a type` before touching the markup. Confirmed on the Phrase connector's Configuration console, Sept 2026.
+**How to spot it next time.** A connector that strips the archetype's sample classes tends to delete their `package-info.java` too, and the first real Sling model lands in that now-private package months later. If a custom console region renders blank, `curl` the page and grep for `cannot be resolved to a type` before touching the markup. Confirmed on the Phrase connector's Configuration console.
 
 ---
 
 ## Reference
 
 - `/libs/granite/ui/components/shell/page/page.jsp` (read it on the instance — the doc comment at the top is the authoritative content-structure spec).
-- Verified on AEMaaCS SDK, May 2026, building the Translated connector's redesigned orders dashboard.
+- Verified on AEMaaCS SDK, building the Translated connector's redesigned orders dashboard.

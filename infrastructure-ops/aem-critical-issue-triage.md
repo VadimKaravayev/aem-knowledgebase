@@ -43,4 +43,4 @@ Recovery (full backup first): **oak-run `check`** mode → "determine the last k
 
 It's the closest thing to Adobe Support's internal decision tree: six symptoms → which console/MBean/log answers each. The durable part is the *mapping* (symptom → first artifact to pull), not the thresholds — those age.
 
-Source: Adobe KCS ka-17457, fetched Oct 2026. 6.2-era content flagged where it conflicts with 6.5-current notes.
+Source: Adobe KCS ka-17457. 6.2-era content flagged where it conflicts with 6.5-current notes.

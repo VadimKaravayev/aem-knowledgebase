@@ -84,5 +84,5 @@ access-restricted.
 ## References
 - [Manage digital assets (Adobe docs, AEMaaCS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/assets/manage/manage-digital-assets)
 
-Docs-based (page read Oct 2026), behaviors not re-verified on an
+Docs-based, behaviors not re-verified on an
 environment.

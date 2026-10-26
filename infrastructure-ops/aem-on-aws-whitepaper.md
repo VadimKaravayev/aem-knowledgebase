@@ -49,4 +49,4 @@ Deployment automation: Jenkins as hub driving AEM's HTTP interfaces (curl — [a
 
 Almost every pattern here is a hand-built version of something AEMaaCS later made a platform property: publish-paired dispatchers, snapshot-boot + replication catch-up vs journal replay, shared blob store, edge WAF, rendition offload. For design questions it's the reference for "customer insists on self-hosting AEM on AWS — what do they now own?": VPN/NAT plumbing, session stickiness, CDN invalidation races, snapshot-consistent backups, and all scaling choreography.
 
-Source: AWS whitepaper "Running Adobe Experience Manager on AWS", July 2016, read in full Oct 2026.
+Source: AWS whitepaper "Running Adobe Experience Manager on AWS", July 2016.

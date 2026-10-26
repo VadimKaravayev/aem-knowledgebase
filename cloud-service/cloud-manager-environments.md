@@ -156,7 +156,7 @@ either production or stage updates the other, so the pair stays on one release.
   region's IP means advanced networking was provisioned after the region.
 
 ## References
-- [Onboarding journey: Create environments (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/onboarding/journey/create-environments) — read Oct 2026
+- [Onboarding journey: Create environments (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/onboarding/journey/create-environments)
 - [Manage environments (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/manage-environments)
 - [Additional publish regions (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/operations/additional-publish-regions)
 - [Rapid Development Environments (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/rde/overview)

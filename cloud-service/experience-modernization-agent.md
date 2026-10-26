@@ -58,7 +58,7 @@ path.
   (Bring Your Own Git).
 - Adobe ID for sign-in; console access granted on request.
 - Source site behind a firewall: **allowlist** 34.228.136.112, 54.90.51.39,
-  3.224.194.242 (from the Troubleshooting section, Sept 2026; recheck before
+ 3.224.194.242 (from the Troubleshooting section; recheck before
   quoting to a customer). Authenticated/intranet content cannot be scraped at
   all; Adobe points to SLICC for that.
 

@@ -46,4 +46,4 @@ Verified empirically with a scratch test printing the injected field via reflect
 
 Core Image v3 `initResource()` wraps the resource with **inheritance** (`Utils.getWrappedImageResourceWithInheritance`): with `imageFromPageImage` (the "Inherit featured image from page" checkbox; default on when the component has no `fileReference`/`file`) the effective `fileReference` comes from `<page>/jcr:content/cq:featuredimage`, and the component node has none. A custom model that reads `@ValueMapValue fileReference` for its own logic silently gets `null` in that mode — read `image.getFileReference()` from the delegate and fall back to the property.
 
-Confirmed on a client's `ClientImageImpl` (Core Components 2.30.4, AEM 6.5 LTS), Aug 2026.
+Confirmed on a client's `ClientImageImpl` (Core Components 2.30.4, AEM 6.5 LTS).

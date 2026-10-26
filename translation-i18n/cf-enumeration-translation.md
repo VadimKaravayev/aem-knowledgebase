@@ -39,7 +39,7 @@ Not serializing enum fields for translation is *correct* behavior. The customer-
 is patterns 1/2; the product opportunity is translating i18n dictionaries, not bending enum
 serialization.
 
-## How the core CF component renders enums (verified in source, July 2026)
+## How the core CF component renders enums (verified in source)
 
 `core/wcm/components/contentfragment/v1/contentfragment` does NO enum handling — the stored
 key renders literally, even on localized pages:
@@ -67,4 +67,3 @@ keyed by the option values). One line; stored value stays untouched (pattern 1 a
 - [Enumeration field validation error thread (stored value must match model options)](https://experienceleaguecommunities.adobe.com/t5/adobe-experience-manager/enumeration-data-type-content-fragment-throws-validation-error/td-p/449705)
 - [Localized content with AEM Headless (locale folders + `_locale` filter; no enum translation mechanism)](https://experienceleague.adobe.com/en/docs/experience-manager-learn/getting-started-with-aem-headless/how-to/localized-content)
 
-Researched July 2026.

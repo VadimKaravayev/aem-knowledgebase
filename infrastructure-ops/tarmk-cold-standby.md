@@ -152,7 +152,7 @@ afterwards on the standby. The standby has no `RepositoryManagement` MBean, so u
 **stop sync on the standby via JMX (`stop()`)**, stop the standby, delete its folder, stop the
 primary, file-system copy it, and reconfigure the copy as the standby.
 
-Adobe page re-read Oct 2026; the sections above match it, with the capacity-vs-availability framing
+Adobe page re-read; the sections above match it, with the capacity-vs-availability framing
 and the ORC phase split added from the revision cleanup doc.
 
 ## References

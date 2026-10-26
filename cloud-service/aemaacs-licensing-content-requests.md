@@ -31,4 +31,4 @@ Design consequences: route health checks to **`/system/probes/health`** (free) o
 - SLA = the **Unified SLA + Actionability Addendum** (adobe.com/legal/service-commitments); updates including Emergency Updates are Adobe-pushed — if an Update breaks Customer Customizations, Adobe only "supports your efforts" to fix your code.
 - Automated Forms Conversion: don't feed it forms with **prefilled/personal data**.
 
-Sources: PSLT 2025v1 (full read), Experience League content-requests doc, product description figures effective 2026-09-02 via licenseware.io wiki (helpx original 403s automated fetchers — re-verify plan numbers there before contractual use). Oct 2026.
+Sources: PSLT 2025v1 (full read), Experience League content-requests doc, product description figures effective 2026-09-02 via licenseware.io wiki (helpx original 403s automated fetchers — re-verify plan numbers there before contractual use).

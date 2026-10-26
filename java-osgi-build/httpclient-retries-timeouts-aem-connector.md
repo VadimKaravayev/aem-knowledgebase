@@ -7,7 +7,7 @@ and the reflex to write a `for` loop with `Thread.sleep` produces code that look
 ## Use what AEM already exports
 
 `org.apache.http.*` (HttpClient 4.5) is on **both** `aem-sdk-api` and `uber-jar` 6.5.22. Verified
-Sept 2026:
+with:
 
 ```bash
 unzip -l uber-jar-6.5.22.jar | grep -E 'org/apache/http/(client/ServiceUnavailableRetryStrategy|impl/client/DefaultHttpRequestRetryHandler)\.class'
@@ -129,7 +129,7 @@ field and read it once per call into a local, since `@Modified` can replace it m
 
 ---
 
-Implemented and verified on the Phrase TMS connector, Sept 2026. Related:
+Implemented and verified on the Phrase TMS connector. Related:
 [java-target-platform-vs-build-jdk.md](java-target-platform-vs-build-jdk.md),
 [osgi-import-package-version-range.md](osgi-import-package-version-range.md),
 [translation-connector-cached-services.md](../translation-i18n/translation-connector-cached-services.md).

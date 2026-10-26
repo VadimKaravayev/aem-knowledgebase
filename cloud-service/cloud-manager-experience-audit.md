@@ -66,4 +66,4 @@ trend. "Experience Audit failed the pipeline" is a distractor.
 ## References
 - [Experience Audit (Adobe docs, Cloud Manager AEMaaCS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/reports/report-experience-audit)
 
-Docs-based (page read Oct 2026), not verified against a live pipeline.
+Docs-based, not verified against a live pipeline.

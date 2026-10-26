@@ -1,6 +1,6 @@
 # Scanning a public AEM site from the outside (presales recipe)
 
-How to learn an AEM site's platform, templates, libraries, martech and SEO state from the public site alone, before getting any access. Verified on a production on-prem/self-hosted AEM 6.x Sites site behind Akamai (presales scan, Oct 2026), using Chrome DevTools (MCP `evaluate_script`, `list_network_requests`).
+How to learn an AEM site's platform, templates, libraries, martech and SEO state from the public site alone, before getting any access. Verified on a production on-prem/self-hosted AEM 6.x Sites site behind Akamai (presales scan), using Chrome DevTools (MCP `evaluate_script`, `list_network_requests`).
 
 ## Use a real browser, not a fetcher
 

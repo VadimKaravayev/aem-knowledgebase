@@ -45,4 +45,4 @@ Custom task = OSGi service implementing **`org.apache.sling.event.jobs.consumer.
 
 One read-only page aggregating health checks, maintenance task states, system (load/disk/heap), instance (version, run modes, startup date), repository (Oak version, **node store + data store type** — fastest way to answer "is this TarMK or Mongo"), distribution + replication agents, workflow/Sling job counts, estimated node counts, online-backup-in-progress flag, indexing status. `export.json` endpoint makes it the cheap fleet-status scrape.
 
-Source: Adobe 6.5 operations-dashboard page, Oct 2026. Docs-based, not reproduced on an instance.
+Source: Adobe 6.5 operations-dashboard page. Docs-based, not reproduced on an instance.

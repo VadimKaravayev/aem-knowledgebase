@@ -1,6 +1,6 @@
 # Dispatcher log entries you will actually meet — what each means and the fix
 
-Adobe's AMS tutorial page *Dispatcher Common Logs* (AEM 6.5 / AMS; read Oct 2026) as a lookup table, plus the triage context it leaves out. Log mechanics (`DispatcherLogLevel`, bring-up checklist, debug headers) are in [[dispatcher-fundamentals]]; cache semantics in [[dispatcher-caching-and-invalidation]]. On **AEMaaCS** the same module writes the same lines, but you read them via Cloud Manager `download-logs` / `tail-log` for the `aemdispatcher` log, not `/var/log/httpd` ([[aio-cloudmanager-cli]]).
+Adobe's AMS tutorial page *Dispatcher Common Logs* (AEM 6.5 / AMS) as a lookup table, plus the triage context it leaves out. Log mechanics (`DispatcherLogLevel`, bring-up checklist, debug headers) are in [[dispatcher-fundamentals]]; cache semantics in [[dispatcher-caching-and-invalidation]]. On **AEMaaCS** the same module writes the same lines, but you read them via Cloud Manager `download-logs` / `tail-log` for the `aemdispatcher` log, not `/var/log/httpd` ([[aio-cloudmanager-cli]]).
 
 ## Paths on AMS
 
@@ -20,7 +20,7 @@ Adobe's AMS tutorial page *Dispatcher Common Logs* (AEM 6.5 / AMS; read Oct 2026
 |---|---|---|
 | `W … Allowing requests with globs is considered unsafe.` | Dispatcher ≥ 4.2.x discourages `/glob` filter rules (`/glob "* *.css *"`) | rewrite with `/url`, `/extension`, `/path`: `/0041 { /type "allow" /extension "css" }` |
 | `D … Filter rejects: GET /libs/granite/core/content/login.html HTTP/1.1` | a filter denied the request. Rejects for `/system/console/`, `/libs/granite/…login` on publish are **intended** | if a legitimate asset is blocked (e.g. `.eot` under `/etc/designs/`), add a targeted allow: `/0011 { /type "allow" /method "GET" /extension 'eot' /path "/etc/designs/*" }` |
-| `W … Unable to connect socket to 10.43.3.40:4502: Connection timed out` | **TCP never opened**: wrong render IP/port in `/renders`, firewall, or AEM down/not listening | verify render IP:port, firewall, AEM process health |
+| `W … Unable to connect socket to 192.0.2.40:4502: Connection timed out` | **TCP never opened**: wrong render IP/port in `/renders`, firewall, or AEM down/not listening | verify render IP:port, firewall, AEM process health |
 | `I … "GET /favicon.ico" 502 - 54034ms authorfarm/-` | **TCP opened, AEM too slow**: dispatcher hit its render timeout → 502/503 to the client | raise `/timeout` in the farm's `/renders` entry, or fix AEM's health (threads, GC, slow queries) |
 | `I … Current cache hit ratio: 87.94 %` | share of requests served from cache vs rendered | target **≥ 80 %**; a low ratio with caching configured usually means **too-frequent or too-broad flushes** |
 | `E … Unable to create parent directory …: Not a directory` | normally a fetch racing a cache clear; otherwise wrong permissions or **SELinux context** on the doc root | `ls -Z /var/www/` → expect `drwxr-xr-x` and `httpd_sys_content_t` |

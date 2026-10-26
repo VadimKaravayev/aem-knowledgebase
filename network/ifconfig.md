@@ -1,6 +1,6 @@
 # ifconfig: reading an interface, and what it can and cannot tell you about AEM
 
-`ifconfig` prints and (as root) changes the configuration of network interfaces: address, netmask, MAC, MTU, up/down state, media. On macOS and the BSDs it is still the primary tool. On Linux it is deprecated in favour of `ip` and often not installed; the Linux equivalents are given throughout. Output below was verified on macOS, Oct 2026, with addresses replaced by documentation values. Companion docs: [ip-addresses.md](ip-addresses.md), [mac-addresses.md](mac-addresses.md), [mtu.md](mtu.md), [tcpdump.md](tcpdump.md).
+`ifconfig` prints and (as root) changes the configuration of network interfaces: address, netmask, MAC, MTU, up/down state, media. On macOS and the BSDs it is still the primary tool. On Linux it is deprecated in favour of `ip` and often not installed; the Linux equivalents are given throughout. Output below was verified on macOS, with addresses replaced by documentation values. Companion docs: [network-interface-card.md](network-interface-card.md) (what the card behind the interface does: offloads, rings, duplex, virtual NICs), [ip-addresses.md](ip-addresses.md), [mac-addresses.md](mac-addresses.md), [mtu.md](mtu.md), [tcpdump.md](tcpdump.md).
 
 ## The one block you must be able to read
 
@@ -22,7 +22,7 @@ Line by line:
   - **`UP`** = administratively enabled (someone ran `ifconfig en0 up`, or the OS did).
   - **`RUNNING`** = the link is actually working (cable in, Wi-Fi associated). **`UP` without `RUNNING` is "configured but no carrier"**: the classic unplugged cable or unassociated Wi-Fi.
 - **`mtu 1500`**: the largest IP packet this link will carry. 1500 is Ethernet/Wi-Fi, 16384 on `lo0`, ~1400 on VPN `utun` interfaces. Details and the black-hole failure mode: [mtu.md](mtu.md).
-- **`options=...`**: hardware offloads (`TSO4/6` TCP segmentation offload, `*_CSUM` checksum offload). Operationally relevant in one case: **captures taken on this host show wrong or absent TCP checksums** because the NIC fills them in after tcpdump sees the frame. Not a network fault.
+- **`options=...`**: hardware offloads (`TSO4/6` TCP segmentation offload, `*_CSUM` checksum offload). Operationally relevant in one case: **captures taken on the capturing host show wrong or absent TCP checksums** because the NIC fills them in after tcpdump sees the frame. Not a network fault.
 - **`ether`**: the MAC address. Linux prints `link/ether`. Randomised on modern Wi-Fi clients ([mac-addresses.md](mac-addresses.md)).
 - **`inet6 ... %en0 prefixlen 64 secured scopeid 0xe`**: an IPv6 address. `fe80::` prefix = link-local, exists on every interface even when IPv6 is "not used". `%en0` is the zone (which interface), needed when you address a link-local target. `secured` = RFC 7217 stable privacy address (not derived from the MAC). A second `inet6` line starting with a global prefix and `temporary` is the rotating outbound privacy address.
 - **`inet 192.0.2.10 netmask 0xffffff00 broadcast 192.0.2.255`**: the IPv4 address. **macOS prints the netmask in hex**: `0xffffff00` = `255.255.255.0` = `/24`. Count the `f`s: each is 4 one-bits. `ifconfig -f inet:cidr en0` prints `/24` instead (verified; the `-f` display-format flag is macOS-only). Linux `ip addr` prints CIDR directly.
@@ -56,7 +56,7 @@ Linux `ip` equivalents: `ip addr` / `ip -br addr` (brief table), `ip link set et
 
 ## Which `en` is which (macOS)
 
-`ifconfig` does not say. On a laptop with Thunderbolt docks the list is long (`en0`–`en6`, `bridge0`, `ap1`, `awdl0`, `llw0`, `utun0`–`utun4` all appeared on the verified machine). To map names to hardware:
+`ifconfig` does not say. On a laptop with Thunderbolt docks the list is long (`en0`–`en6`, `bridge0`, `ap1`, `awdl0`, `llw0`, `utun0`–`utun4` all appeared on one test machine). To map names to hardware:
 
 ```bash
 networksetup -listallhardwareports    # "Hardware Port: Wi-Fi / Device: en0 / Ethernet Address: ..."

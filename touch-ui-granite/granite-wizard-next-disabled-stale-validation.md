@@ -8,7 +8,7 @@ the "empty" field by hand and leaving it enables Next again.
 
 ## Root cause
 
-Three Granite behaviours combine (foundation clientlib, verified on the Cloud SDK, Sep 2026):
+Three Granite behaviours combine (foundation clientlib, verified on the Cloud SDK):
 
 1. **`aria-required="true"` is a validation constraint.** The required validator for
    `input, textarea, select` accepts `element.required`, the `required` attribute *or*

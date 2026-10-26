@@ -1,7 +1,7 @@
 # Server-Sent Events from an AEM servlet
 
 Pushing live updates to an author-tier console (job progress, status, notifications) without polling.
-Verified on an AEM as a Cloud Service SDK Quickstart, Sept 2026, with a Sling servlet and a Coral
+Verified on an AEM as a Cloud Service SDK Quickstart, with a Sling servlet and a Coral
 progress bar.
 
 Spec: [WHATWG HTML, Server-sent events](https://html.spec.whatwg.org/multipage/server-sent-events.html).

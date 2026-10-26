@@ -64,5 +64,5 @@ Manager's own analysis ([[aem-analyser-maven-plugin]]).
 - [How to make your content packages comply with Jackrabbit FileVault Validation (wcm.io)](https://wcm-io.atlassian.net/wiki/spaces/WCMIO/pages/1353056261/How+to+make+your+content+packages+comply+with+Jackrabbit+FileVault+Validation)
 - [FileVault validation reference (Apache Jackrabbit)](https://jackrabbit.apache.org/filevault/validation.html)
 
-wcm.io wiki (read via Confluence API, Oct 2026); XML snippets paraphrased —
+wcm.io wiki (read via Confluence API); XML snippets paraphrased —
 exact syntax in the linked pages.

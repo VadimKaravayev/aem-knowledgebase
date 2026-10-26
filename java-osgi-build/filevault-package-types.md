@@ -15,7 +15,7 @@ The split people get wrong: **mutable vs immutable** only separates `content` fr
 
 ## Why `ui.config` is `container`, not `application`
 
-The intuition "OSGi config is immutable code under `/apps` → `application`" is exactly the planted exam trap. The validator rule kills it: **an `application` package must not contain OSGi configuration or bundles** — a `config.author`/`config.publish.prod` folder inside `ui.apps` fails validation (locally and in Cloud Manager's Build step). So the archetype keeps all run-mode configuration in its own `ui.config` module, `<packageType>container</packageType>`, rooted at `/apps/<app>/osgiconfig` — verified in the archetype's `ui.config/pom.xml` on the `develop` branch, Oct 2026. Run-mode *resolution* semantics (replace-not-merge per PID) are in [osgi-config-runmode-resolution.md](../infrastructure-ops/osgi-config-runmode-resolution.md); assembly into `all` and the embed-folder grammar are in [all-package-embed-structure.md](all-package-embed-structure.md) (which this doc corrects: it previously claimed `ui.config` was `application`).
+The intuition "OSGi config is immutable code under `/apps` → `application`" is exactly the planted exam trap. The validator rule kills it: **an `application` package must not contain OSGi configuration or bundles** — a `config.author`/`config.publish.prod` folder inside `ui.apps` fails validation (locally and in Cloud Manager's Build step). So the archetype keeps all run-mode configuration in its own `ui.config` module, `<packageType>container</packageType>`, rooted at `/apps/<app>/osgiconfig` — verified in the archetype's `ui.config/pom.xml` on the `develop` branch. Run-mode *resolution* semantics (replace-not-merge per PID) are in [osgi-config-runmode-resolution.md](./infrastructure-ops/osgi-config-runmode-resolution.md); assembly into `all` and the embed-folder grammar are in [all-package-embed-structure.md](all-package-embed-structure.md) (which this doc corrects: it previously claimed `ui.config` was `application`).
 
 ## Fast elimination grid for exam/config-review
 
@@ -24,4 +24,4 @@ The intuition "OSGi config is immutable code under `/apps` → `application`" is
 - `application` for configs fails validation — the "closest wrong answer" by design.
 - A real-world package that mixes `/apps` and `/content` either declares `mixed` (and loses validation + deploys unpredictably on AEMaaCS) or should be split. The archetype's four-module layout (`ui.apps`/`ui.config`/`ui.content`/`all`) exists precisely so each artifact has one honest type.
 
-Archetype pom verified via GitHub Oct 2026; validator rules from FileVault/Adobe docs, not re-run locally for this doc.
+Archetype pom verified via GitHub; validator rules from FileVault/Adobe docs, not re-run locally for this doc.

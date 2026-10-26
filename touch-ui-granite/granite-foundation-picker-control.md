@@ -134,5 +134,5 @@ Reject invalid picks with an explanatory dialog listing the skipped paths; never
 
 Confirmed on the Crowdin connector New Job wizard (Pages / Experience fragments / Content
 fragments menu; the CF item uses a connector-owned clone of the CFM picker at
-`/apps/crowdin/content/cfpicker/picker`), July 2026. The clone-with-parameterized-selectionCount
+`/apps/crowdin/content/cfpicker/picker`). The clone-with-parameterized-selectionCount
 approach matches what the translated.com connector does, minus their `/apps/dam` overlay.

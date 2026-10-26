@@ -96,4 +96,4 @@ servlet or JobConsumer right after someone made a DTO immutable → they used `@
 removed the no-arg ctor) without `@Jacksonized`.
 
 Confirmed on the Crowdin AEM connector (`CrowdinLanguage` / `SubmitTranslationsContext` flow,
-Lombok 1.18.46, AEM SDK 2026.6), July 2026.
+Lombok 1.18.46, AEM SDK 2026.6).

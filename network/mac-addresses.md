@@ -1,6 +1,6 @@
 # MAC addresses: the mailbox name on the local link, and the other MAC (message authentication code)
 
-"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Verified on macOS in Oct 2026 on a home Wi-Fi LAN. Companion docs: [ip-addresses.md](ip-addresses.md), [icmp.md](icmp.md), [internet-checksum.md](internet-checksum.md).
+"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Verified on macOS on a Wi-Fi LAN; addresses in the examples use the documentation ranges. Companion docs: [ip-addresses.md](ip-addresses.md), [icmp.md](icmp.md), [internet-checksum.md](internet-checksum.md).
 
 ## The apartment-building picture
 
@@ -26,24 +26,24 @@ Layering in one line: Ethernet frame (MAC → MAC) carries an IP packet (IP → 
 
 Full treatment of the protocol, its cache timers, and ARP poisoning: [arp.md](arp.md).
 
-To send to an IP on its own subnet, a host broadcasts an **ARP** (Address Resolution Protocol) request: "who has 192.168.0.1?" The owner replies with its MAC and the asker caches it for a few minutes. For an off-subnet destination the host ARPs for the **default gateway** instead and hands the packet to the router. IPv6 does the same job with **ICMPv6 Neighbor Discovery** (Neighbor Solicitation/Advertisement, multicast instead of broadcast), which is why a firewall that blocks ICMPv6 kills IPv6 entirely.
+To send to an IP on its own subnet, a host broadcasts an **ARP** (Address Resolution Protocol) request: "who has 192.0.2.1?" The owner replies with its MAC and the asker caches it for a few minutes. For an off-subnet destination the host ARPs for the **default gateway** instead and hands the packet to the router. IPv6 does the same job with **ICMPv6 Neighbor Discovery** (Neighbor Solicitation/Advertisement, multicast instead of broadcast), which is why a firewall that blocks ICMPv6 kills IPv6 entirely.
 
 ```bash
 ifconfig en0 | grep ether        # your MAC on macOS (ip link show on Linux)
 arp -a                           # ARP cache: which MAC answers for each local IP
-arp -d 192.168.0.1               # drop one entry (sudo) when a stale one is suspected
+arp -d 192.0.2.1                 # drop one entry (sudo) when a stale one is suspected
 ```
 
-Verified ARP cache on a small consumer Wi-Fi LAN:
+Typical ARP cache of a client on a Wi-Fi LAN (documentation addresses):
 
 ```
-? (192.168.0.1)   at 0:0:5e:…    on en0   ← router: factory OUI
-? (192.168.0.123) at ce:0:53:…   on en0   ← phone: ce = locally administered
-? (192.168.0.146) at 12:0:53:…   on en0   ← laptop: 12 = locally administered
-? (192.168.0.172) at 66:0:53:…   on en0   ← 66 = locally administered
+? (192.0.2.1)   at 0:0:5e:…    on en0   ← router: factory OUI
+? (192.0.2.20)  at ce:0:53:…   on en0   ← phone: ce = locally administered
+? (192.0.2.30)  at 12:0:53:…   on en0   ← laptop: 12 = locally administered
+? (192.0.2.40)  at 66:0:53:…   on en0   ← 66 = locally administered
 ```
 
-The test laptop's own Wi-Fi MAC began with `0a`, also locally administered. **Every client on the LAN except the router was using a randomised MAC.** That is the state of a normal 2026 network and the reason for the first gotcha below.
+The observing laptop's own Wi-Fi MAC was also locally administered. **Every client on the LAN except the router was using a randomised MAC.** That is the normal state of a current Wi-Fi network and the reason for the first gotcha below.
 
 ## Gotchas
 

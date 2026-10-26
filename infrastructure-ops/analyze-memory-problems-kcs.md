@@ -2,7 +2,7 @@
 
 Adobe's own knowledge-base article for an AEM/CRX JVM that slows down, runs out of memory, or logs `OutOfMemoryError: Java heap space` / `OutOfMemoryError: GC overhead limit exceeded`. CQ-vintage (it still says "CRX/CQ" and quotes a 256 MB minimum heap) but the **method** is what Support expects you to have followed before opening a ticket. Applies to **6.5 / AMS / any self-hosted JVM**; on **AEMaaCS none of this is possible** — heap dumps come from Adobe via a Support request, you work from Developer Console logs instead ([[jdk-diagnostic-tools]], [[aemaacs-repository-inspection-by-tier]]).
 
-The deeper tool reference (attach prerequisites, stop-the-world cost, `jcmd`, JFR) is [[jdk-diagnostic-tools]]; this page is the Support-flavoured checklist on top of it. Article read Oct 2026, last updated by Adobe 2026-09-17.
+The deeper tool reference (attach prerequisites, stop-the-world cost, `jcmd`, JFR) is [[jdk-diagnostic-tools]]; this page is the Support-flavoured checklist on top of it. Article last updated by Adobe 2026-09-17.
 
 ## The recipe, in Adobe's order
 

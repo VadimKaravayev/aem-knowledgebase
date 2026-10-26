@@ -77,7 +77,7 @@ PIPELINEID --variable NAME value [--secret …]`) have hard limits:
 ## References
 - [Build environment (Adobe docs, Cloud Manager for AMS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-manager/content/getting-started/project-creation/build-environment)
 
-Docs-based (page read Oct 2026), not verified against a live AMS build. The
+Docs-based, not verified against a live AMS build. The
 page summary also surfaced AEMaaCS-flavored items (author/preview/publish
 secret-vs-variable contexts, Node 18 front-end pipelines) that belong to the
 cloud build-environment doc set; they are deliberately left out here rather

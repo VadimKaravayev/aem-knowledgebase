@@ -51,4 +51,4 @@ Collections (repeatable items, e.g. social links): `@Configuration(collection = 
 - Multi-brand / per-language / per-region overrides with shared defaults (contact info, approval groups) → **CA Config**; distractors are OSGi-per-runmode (can't vary by content path, run modes are coarse and closed), Configuration Browser (folder/cloud-config management, no inheritance model), one-workflow-per-combination (maintenance explosion).
 - Any option placing an OSGi `.cfg.json` under `/conf` is wrong regardless of its other merits.
 
-Sourced from Sling caconfig / Adobe docs and prior project experience, Oct 2026; code snippets not re-verified against a live instance for this doc.
+Sourced from Sling caconfig / Adobe docs and prior project experience; code snippets not re-verified against a live instance for this doc.

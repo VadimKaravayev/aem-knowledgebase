@@ -96,7 +96,7 @@ anything environment-variable-shaped can't be provisioned via repoinit.
   Status Dump **Configurations** → find the `pid`, inspect `properties`,
   diff against the run-mode folder you expect to have won.
 
-## Page leftovers (re-read Oct 2026, page dated 2026-10-09)
+## Page leftovers (page dated 2026-10-09)
 
 - **Factory file naming as Adobe writes it is `<factoryPID>-<name>.cfg.json`** (hyphen). The Sling
   installer accepts both `-` and the OSGi R7 `~` for `.cfg.json`; the archetype and
@@ -139,4 +139,4 @@ anything environment-variable-shaped can't be provisioned via repoinit.
 ## References
 - [Configuring OSGi for AEM as a Cloud Service (Adobe docs)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/deploying/configuring-osgi)
 
-Docs-based (page read Oct 2026, re-read Oct 2026 against the 2026-10-09 revision; this doc is the knowledgebase's home for that page), not reproduced on a live environment.
+Docs-based (re-read against the 2026-10-09 revision; this doc is the knowledgebase's home for that page), not reproduced on a live environment.

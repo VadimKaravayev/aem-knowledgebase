@@ -8,7 +8,7 @@ configuration" — and behind why that configuration then *stays* what the
 deployed code says it is.
 
 **Scope:** Sling *JCR Installer Provider* docs (sling.apache.org) and Adobe
-*OSGi Configuration Settings* (AEM 6.5), both read October 2026. Behavior not
+*OSGi Configuration Settings* (AEM 6.5). Behavior not
 reproduced against a running instance except where a linked note says
 otherwise.
 

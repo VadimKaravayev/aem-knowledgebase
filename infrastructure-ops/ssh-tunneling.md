@@ -69,6 +69,6 @@ surface, not the server tool).
 
 ---
 
-Written Oct 2026 from working knowledge of OpenSSH and JDWP/JMX mechanics; flags
+Written from working knowledge of OpenSSH and JDWP/JMX mechanics; flags
 cross-checked against OpenSSH man-page semantics from memory, not re-verified against a
 live system. The exam framing is from the DevOps question bank (question-2).

@@ -39,4 +39,4 @@ Initial-response targets are **targets, not SLAs with credits** — and they're 
 
 A scenario mixing "15-minute P1 response" with "TAM" is describing **Ultimate Success** (or legacy Elite), not a bigger AEM license and not AMS.
 
-Sources: Experience League Success Plans overview + Elite data sheet (May 2026), Enterprise Support datasheet via search; helpx terms page 403s automated fetchers. Oct 2026.
+Sources: Experience League Success Plans overview + Elite data sheet (May 2026), Enterprise Support datasheet via search; helpx terms page 403s automated fetchers.

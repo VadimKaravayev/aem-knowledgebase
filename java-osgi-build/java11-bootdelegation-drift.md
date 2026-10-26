@@ -28,7 +28,7 @@ state on disk, not something derived from the running JVM.** In Java 8 the refle
 `jdk.internal.reflect.*`, which that list does not match, so Adobe added explicit entries to the
 newer quickstart templates.
 
-Verified across three instances on one machine (Sept 2026):
+Verified across three instances on one machine:
 
 | Instance | `quickstart.build` | `org.osgi.framework.bootdelegation` |
 |---|---|---|

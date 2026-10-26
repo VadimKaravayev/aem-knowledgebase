@@ -30,4 +30,4 @@ App Builder hosts the **middleware/API layer**, not the data. The action is just
 
 Don't read "use an external data store" as "Adobe hosts it for you" or "just use App Builder's State SDK and call it done." App Builder solves *where the custom code runs* (off the AEM JVM); it does not solve *where durable, queryable UGC lives* — that's still a genuine external database decision, same as any other backend system.
 
-Confirmed via AEM Architect exam question-9 discussion, Sept 2026.
+Confirmed via AEM Architect exam question-9 discussion.

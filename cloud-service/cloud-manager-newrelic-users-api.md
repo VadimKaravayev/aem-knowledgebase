@@ -45,5 +45,5 @@ Auth = the standard Cloud Manager API trio on every call:
 - [getNewRelicSubAccountUserList (Cloud Manager API reference)](https://developer.adobe.com/experience-cloud/cloud-manager/reference/api#operation/getNewRelicSubAccountUserList)
 - Raw spec: `static/api.yaml` in [AdobeDocs/cloudmanager-api-docs](https://github.com/AdobeDocs/cloudmanager-api-docs) (see LINKS.md)
 
-Extracted from the published OpenAPI spec, Oct 2026; operations not exercised
+Extracted from the published OpenAPI spec; operations not exercised
 against a live program.

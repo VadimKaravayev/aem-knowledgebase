@@ -81,4 +81,4 @@ wants reported, with the request URL and response).
 ## References
 - [adobe/aio-cli-plugin-cloudmanager (GitHub README)](https://github.com/adobe/aio-cli-plugin-cloudmanager/blob/main/README.md)
 
-README-based (read Oct 2026), commands not individually re-run.
+README-based, commands not individually re-run.

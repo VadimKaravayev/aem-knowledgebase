@@ -112,4 +112,4 @@ No SSH, no pod shell, ephemeral instances — you cannot run jstack/jmap/jcmd yo
 
 The rule of thumb from [aemaacs-repository-inspection-by-tier.md](../cloud-service/aemaacs-repository-inspection-by-tier.md) generalizes: any runbook step that assumes server access has a managed-surface replacement on AEMaaCS, and naming the on-prem tool is the exam trap.
 
-Sources: JDK tool docs + Adobe troubleshooting KBs, Oct 2026; tool mechanics not re-verified against a live AEM for this doc except where linked docs say otherwise.
+Sources: JDK tool docs + Adobe troubleshooting KBs; tool mechanics not re-verified against a live AEM for this doc except where linked docs say otherwise.

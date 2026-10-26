@@ -102,4 +102,4 @@ model/standards, and two structural consequences:
 - [Working with multiple source Git repositories (Adobe docs, AEMaaCS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/managing-code/working-with-multiple-source-git-repositories)
 - [Enterprise team development setup (Adobe docs, AEMaaCS)](https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/using-cloud-manager/managing-code/enterprise-team-dev-setup)
 
-Docs-based (both pages read Oct 2026), sync scripts not run.
+Docs-based, sync scripts not run.

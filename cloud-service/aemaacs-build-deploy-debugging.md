@@ -109,4 +109,4 @@ switcher first).
 ## References
 - [Debugging AEMaaCS: Build and Deployment (Experience League tutorial)](https://experienceleague.adobe.com/en/docs/experience-manager-learn/cloud-service/debugging/debugging-aem-as-a-cloud-service/build-and-deployment)
 
-Docs-based (page read Oct 2026), failure signatures as documented.
+Docs-based, failure signatures as documented.

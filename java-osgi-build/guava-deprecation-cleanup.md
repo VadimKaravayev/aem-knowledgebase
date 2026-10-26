@@ -18,7 +18,7 @@ Adobe is fully deprecating the `com.google.common` (Guava) API on AEMaaCS, with 
 4. If a stray import still leaks into the manifest, exclude `com.google.common.*` from `Import-Package` in the bundle plugin — and remember an explicit `Import-Package` pom entry survives code deletion (see [[osgi-import-package-version-range]] for that removal trap).
 5. Redeploy via a full pipeline, then re-run `mvn dependency:tree` and check the analyser log; the Actions Center incident auto-resolves once clean.
 
-## Seen in the wild: sandbox fails to dehibernate (Oct 2026)
+## Seen in the wild: sandbox fails to dehibernate
 
 A sandbox env wouldn't come out of hibernation; Adobe Support forced it and sent the launcher log. The log pins down how "deprecation" is actually enforced and when it bites:
 
@@ -34,4 +34,4 @@ Guava **cannot be installed as a standalone bundle** on 6.5/on-prem (`sling_boot
 
 Related: [[aem-analyser-maven-plugin]] runs the same deprecated-API scan locally before Cloud Manager sees it; [[aem-sdk-java-ceiling-dual-65-cloud]] for the general shape of deprecation migrations blocked by a dual 6.5+Cloud baseline.
 
-Source: Adobe KB [ka-34621](https://experienceleague.adobe.com/en/docs/experience-cloud-kcs/kbarticles/ka-34621) (updated Aug 2026); dehibernation incident verified from an Adobe Support launcher-log excerpt on a real AEMaaCS sandbox (AEM 6.6.0-8b7b8fbf1b base feature), Oct 2026.
+Source: Adobe KB [ka-34621](https://experienceleague.adobe.com/en/docs/experience-cloud-kcs/kbarticles/ka-34621) (updated Aug 2026); dehibernation incident verified from an Adobe Support launcher-log excerpt on a real AEMaaCS sandbox (AEM 6.6.0-8b7b8fbf1b base feature).

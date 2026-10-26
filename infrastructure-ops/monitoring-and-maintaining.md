@@ -88,4 +88,4 @@ Tools → Replication → Agents on author → click the agent. Check: enabled, 
 
 Software installation = stop AEM, back up all of `<cq-installation-dir>`; repository = CRX online backup for hot. Incremental file-datastore backup is supported, but incremental backup of things like Lucene indexes must propagate **deletions**. The load-bearing sentence: **an untested restore means the backup is potentially useless** — test restores, not backups. (Related failure shape: replication ≠ backup, [data-storage.md](../system-design/data-storage.md).)
 
-Source: Adobe 6.5 + 6.4 monitoring-and-maintaining pages, Oct 2026. Docs-based, not reproduced on an instance.
+Source: Adobe 6.5 + 6.4 monitoring-and-maintaining pages. Docs-based, not reproduced on an instance.

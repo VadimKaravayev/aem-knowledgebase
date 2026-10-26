@@ -1,6 +1,6 @@
 # Remote-debugging AEM from the IDE (JDWP) — KCS ka-17459 plus what it leaves out
 
-Adobe Support's recipe for stepping through code on a local or remote AEM instance: start the JVM with the **JDWP agent**, attach the IDE's "Remote Java Application" configuration. Article *How to debug an AEM app using Eclipse*, applies to **6.4 / 6.5** (AMS/on-prem); read Oct 2026, Adobe last update 2026-08-18. On **AEMaaCS there is no JDWP** — no JVM flags, no port; the fidelity tools are RDE + logs ([[local-development-environment]], [[aemaacs-repository-inspection-by-tier]]).
+Adobe Support's recipe for stepping through code on a local or remote AEM instance: start the JVM with the **JDWP agent**, attach the IDE's "Remote Java Application" configuration. Article *How to debug an AEM app using Eclipse*, applies to **6.4 / 6.5** (AMS/on-prem); Adobe last update 2026-08-18. On **AEMaaCS there is no JDWP** — no JVM flags, no port; the fidelity tools are RDE + logs ([[local-development-environment]], [[aemaacs-repository-inspection-by-tier]]).
 
 Transport to a firewalled debug port is a separate concern: [[ssh-tunneling]].
 

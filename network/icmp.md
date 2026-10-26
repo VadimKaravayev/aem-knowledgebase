@@ -1,6 +1,6 @@
 # ICMP: the internet's status and error channel, and what it means for AEM diagnostics
 
-ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Every example below was run on macOS (Oct 2026) from a consumer ISP connection against `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute.md](traceroute.md) (built entirely on one ICMP message type) and [ip-addresses.md](ip-addresses.md).
+ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Every example below was run on macOS from an ordinary client network against `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute.md](traceroute.md) (built entirely on one ICMP message type) and [ip-addresses.md](ip-addresses.md).
 
 ## The post-office picture
 
@@ -25,7 +25,7 @@ Every ICMP *error* message quotes the IP header plus the first 8 bytes of the pa
 $ ping -c 1 -m 2 cdn.adobeaemcloud.com          # -m 2: TTL 2, expires at the ISP router
 36 bytes from gw.isp.example.net (203.0.113.1): Time to live exceeded
 Vr HL TOS  Len   ID Flg  off TTL Pro  cks      Src          Dst
- 4  5  00 5400 98e1   0 0000  01  01 84d6 192.168.0.218  151.101.67.10
+ 4  5  00 5400 98e1   0 0000  01  01 84d6 192.0.2.10     151.101.67.10
 ```
 
 The second line is the header of *your* original echo request as the router received it (`Pro 01` = ICMP, TTL already decremented to `01`). This is also why a NAT router can translate ICMP errors correctly: it rewrites the quoted inner header too.

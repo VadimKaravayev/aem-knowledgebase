@@ -18,7 +18,7 @@ When a requirement says "an external/third-party system needs to pull content or
 
 A question may focus entirely on picking the right **authentication mechanism** (OAuth+JWT vs SAML vs Basic Auth vs IP whitelisting) for a scenario that says third parties connect to "the Author instance," and expect you to reason only about the auth layer. In a real design review, the more fundamental red flag — third parties should never be pointed at Author to begin with — should be raised first; the auth-mechanism question is really "given Publish is the right tier, which auth scheme fits these constraints."
 
-Confirmed via AEM Architect exam question-35 discussion, Sept 2026.
+Confirmed via AEM Architect exam question-35 discussion.
 
 ## If the caller is a browser, not a server
 

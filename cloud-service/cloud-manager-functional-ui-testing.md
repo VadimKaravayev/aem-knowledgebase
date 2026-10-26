@@ -94,5 +94,5 @@ CreatePageAsAuthorUserIT, ReplicationIT…) and the de-facto template for
 - [adobe/aem-test-samples, aem-cloud branch (GitHub)](https://github.com/adobe/aem-test-samples/blob/aem-cloud/README.md)
 - [aem-project-archetype ui.tests module (GitHub)](https://github.com/adobe/aem-project-archetype/tree/master/src/main/archetype/ui.tests)
 
-Docs-based (overview page read Oct 2026), not reproduced against a live
+Docs-based, not reproduced against a live
 pipeline.

@@ -60,5 +60,5 @@ returned resource, not by trusting `getType()`.
 Same recipe family as [dialog-el-bindings.md](../touch-ui-granite/dialog-el-bindings.md).
 
 Confirmed on AEM SDK 2026.6 local author (cq-wcm-core 5.16.4, cq-experience-fragments
-1.3.116, cq-dam-cfm-impl 0.12.524), July 2026, for the Crowdin connector's reference
+1.3.116, cq-dam-cfm-impl 0.12.524), for the Crowdin connector's reference
 discovery service.
