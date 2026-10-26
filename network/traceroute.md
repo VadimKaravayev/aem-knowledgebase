@@ -1,6 +1,6 @@
 # traceroute: how it works, how to read it, and mtr for intermittent problems
 
-Run every example below on macOS. The traces were captured from an ordinary client network to `cdn.adobeaemcloud.com`, which resolves to `adobe-aem.map.fastly.net`, Fastly `151.101.{3,67,131,195}.10`. Background on IP addresses and DNS: [ip-addresses.md](ip-addresses.md).
+Examples use macOS `traceroute` syntax (Linux flags noted where they differ) against `cdn.adobeaemcloud.com`, which resolves to `adobe-aem.map.fastly.net`, Fastly `151.101.{3,67,131,195}.10`. Background on IP addresses and DNS: [ip-addresses.md](ip-addresses.md).
 
 ## How it works
 

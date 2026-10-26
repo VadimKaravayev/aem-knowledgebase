@@ -1,6 +1,6 @@
 # ifconfig: reading an interface block, the forms you actually type, and mapping macOS en names
 
-`ifconfig` prints and (as root) changes the configuration of network interfaces: address, netmask, MAC, MTU, up/down state, media. On macOS and the BSDs it is still the primary tool. On Linux it is deprecated in favour of `ip` and often not installed; the Linux equivalents are given throughout. Output below was verified on macOS, with addresses replaced by documentation values. Companion docs: [network-interface-card.md](network-interface-card.md) (what the card behind the interface does: offloads, rings, duplex, virtual NICs), [ip-addresses.md](ip-addresses.md), [mac-addresses.md](mac-addresses.md), [mtu.md](mtu.md), [tcpdump.md](tcpdump.md).
+`ifconfig` prints and (as root) changes the configuration of network interfaces: address, netmask, MAC, MTU, up/down state, media. On macOS and the BSDs it is still the primary tool. On Linux it is deprecated in favour of `ip` and often not installed; the Linux equivalents are given throughout. Addresses in the examples use the documentation ranges. Companion docs: [network-interface-card.md](network-interface-card.md) (what the card behind the interface does: offloads, rings, duplex, virtual NICs), [ip-addresses.md](ip-addresses.md), [mac-addresses.md](mac-addresses.md), [mtu.md](mtu.md), [tcpdump.md](tcpdump.md).
 
 ## The one block you must be able to read
 

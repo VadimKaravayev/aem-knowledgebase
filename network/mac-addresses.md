@@ -1,6 +1,6 @@
 # MAC addresses: the mailbox name on the local link, and the other MAC (message authentication code)
 
-"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Verified on macOS on a Wi-Fi LAN; addresses in the examples use the documentation ranges. Companion docs: [ip-addresses.md](ip-addresses.md), [icmp.md](icmp.md), [internet-checksum.md](internet-checksum.md).
+"MAC" means two unrelated things in this knowledgebase. In networking it is the **MAC address** (Media Access Control), the hardware identifier of a network interface. In security it is a **Message Authentication Code**, a keyed integrity tag. This doc is mostly about the first and ends with the second so a search for either lands here. Addresses in the examples use the documentation ranges. Companion docs: [ip-addresses.md](ip-addresses.md), [icmp.md](icmp.md), [internet-checksum.md](internet-checksum.md).
 
 ## The apartment-building picture
 
@@ -34,7 +34,7 @@ arp -a                           # ARP cache: which MAC answers for each local I
 arp -d 192.0.2.1                 # drop one entry (sudo) when a stale one is suspected
 ```
 
-Typical ARP cache of a client on a Wi-Fi LAN (documentation addresses):
+Typical ARP cache of a Wi-Fi client (documentation addresses):
 
 ```
 ? (192.0.2.1)   at 0:0:5e:…    on en0   ← router: factory OUI

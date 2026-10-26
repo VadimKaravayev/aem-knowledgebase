@@ -37,7 +37,7 @@ So a Sling model / OSGi service can `@Reference(cardinality = MULTIPLE)` bind **
 
 Caveat: **allowlist the names you emit.** Any feature can register more factory configs (a tiny `lqip`, social/OG-image sizes, …) and they would otherwise silently leak into every `srcset`.
 
-Verification level: interface confirmed by `javap` on acs-aem-commons 6.15.0; the multi-bind pattern is **runtime-confirmed** (AEM 6.5 LTS local author, during a client engagement): a DS component with `@Reference(cardinality = MULTIPLE, policyOption = GREEDY)` on a `List<NamedImageTransformer>` field picked up a newly deployed factory config (`xlarge`) with zero Java changes — srcset gained the new rung on config deploy alone. Width values arrive as Strings in the ValueMap (parse, don't cast). Bonus finding: the servlet **upscales** sources smaller than the rung's width (1800px source → larger file at `resize:width=1920` than at 1440), so rungs above your typical original size cost bytes without quality.
+Verification level: interface confirmed by `javap` on acs-aem-commons 6.15.0; the multi-bind pattern is **runtime-confirmed** (AEM 6.5 LTS): a DS component with `@Reference(cardinality = MULTIPLE, policyOption = GREEDY)` on a `List<NamedImageTransformer>` field picked up a newly deployed factory config (`xlarge`) with zero Java changes — srcset gained the new rung on config deploy alone. Width values arrive as Strings in the ValueMap (parse, don't cast). Bonus finding: the servlet **upscales** sources smaller than the rung's width (1800px source → larger file at `resize:width=1920` than at 1440), so rungs above your typical original size cost bytes without quality.
 
 ## Free model.json plumbing via core components
 

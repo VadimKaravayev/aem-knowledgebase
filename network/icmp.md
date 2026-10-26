@@ -1,6 +1,6 @@
 # ICMP: the internet's status and error channel, and what it means for AEM diagnostics
 
-ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Every example below was run on macOS from an ordinary client network against `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute.md](traceroute.md) (built entirely on one ICMP message type) and [ip-addresses.md](ip-addresses.md).
+ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Examples target `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute.md](traceroute.md) (built entirely on one ICMP message type) and [ip-addresses.md](ip-addresses.md).
 
 ## The post-office picture
 

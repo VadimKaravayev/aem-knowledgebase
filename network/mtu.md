@@ -1,6 +1,6 @@
 # MTU: the largest packet a link carries, why 1500, and how to find the path MTU
 
-MTU (Maximum Transmission Unit) is the largest IP packet, in bytes, that a network link will carry in one piece. It is a property of each link and interface, not of a connection. The **path MTU** is the smallest MTU on the whole route. Examples below were run on macOS against `cdn.adobeaemcloud.com` (Fastly). Companion docs: [icmp.md](icmp.md) (Path MTU Discovery and the black hole), [internet-checksum.md](internet-checksum.md), [ip-addresses.md](ip-addresses.md).
+MTU (Maximum Transmission Unit) is the largest IP packet, in bytes, that a network link will carry in one piece. It is a property of each link and interface, not of a connection. The **path MTU** is the smallest MTU on the whole route. Examples target `cdn.adobeaemcloud.com` (Fastly). Companion docs: [icmp.md](icmp.md) (Path MTU Discovery and the black hole), [internet-checksum.md](internet-checksum.md), [ip-addresses.md](ip-addresses.md).
 
 ## The bridge picture
 
@@ -75,7 +75,7 @@ Fixes, in order of preference: let ICMP Fragmentation Needed / Packet Too Big th
 - **Replication author → publish, Dispatcher → publish, or asset upload between zones joined by a VPN/tunnel/interconnect that works for small payloads and stalls above a threshold** is an MTU problem until the ICMP path and tunnel MSS are checked. Replication queues blocked with socket timeouts on large packages while small pages flow is the signature.
 - **AEMaaCS** customers never touch MTU: the CDN, Adobe's network and advanced-networking egress are Adobe's. The exception is the customer side of a **dedicated egress / VPN** (advanced networking): that tunnel's MTU and MSS clamping are the customer's to get right, and symptoms land on the AEM side as "integration calls time out only for large responses".
 - **AMS / on-prem:** jumbo frames between author, publish and the data store are fine inside one network; the first 1500 hop outward (CDN origin pull, SMTP, external APIs) must still pass ICMP or be MSS-clamped.
-- Verified: the public path from here to Adobe's Fastly edge carries full 1500-byte packets with DF set, so a stall on an AEMaaCS site from a client is almost always the **client's** VPN or tunnel, not Adobe's edge.
+- The public path from a direct consumer connection to Adobe's Fastly edge carries full 1500-byte packets with DF set, so a stall on an AEMaaCS site from a client is almost always the **client's** VPN or tunnel, not Adobe's edge.
 
 ## Cheat sheet
 

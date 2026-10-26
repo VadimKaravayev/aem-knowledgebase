@@ -145,7 +145,7 @@ thing left to review.
   `description="One sentence, max 15 words, naming the affected component"` to a
   bare field and re-run.
 
-Verified locally on openai 3.8.0 / pydantic 2.13.5 / Python 3.13: schema
+Verified on openai 3.8.0 / pydantic 2.13.5 / Python 3.13: schema
 payload dumped as shown, and the two-error `ValidationError` reproduced by feeding
 `model_validate` an empty `evidence` plus `confidence: 1.4`. The strict-mode keyword
 subset is the vendor-side claim here — the payload contents are confirmed, the

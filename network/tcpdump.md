@@ -1,6 +1,6 @@
 # tcpdump: capturing packets, BPF filters, and reading the one-line format
 
-`tcpdump` captures packets from an interface (or reads them from a file) and prints one line per packet, optionally with the bytes. It is the tool for "what is actually on the wire" when logs and curl disagree. Everything below was verified on macOS with tcpdump 4.99 / libpcap 1.10, using a capture whose addresses are documentation values. Companion docs: [ifconfig.md](ifconfig.md) (which interface), [icmp.md](icmp.md), [arp.md](arp.md), [mtu.md](mtu.md).
+`tcpdump` captures packets from an interface (or reads them from a file) and prints one line per packet, optionally with the bytes. It is the tool for "what is actually on the wire" when logs and curl disagree. Examples use tcpdump 4.99 / libpcap 1.10, using a capture whose addresses are documentation values. Companion docs: [ifconfig.md](ifconfig.md) (which interface), [icmp.md](icmp.md), [arp.md](arp.md), [mtu.md](mtu.md).
 
 ## Before anything: root, and the macOS surprise
 

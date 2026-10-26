@@ -23,4 +23,4 @@
 
 Analyzer shortlist per Adobe: [TDA](https://github.com/irockel/tda), [fastthread.io](https://fastthread.io/) (upload — mind what's in your stack traces), IBM Thread Monitor and Dump Analyzer.
 
-Source: Adobe KCS ka-17452. Capture commands not re-verified locally.
+Source: Adobe KCS ka-17452. Capture commands not re-verified.

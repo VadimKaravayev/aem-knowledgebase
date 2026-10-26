@@ -4,7 +4,7 @@
 dependencies, creates the virtualenv, installs (or downloads) the interpreter, and runs
 commands inside the environment. It's the tooling behind the Python side of this folder
 (the FastAPI boundary in [fastapi-llm-service-boundary.md](fastapi-llm-service-boundary.md),
-the OpenAI/Ollama clients). Verified on uv 0.12.10 and 0.13.0, macOS arm64.
+the OpenAI/Ollama clients). Verified on uv 0.12.10 and 0.13.0.
 
 ## Mental model
 

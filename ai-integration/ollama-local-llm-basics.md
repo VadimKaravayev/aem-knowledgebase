@@ -6,7 +6,7 @@ without an API key, and against a model whose weights don't leave the machine (r
 when the `input` is customer AEM config, logs or content). The server speaks its own
 native API **and** an OpenAI-compatible one, including the Responses API.
 
-Verified on Ollama 0.33.3 (macOS menu-bar app, Apple Silicon, 16 GB), `llama3.2:1b`,
+Verified on Ollama 0.33.3, `llama3.2:1b`,
 openai 3.8.0 / Python 3.13. Items marked *(docs)* are from Ollama's docs and not
 re-verified here.
 
