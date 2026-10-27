@@ -9,7 +9,11 @@ Companion notes: [[aemaacs-architecture-overview]] (the service view with EDS
 Publish as a second origin), [[cloud-manager-program-types]] (EDS is a
 solution on a Sites program), [[edge-functions]] (the only server-side seam
 on an EDS site), [[aemaacs-licensing-content-requests]] (EDS counts content
-requests too; HEAD-only health checks).
+requests too; HEAD-only health checks),
+[[edge-delivery-media-bus]] (code/content/media buses; where images live),
+[[edge-delivery-blocks-and-widgets]] (table → block markup, loader, block vs widget),
+[[edge-delivery-project-anatomy]] (repo layout, special files, Configuration Service),
+[[edge-delivery-block-collection]] (boilerplate / collection / Block Party blocks).
 
 ---
 

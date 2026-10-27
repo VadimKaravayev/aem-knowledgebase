@@ -13,6 +13,7 @@ A plain-markdown knowledgebase of AEM (Adobe Experience Manager) patterns, gotch
   - `ai-integration/` — LLM and external service integration with AEM.
   - `assets-dam/` — AEM Assets and DAM: image delivery, Dynamic Media, Brand Portal.
   - `cloud-service/` — AEM as a Cloud Service platform and Cloud Manager.
+  - `edge-delivery-service/` — Edge Delivery Services (aem.live): project anatomy, blocks, buses, Block Collection, EDS migration, agent tooling for EDS repos.
   - `dispatcher-url-delivery/` — Dispatcher, CDN, URL resolution and the request path.
   - `infrastructure-ops/` — AEM 6.5 / AMS infrastructure, runmodes, upgrades, diagnostics.
   - `java-osgi-build/` — Java, OSGi, Maven build, testing, servlet patterns.

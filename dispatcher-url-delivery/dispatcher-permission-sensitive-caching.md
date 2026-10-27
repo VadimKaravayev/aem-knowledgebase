@@ -19,9 +19,17 @@ What "authenticated request" means to the Dispatcher: it carries an `Authorizati
 
 The doorman picture that makes posture 3 click: `0` = "always check the membership card"; `/sessionmanagement`/`/auth_checker` = hiring the doorman who *can* check cards. Together: copies are handed out fast, but only to verified members. `1` = "don't check anyone" — which makes the doorman unemployable.
 
-## The mutual-exclusivity trap
+## The one-line rule, verbatim from Adobe
 
-Adobe documents `/sessionmanagement` and `/allowAuthorized "1"` as **mutually exclusive**. They are contradictory orders: "cache only for validated sessions" vs "cache ignoring auth." In the exam scenario (CUG pages not being cached despite `/sessionmanagement` being added), the cause is a leftover `/allowAuthorized "1"` in `/cache` — the fix is flipping it to `"0"`, *not* touching `/rules`, `/clientheaders`, or `/stickyConnectionsFor`. The misread to avoid: "`1` should mean it caches *more*, so it can't be the blocker" — with session management present, the session gate dominates, requests without a valid session are proxied and **not** cached, and `"1"` prevents the gate from ever validating anyone. (Mechanism as documented + consistent reading; not reproduced against a live Dispatcher.)
+The Dispatcher configuration reference, section "Enable secure sessions - /sessionmanagement", carries this caution:
+
+> `/allowAuthorized` Set to `"0"` in the `/cache` section to enable this feature. As detailed in the section "Caching when authentication is used" section, when you set `/allowAuthorized 0` requests that include authentication information are not cached. If permission-sensitive caching is required, see the Caching Secured Content page.
+
+That is the whole rule: **to use `/sessionmanagement`, set `/allowAuthorized "0"`.** Two things the caution adds that the exam answer does not: with `"0"` and no session management, authenticated requests are simply not cached; and Adobe points to the *Caching Secured Content* page (`/auth_checker`, below) as the feature it calls "permission-sensitive caching", so `/sessionmanagement` and `/auth_checker` are two distinct features that both require `"0"`. Adobe does not use the phrase "mutually exclusive"; that wording comes from exam material.
+
+## The trap
+
+`/sessionmanagement` and `/allowAuthorized "1"` are contradictory orders: "cache only for validated sessions" vs "cache ignoring auth." In the exam scenario (CUG pages not being cached despite `/sessionmanagement` being added), the cause is a leftover `/allowAuthorized "1"` in `/cache` — the fix is flipping it to `"0"`, *not* touching `/rules`, `/clientheaders`, or `/stickyConnectionsFor`. The misread to avoid: "`1` should mean it caches *more*, so it can't be the blocker" — with session management present, the session gate dominates, requests without a valid session are proxied and **not** cached, and `"1"` prevents the gate from ever validating anyone. (Mechanism as documented + consistent reading; not reproduced against a live Dispatcher.)
 
 Distractor taxonomy from the same question, reusable: `/rules` = *which paths* are cacheable (can't authorize anything); `/clientheaders` = header forwarding (already `"*"` in most dumps — an "add header X" answer that's covered by a wildcard changes nothing); `/stickyConnectionsFor` = load-balancing pin to one render, takes a *content* path (an option feeding it a filesystem path is a category error).
 
