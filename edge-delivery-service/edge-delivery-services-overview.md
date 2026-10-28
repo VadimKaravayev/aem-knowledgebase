@@ -13,7 +13,10 @@ requests too; HEAD-only health checks),
 [[edge-delivery-media-bus]] (code/content/media buses; where images live),
 [[edge-delivery-blocks-and-widgets]] (table → block markup, loader, block vs widget),
 [[edge-delivery-project-anatomy]] (repo layout, special files, Configuration Service),
-[[edge-delivery-block-collection]] (boilerplate / collection / Block Party blocks).
+[[edge-delivery-block-collection]] (boilerplate / collection / Block Party blocks),
+[[edge-delivery-dev-good-practices]] (PR, CSS, JS and content-first rules),
+[[edge-delivery-configuration-service]] (site config via Admin API, repoless, safe changes),
+[[edge-delivery-translation-localization]] (multilingual sites, DA Translate app, placeholders).
 
 ---
 

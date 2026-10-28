@@ -5,7 +5,8 @@ of the repo into the Configuration Service. Condensed from aem.live
 [The Anatomy of a Project](https://www.aem.live/developer/anatomy-of-a-project);
 claims about `aem.js` checked against `aem-boilerplate` 1.3.0.
 
-Companion notes: [[edge-delivery-services-overview]],
+Companion notes: [[edge-delivery-configuration-service]] (API recipes and
+traps for the config below), [[edge-delivery-services-overview]],
 [[edge-delivery-blocks-and-widgets]], [[edge-delivery-media-bus]] (code vs
 content vs media bus).
 
