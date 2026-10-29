@@ -1,4 +1,4 @@
-# ICMP: the internet's status and error channel, and what it means for AEM diagnostics
+# ICMP: the internet's status and error channel
 
 ICMP (Internet Control Message Protocol) does not carry application data. It carries messages *about* other packets: "that didn't arrive", "that was too big", "that ran out of hops", "yes, I'm here". Examples target `cdn.adobeaemcloud.com` (Fastly anycast, `151.101.{3,67,131,195}.10`). Companion docs: [traceroute.md](traceroute.md) (built entirely on one ICMP message type) and [ip-addresses.md](ip-addresses.md).
 
