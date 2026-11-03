@@ -12,6 +12,7 @@ Plain markdown, kept central so multiple projects — and the Claude Code agents
   - `assets-dam/` — AEM Assets and DAM: image delivery, Dynamic Media, Brand Portal.
   - `cloud-service/` — AEM as a Cloud Service platform and Cloud Manager.
   - `dispatcher-url-delivery/` — Dispatcher, CDN, URL resolution and the request path.
+  - `git/` — Git mental models and recipes: CLI, SSH identity across GitHub accounts, undoing commits.
   - `infrastructure-ops/` — AEM 6.5 / AMS infrastructure, runmodes, upgrades, diagnostics.
   - `java-osgi-build/` — Java, OSGi, Maven build, testing, servlet patterns.
   - `sites-content/` — AEM Sites content, references, headless delivery, Core Components.

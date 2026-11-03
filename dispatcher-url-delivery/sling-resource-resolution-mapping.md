@@ -84,6 +84,25 @@ Same shape as the CORS policy selection in
 placed early shadows everything narrower after it, and the symptom is a later
 entry that appears to do nothing.
 
+### Node-name entries match with a trailing slash
+
+An entry **without** `sling:match` is registered from its node path with a slash appended, so this tree
+
+```
+/etc/map/http/localhost.4503/publish/login
+    sling:redirect = /libs/granite/core/content/login.html
+```
+
+registers as `^http/localhost.4503/publish/login/` and matches `/publish/login/` only; the bare `/publish/login` is a 404 (confirmed on the AEMaaCS SDK; the registered pattern is visible on `/system/console/jcrresolver`). That is by design: name-based entries map subtrees, and the slash keeps `/publish/login` from also matching `/publish/loginfoo`.
+
+To match the bare path add `sling:match` on the leaf; its value replaces the node name in the pattern and **no slash is appended**:
+
+```
+sling:match = login/?$        → ^http/localhost.4503/publish/login/?$
+```
+
+The value must **not** start with `/`: the parent prefix already ends in one, and `sling:match = /login/?$` registers as `…/publish//login/?$`, which matches nothing. The hand-edit recipe this comes from is in [[dispatcher-sdk-docker-local-lab]].
+
 ### Environment-specific values via interpolation
 
 ```

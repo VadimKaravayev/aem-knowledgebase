@@ -50,7 +50,34 @@ Farm-level: the whole farm becomes a secured area. A session is created when a r
 
 ## /auth_checker (the AEMaaCS-era alternative)
 
-Per-request validation instead of farm-level sessions: the Dispatcher sends a **HEAD** request for the page to a configurable AEM endpoint (a custom authorization servlet); 200 → serve from cache, anything else → deny/forward. Scoped by `/url`, `/filter` (which paths get checked) and `/headers` (which request headers are passed to the servlet). This is the pattern Adobe documents for permission-sensitive caching on AEMaaCS, where you author only `filters/`, `cache/`, `clientheaders/` etc. in the dispatcher module — same principle: works only with `/allowAuthorized "0"`.
+Per-request validation instead of farm-level sessions. The Dispatcher ships an **AuthChecker module**; when `/auth_checker` is configured it sends a **HEAD** request for the page to a servlet on Publish and serves the cached copy only on 200. Scoped by `/url` (servlet path), `/filter` (which paths get checked) and `/headers` (which request headers are passed on, typically the login cookie). Works only with `/allowAuthorized "0"`. This is the pattern Adobe documents for permission-sensitive caching on AEMaaCS.
+
+### Two servlets, not one — the naming trap
+
+Adobe's "Caching Secured Content" page names two distinct things and states the distinction outright: *"The render calls the AEM authorizer servlet (this servlet is not the Dispatcher AuthChecker servlet)."*
+
+| | Auth Checker servlet | AEM authorizer |
+|---|---|---|
+| Who provides it | **You write and deploy it** on Publish (`sling.servlet.paths` = the `/url` value, e.g. `/bin/permissioncheck`) | **Built into AEM** — the normal authentication + ACL check that runs when a page is rendered |
+| Who calls it | The Dispatcher's AuthChecker module, via HEAD, when a cached copy exists | Sling, whenever a request is actually forwarded to the render |
+| What it guards | The **cache** — may this visitor receive the cached file? | **Rendering** — may this visitor get the page from AEM at all? |
+| Output | HTTP status only: 200 = serve from cache, 403 = deny | The rendered page, or a login redirect / 403 |
+
+The three documented flows:
+
+1. **Cached, authorized** — Dispatcher → HEAD to Auth Checker servlet → 200 → cached file served. AEM authorizer never runs.
+2. **Not cached, authorized** — Dispatcher forwards to the render → AEM authorizer passes the user → page rendered → Dispatcher caches it.
+3. **Not authorized** — Auth Checker servlet returns non-200 → Dispatcher forwards to the render → AEM authorizer decides what the user sees (login page or 403). Nothing cached.
+
+Both gates must agree: the Auth Checker servlet is only as good as the permission check it performs, and the AEM authorizer alone cannot protect files already in the cache.
+
+### Auth Checker servlet requirements (from the docs)
+
+- Implement `doHead` only — the Dispatcher sends HEAD requests exclusively.
+- Must be **accessible to all users** (not behind a CUG, not blocked by `/filter`), otherwise the check itself fails and nothing is served.
+- Read the requested path from the `uri` request parameter, check it with the visitor's session (`session.checkPermission(uri, Session.ACTION_READ)` in Adobe's sample), return 200 on success and 403 on failure.
+- Keep it cheap: it runs on every request to a protected path, including cache hits. Resolve/check only, never render.
+- The servlet path must be allowed in the Sling Servlet Resolver's execution paths.
 
 ## Related but distinct
 

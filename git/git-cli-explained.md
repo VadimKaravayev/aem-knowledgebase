@@ -37,6 +37,7 @@ Git is a distributed version control system; the `git` command is its interface.
 
 - **Never rewrite history others have pulled.** Rebasing, amending or force-pushing a shared branch forces everyone else to recover. `git push --force-with-lease` at least refuses to clobber commits you have not seen.
 - **`git reset --hard` and `git clean -fd` destroy uncommitted work with no undo.** `git reflog` recovers lost *commits*; nothing recovers unstaged changes.
+- **Undoing a mistaken unpushed commit while keeping the files** is `git reset --soft HEAD~1`; **a root commit has no `HEAD~1`**, so use `git update-ref -d HEAD` there. Details and the `reset` mode table: [[git-undo-mistaken-commit]].
 - `git pull` onto a dirty tree fails or produces surprise merges. Commit or stash first.
 - Line endings: Windows CRLF vs Unix LF turns every line into a diff. Fix with `core.autocrlf` or `* text=auto` in `.gitattributes`.
 - Large binaries bloat history forever — every clone downloads every version. Use **Git LFS** for them.
