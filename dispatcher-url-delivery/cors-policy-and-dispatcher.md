@@ -225,3 +225,5 @@ discards the response. Stop inspecting routes and read the logs.
 - [exposing-apis-to-external-systems.md](exposing-apis-to-external-systems.md)
 - [content-services-vs-cf-headless-delivery.md](../sites-content/content-services-vs-cf-headless-delivery.md)
 - [osgi-config-runmode-resolution.md](../infrastructure-ops/osgi-config-runmode-resolution.md)
+- [aemaacs-headless-cors.md](aemaacs-headless-cors.md) (AEMaaCS headless: OSGi policy vs dispatcher-side CORS for cached persisted queries)
+- [sling-referrer-filter.md](sling-referrer-filter.md) (the server-side check a cross-origin POST must also pass)

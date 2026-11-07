@@ -88,6 +88,24 @@ A bundle typically does **both**: embed only the few libs AEM lacks, and import 
 -includeresource: jsoup*.jar;lib:=true, org.apache.sling.servlet-helpers*.jar;lib:=true
 ```
 
+### A third case: exported, but only to Adobe (API regions)
+
+On AEMaaCS (and the SDK) a package can be present and exported yet still unresolvable for your bundle, because it sits in Adobe's internal API region. The Felix console shows the bundle `Installed`, but the import line may not say `Cannot be resolved`; the real reason is in `error.log`:
+
+```
+API-Regions removed candidates [org.apache.sling.servlet-helpers [616]] ...
+osgi.wiring.package=org.apache.sling.servlethelpers.internalrequests ...
+[Regions: [com.adobe.aem.internal] ...] ... as the requirement is in the following regions: [global]
+```
+
+Relaxing the version range does nothing here, and neither does installing your own copy of the bundle: a bundle with the same symbolic name and version just *updates* the platform bundle in place, which keeps its region. What works is copying the classes into your bundle so it stops importing the package. With bnd:
+
+```
+-conditionalpackage: org.apache.sling.servlethelpers.*
+```
+
+`-conditionalpackage` copies the matching packages your code references from the compile classpath into the jar (`Private-Package`), and recursively any packages *those* reference that also match the pattern. Use the wildcard: `org.apache.sling.servlethelpers.internalrequests` alone left its parent package `org.apache.sling.servlethelpers` (`[1.9,2)`) as an import, which is region-blocked too. Verify in the built `MANIFEST.MF` that neither package is listed under `Import-Package`. Trade-off: the copy is frozen at the version you compiled against. Lab-verified on an SDK publish (2026.7) with a connector `core` bundle that used `internalrequests` from two classes; same region mechanism as the Guava case in [guava-deprecation-cleanup.md](guava-deprecation-cleanup.md).
+
 ---
 
 ## The transitive-dependency trap (the important gotcha)
