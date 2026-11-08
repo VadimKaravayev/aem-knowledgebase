@@ -12,6 +12,7 @@ A plain-markdown knowledgebase of AEM (Adobe Experience Manager) patterns, gotch
 - One topic per file, kebab-case filenames (e.g. `touch-ui-granite/dialog-showhide-fields.md`), grouped into topic folders:
   - `ai-integration/` — LLM and external service integration with AEM.
   - `assets-dam/` — AEM Assets and DAM: image delivery, Dynamic Media, Brand Portal.
+  - `azure/` — Microsoft Azure services an AEM solution integrates with (Event Hubs and other messaging, storage, compute).
   - `cloud-service/` — AEM as a Cloud Service platform and Cloud Manager.
   - `experience-platform/` — Adobe Experience Platform, Real-Time CDP, Journey Optimizer.
   - `edge-delivery-service/` — Edge Delivery Services (aem.live): project anatomy, blocks, buses, Block Collection, EDS migration, agent tooling for EDS repos.
