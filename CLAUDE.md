@@ -17,6 +17,7 @@ A plain-markdown knowledgebase of AEM (Adobe Experience Manager) patterns, gotch
   - `experience-platform/` — Adobe Experience Platform, Real-Time CDP, Journey Optimizer.
   - `edge-delivery-service/` — Edge Delivery Services (aem.live): project anatomy, blocks, buses, Block Collection, EDS migration, agent tooling for EDS repos.
   - `dispatcher-url-delivery/` — Dispatcher, CDN, URL resolution and the request path.
+  - `docker/` — Docker and Docker Compose for local stacks around AEM.
   - `git/` — Git mental models and recipes: CLI, SSH identity across GitHub accounts, undoing commits.
   - `infrastructure-ops/` — AEM 6.5 / AMS infrastructure, runmodes, upgrades, diagnostics.
   - `java-osgi-build/` — Java, OSGi, Maven build, testing, servlet patterns.
