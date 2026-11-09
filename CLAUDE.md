@@ -14,6 +14,7 @@ A plain-markdown knowledgebase of AEM (Adobe Experience Manager) patterns, gotch
   - `assets-dam/` — AEM Assets and DAM: image delivery, Dynamic Media, Brand Portal.
   - `azure/` — Microsoft Azure services an AEM solution integrates with (Event Hubs and other messaging, storage, compute).
   - `cloud-service/` — AEM as a Cloud Service platform and Cloud Manager.
+  - `databases/` — Database design: normalization, keys, SQL, indexing.
   - `experience-platform/` — Adobe Experience Platform, Real-Time CDP, Journey Optimizer.
   - `edge-delivery-service/` — Edge Delivery Services (aem.live): project anatomy, blocks, buses, Block Collection, EDS migration, agent tooling for EDS repos.
   - `dispatcher-url-delivery/` — Dispatcher, CDN, URL resolution and the request path.
@@ -34,7 +35,7 @@ A plain-markdown knowledgebase of AEM (Adobe Experience Manager) patterns, gotch
 **Adding a doc**:
 1. Create a kebab-case markdown file in the folder that fits the topic best (create a new folder only when several docs would share it).
 2. Add a one-line entry under that folder's section in `INDEX.md` summarizing the finding (see existing entries for the expected density — key facts, gotchas, and the exam/design trap if there is one, not a generic teaser).
-3. Title the doc by what it covers, drawn from its section headings. Do not append an AEM tie-in such as "and what it can and cannot tell you about AEM"; hardware, protocols and commands do not "tell you about AEM". The AEM relationship is stated once, in a closing "What this means for AEM" section, honestly, including "irrelevant on AEMaaCS" where that is true. `INDEX.md` folder blurbs follow the same rule.
+3. Title the doc by what it covers, drawn from its section headings. Do not append an AEM tie-in such as "and what it can and cannot tell you about AEM"; hardware, protocols and commands do not "tell you about AEM". Mention AEM only where it is relevant to AEM. In a general-topic doc (networking, databases, system design), add a closing "What this means for AEM" section only when there are points specific to AEM, keep it to those points, and say "irrelevant on AEMaaCS" where that is true; otherwise leave AEM out entirely, with no "non-AEM" label either. `INDEX.md` folder blurbs follow the same rule.
 
 Docs accumulate verified, often counter-intuitive findings (decompiled source, reproduced bugs, confirmed-on-version behavior) rather than restating official docs — entries typically cite how/where something was verified and note version specifics, since AEM behavior varies significantly across 6.5/AMS vs AEMaaCS and across versions.
 

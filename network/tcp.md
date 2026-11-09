@@ -114,6 +114,22 @@ Cumulative ACK has a weakness: if bytes 1000–1999 are lost but 2000–9999 arr
 - **D-SACK (RFC 2883):** a first block *below* the ACK number reports "you sent me this twice". It tells the sender its retransmission was spurious (the original was merely delayed), so it can undo its congestion-window cut. Wireshark labels these `[TCP D-SACK]` and the retransmission `[TCP Spurious Retransmission]`.
 - A burst of ACKs with growing SACK ranges and the same `Ack=` is the fingerprint of **a single lost segment on a fat pipe**; the gap closes with one fast retransmission. Many small SACK blocks in a row point to reordering or a lossy link (Wi-Fi, a saturating queue), not a single drop.
 
+## Head-of-line blocking
+
+TCP promises an *ordered* byte stream, so the receiving kernel may hand bytes to the application only up to the first gap. If segment 1000–1999 is lost and 2000–9999 arrive, those 8 KB sit in the receive buffer (SACKed, acknowledged in an option) while `recv()` returns nothing. The application sees a stall of at least one RTT (fast retransmit or RACK), or a full RTO (initial 1 s, Linux floor 200 ms) when the loss is at the tail of a burst and nothing follows to trigger duplicate ACKs. Once the retransmission fills the gap, everything buffered is released at once. SACK makes the *sender* resend only the gap, but it does nothing for delivery order: the data is already there and the application still cannot have it.
+
+This is harmless when the stream carries one thing. It hurts when one connection carries several independent things:
+
+- **HTTP/1.1 pipelining** has head-of-line blocking at the application layer: responses must come back in request order, so one slow response holds back the fast ones. Browsers never enabled pipelining and open about 6 parallel connections per origin instead.
+- **HTTP/2** fixes the application-layer problem by interleaving many streams on one connection, then runs into the transport-layer problem: TCP sees one byte stream, so a single lost segment carrying part of one image stalls *every* stream until it is retransmitted. On a clean path HTTP/2's single connection wins. On a lossy one (mobile, congested Wi-Fi, a few percent loss) it can do worse than HTTP/1.1's six connections, where one loss stalls only a sixth of the traffic.
+- **TLS records** add a second layer. A record (up to 16 KB) can be decrypted only once all its segments have arrived, so one lost segment holds back the whole record even after TCP has delivered the bytes around it. Servers that start with small records (about one MSS) and grow them after the first flight ("dynamic record sizing") limit this for time-to-first-byte.
+
+How it shows up: in Wireshark, a `[TCP Retransmission]` or `[TCP Fast Retransmission]` followed immediately by the application consuming a large block (the receive window jumps back up). In browser DevTools on HTTP/2, several unrelated requests on the same connection stall and then complete together.
+
+What helps, in order of effect: **QUIC/HTTP/3**, which orders per stream so a loss delays only the stream whose bytes were in the lost packet; **several TCP connections** instead of one multiplexed one; **less loss** on the path; and tail-loss probing (TLP in RACK-TLP, the Linux default), which turns a tail loss's full RTO into roughly two RTTs. Bigger buffers and more bandwidth do not help, because the blocked data has already arrived.
+
+The term comes from switching, where the packet at the front of an input queue blocks the ones behind it even though their output port is free. In TCP the "line" is the receive buffer in front of the application.
+
 ## Teardown: FIN, RST and TIME_WAIT
 
 ```
@@ -218,6 +234,7 @@ tshark -r f.pcap -Y 'tcp.stream==7' -T fields -e frame.time_relative -e tcp.seq 
 - **Handshake**: SYN (ISNc, MSS, WS, SACK_PERM, TS) → SYN-ACK (ISNs, ack=ISNc+1, server's own options) → ACK (ack=ISNs+1). Options are set **only** here. SYN with no reply = dropped (retries at 1, 2, 4, 8… s); SYN → RST = nothing listening.
 - **Window** = receiver's free buffer in bytes, 16-bit; **window scale** shift 0–14 from each SYN multiplies that side's later windows (×128 Linux default). Throughput ≤ window ÷ RTT. Zero window = slow reader; Window Full = sender limited by receiver.
 - **SACK** (needs `SACK_PERM` in both SYNs) names received ranges beyond the ACK so only the gap is resent; D-SACK reports a duplicate. Absence today = middlebox or SYN cookie.
+- **Head-of-line blocking**: a lost segment holds back all later bytes in the receive buffer until it is retransmitted (at least 1 RTT, a full RTO on tail loss). SACK doesn't help with this. It stalls every HTTP/2 stream on the connection and a whole TLS record. Fixes: QUIC (per-stream ordering), several connections, less loss. Not bandwidth or buffers.
 - **Teardown**: FIN each way, active closer holds **TIME_WAIT** 60 s (Linux) / 30 s (macOS); CLOSE_WAIT pile = local app never closed; mid-stream **RST = idle-timeout middlebox** nine times in ten.
 - **Wireshark**: `tcp.stream` is Wireshark's per-file conversation counter (Follow TCP Stream, Conversations); Seq/Ack are **relative** by default, raw in `tcp.seq_raw`/`tcp.ack_raw` for cross-capture correlation; `tcp.window_size_value` (wire) × `tcp.window_size_scalefactor` = `tcp.window_size`, factor `-1` = handshake not captured; `tcp.analysis.flags && !tcp.analysis.window_update` for trouble, `tcp.time_delta > 1` for stalls, `tcp.analysis.initial_rtt` per stream, `tcp.completeness` for what the file holds; tcptrace graph for window-limited vs loss.
 - **Host-capture artefacts**: bad outbound checksums (offload), >MSS segments (TSO/GRO), "previous segment not captured" with no dup ACK (capture drop).
