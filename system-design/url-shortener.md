@@ -1,6 +1,6 @@
 # URL shortener — the classic design problem, and where it really breaks
 
-General system-design reference (not AEM-specific), with pointers to the AEM instances of each pattern. It is the standard interview warm-up because it touches every other doc in this folder. The hard parts are not the hashing. They are redirect semantics, cache behavior, ID allocation under concurrency, and abuse.
+It is the standard interview warm-up because it touches every other doc in this folder. The hard parts are not the hashing. They are redirect semantics, cache behavior, ID allocation under concurrency, and abuse.
 
 ## Requirements and the shape of the load
 

@@ -1,7 +1,5 @@
 # Caching — CDN, Redis-style caches, invalidation, cache-aside
 
-General system-design reference (not AEM-specific), with pointers to the AEM instances of each pattern.
-
 ## Where caches live (the layers)
 
 Client/browser → **CDN edge** → reverse proxy / app-level cache → **distributed cache (Redis/Memcached)** → DB internal caches. Each layer has different invalidation reach: you control the CDN and Redis directly; browser caches you only control *in advance* via headers (once a long `max-age` ships, you can't take it back — hence cache-busting file names for static assets: content hash in the filename, `immutable` + 1-year TTL).

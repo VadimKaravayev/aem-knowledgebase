@@ -1,6 +1,8 @@
 # Async systems — queues, events, Kafka concepts, retries, DLQs
 
-General system-design reference (not AEM-specific). AEMaaCS's own publication pipeline is a Kafka-based worked example — see the tie-in at the end.
+AEMaaCS's own publication pipeline is a Kafka-based worked example — see the tie-in at the end.
+
+Related: [[messaging-patterns]] (channels, routing and transformation patterns, Kafka vs RabbitMQ) and [[distributed-transactions]] (saga, outbox, CDC in depth).
 
 ## Queues vs events (the two messaging intents)
 

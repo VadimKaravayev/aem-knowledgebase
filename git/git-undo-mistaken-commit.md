@@ -57,4 +57,4 @@ Recovery, if needed: the deleted commit still exists as an object until garbage 
 
 ## What this means for AEM
 
-Nothing AEM-specific; this is plain Git. It comes up in AEM work when a fresh dispatcher-config lab, a Cloud Manager repo clone, or an archetype-generated project gets its first commit before the files are ready. Cloud Manager pipelines build from branches you push, so an unpushed local undo is invisible to Cloud Manager; a pushed commit on a pipeline branch must be reverted, never rewritten, because Cloud Manager may already have built it ([[cloud-manager-git-repositories]]).
+This comes up in AEM work when a fresh dispatcher-config lab, a Cloud Manager repo clone, or an archetype-generated project gets its first commit before the files are ready. Cloud Manager pipelines build from branches you push, so an unpushed local undo is invisible to Cloud Manager; a pushed commit on a pipeline branch must be reverted, never rewritten, because Cloud Manager may already have built it ([[cloud-manager-git-repositories]]).

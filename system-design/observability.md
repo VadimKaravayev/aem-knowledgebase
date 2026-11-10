@@ -1,6 +1,8 @@
 # Observability — logs, metrics, traces, SLOs
 
-General system-design reference (not AEM-specific). Monitoring answers "is it broken in a way I predicted"; observability answers "why is it broken in a way I didn't" — the difference is whether you can ask new questions of existing telemetry without shipping new code.
+Monitoring answers "is it broken in a way I predicted"; observability answers "why is it broken in a way I didn't" — the difference is whether you can ask new questions of existing telemetry without shipping new code.
+
+This doc is the overview. Each part has its own doc: [[logging]] (levels, JSON, correlation IDs, ELK), [[metrics-prometheus]] (metric types, RED and USE, Prometheus, exporters), [[distributed-tracing]] (spans, OpenTelemetry, Jaeger, Zipkin, service mesh, Dynatrace, Datadog), [[slo-error-budgets-alerting]] (SLI/SLO/SLA, error budget, alert priorities).
 
 ## The three signals (and what each is for)
 

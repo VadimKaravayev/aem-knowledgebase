@@ -1,6 +1,6 @@
 # Scalability — horizontal scaling, stateless services, load balancers
 
-General system-design reference (not AEM-specific). AEMaaCS's publish tier is a textbook horizontal-scaling case study — tie-ins at the end.
+AEMaaCS's publish tier is a textbook horizontal-scaling case study — tie-ins at the end.
 
 ## Vertical vs horizontal
 
@@ -29,6 +29,7 @@ General system-design reference (not AEM-specific). AEMaaCS's publish tier is a 
 - Scale-out must be faster than your traffic ramp (instance boot + warmup counts); scale-in must be slower than your traffic dips (flapping). Set min capacity to survive a cold cache + one AZ loss.
 - Autoscaling doesn't fix a bottleneck *behind* the scaled tier: doubling app servers against a fixed DB just moves the queue — and can turn a slowdown into a DB outage (more connections, more pressure). Scale the constraint, not the symptom.
 - Databases scale differently: read replicas for reads (with staleness consequences — see [[data-storage]]), sharding for writes (last resort: cross-shard queries/transactions get hard), connection pooling always (per-instance pools × many instances = DB connection exhaustion; use a proxy/pooler like PgBouncer).
+- In depth: [[autoscaling]] (cloud policies, Kubernetes HPA) and [[sharding]] (range, hash, consistent hashing).
 
 ## AEM tie-ins
 

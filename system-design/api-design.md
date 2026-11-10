@@ -1,6 +1,6 @@
 # API design — REST, pagination, idempotency, versioning, rate limiting
 
-General system-design reference (not AEM-specific). Key facts, trade-offs, and the design traps interviewers and incident reviews both love.
+Key facts, trade-offs, and the design traps interviewers and incident reviews both love.
 
 ## REST semantics that actually matter
 

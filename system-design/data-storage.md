@@ -1,6 +1,6 @@
 # Data — SQL vs NoSQL, indexes, replication, consistency
 
-General system-design reference (not AEM-specific). Oak/AEM instances of each concept linked at the end.
+Oak/AEM instances of each concept linked at the end.
 
 ## SQL vs NoSQL (the honest version)
 

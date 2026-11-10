@@ -1,6 +1,6 @@
 # Security — OAuth/OIDC, RBAC, Managed Identity, secrets
 
-General system-design reference (not AEM-specific). Adobe IMS is a full worked example of these patterns — tie-ins at the end.
+Adobe IMS is a full worked example of these patterns — tie-ins at the end.
 
 ## OAuth 2.0 / OIDC (what each actually is)
 
